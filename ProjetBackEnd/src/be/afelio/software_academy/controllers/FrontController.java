@@ -1,6 +1,9 @@
 package be.afelio.software_academy.controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.software_academy.repository.DataRepository;
 
 public class FrontController  extends HttpServlet {
@@ -20,24 +24,43 @@ public class FrontController  extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 		try {
 			Class.forName("org.postgresql.Driver");
-			String url = config.getInitParameter("database.url");
-			String user = config.getInitParameter("database.user");
-			String password = config.getInitParameter("database.password");
+			String path = getServletContext().getRealPath("/WEB-INF/conf/database.properties");
+			Properties properties = new Properties();
+			try (
+				InputStream in = new FileInputStream(path)
+			) {
+				properties.load(in);
+			}
+			String url = properties.getProperty("database.url");
+			String user = properties.getProperty("database.user");
+			String password = properties.getProperty("database.password");
+			
 			DataRepository repository = new DataRepository(url, user, password);
-			peopleController = new PeopleController(repository);
-			activityController = new ActivityController(repository);
-			eventController = new EventController(repository);
+			ObjectMapper mapper = new ObjectMapper();
+			
+			peopleController = new PeopleController(repository, mapper);
+			activityController = new ActivityController(repository, mapper);
+			eventController = new EventController(repository, mapper);
+			
 		} catch(Exception e) {
 			throw new ServletException(e);
 		}
 	}
-	
+
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		String pathInfo = request.getPathInfo();
+		if (pathInfo != null) {
+			response.setContentType("application/json");
+			if (pathInfo.startsWith("/activity/all")) {
+				activityController.findAllActivities(request, response);
+			}
+		}
 		
 	}
 	
