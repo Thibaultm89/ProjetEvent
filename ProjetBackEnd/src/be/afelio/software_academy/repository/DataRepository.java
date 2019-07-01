@@ -37,7 +37,7 @@ public class DataRepository {
 	
 	public List<Activity> findAllActivities() {
 		List<Activity>list = new ArrayList<Activity>();
-		String sql = "SELECT id_activity AS ActivityId, name_activity AS ActivityName FROM Activity";
+		String sql = "SELECT id_activity AS ActivityId, name_activity AS ActivityName FROM \"Activity\"";
 		try (
 			Connection connection = createConnection();
 			Statement statement = connection.createStatement();

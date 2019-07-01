@@ -11,8 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.software_academy.repository.DataRepository;
 
 public class EventController extends BaseController{
-	
-	protected DataRepository repository;
 
 	public EventController(DataRepository repository, ObjectMapper mapper) {
 		super(repository, mapper);

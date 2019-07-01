@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import be.afelio.software_academy.repository.DataRepository;
 
+@WebServlet("/json/*")
 public class FrontController  extends HttpServlet {
 	
 	private static final long serialVersionUID = -3198285139205951197L;
@@ -59,7 +61,11 @@ public class FrontController  extends HttpServlet {
 			response.setContentType("application/json");
 			if (pathInfo.startsWith("/activity/all")) {
 				activityController.findAllActivities(request, response);
+			} else {
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 		
 	}

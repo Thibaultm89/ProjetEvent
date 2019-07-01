@@ -13,8 +13,6 @@ import be.afelio.software_academy.repository.DataRepository;
 
 public class ActivityController extends BaseController{
 	
-	protected DataRepository repository;
-
 	public ActivityController(DataRepository repository, ObjectMapper mapper) {
 		super(repository, mapper);
 	}

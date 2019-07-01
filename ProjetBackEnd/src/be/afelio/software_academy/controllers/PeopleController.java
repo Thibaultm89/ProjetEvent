@@ -12,8 +12,6 @@ import be.afelio.software_academy.repository.DataRepository;
 
 public class PeopleController extends BaseController {
 
-	protected DataRepository repository;
-
 	public PeopleController(DataRepository repository, ObjectMapper mapper) {
 		super(repository, mapper);
 	}
