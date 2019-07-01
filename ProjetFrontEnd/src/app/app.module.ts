@@ -6,11 +6,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { JavaService } from './services/java.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CreatePeopleComponent } from './pages/creations/create-people/create-people.component';
+import { CreateActivityComponent } from './pages/creations/create-activity/create-activity.component';
+import { CreateEventComponent } from './pages/creations/create-event/create-event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CreatePeopleComponent,
+    CreateActivityComponent,
+    CreateEventComponent
   ],
   imports: [
     BrowserModule,

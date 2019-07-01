@@ -8,5 +8,11 @@
   <ul>
     <li *ngFor= "let d of (data | async)">{{d.name}}</li>
   </ul>
+  <a [routerLink]="['/create-people']">Inscrire une personne</a>
+  <br>
+  <a [routerLink]="['/create-activity']">Créer une activité</a>
+  <br>
+  <a [routerLink]="['/create-event']">Créer un événement</a>
+
 </div>
 
