@@ -59,6 +59,7 @@ public class FrontController  extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 		if (pathInfo != null) {
 			response.setContentType("application/json");
+			response.addHeader("Access-Control-Allow-Origin", "*");
 			if (pathInfo.startsWith("/activity/all")) {
 				activityController.findAllActivities(request, response);
 			} else {

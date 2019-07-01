@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JavaService } from 'src/app/services/java.service';
+import { Activity } from 'src/app/modules/activity.model';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private javaService: JavaService) { }
 
-  public data: Observable<string[]>;
+  public data: Observable<Activity[]>;
 
   ngOnInit() {
-    this.data = this.javaService.getDataFromJava();
+    this.data = this.javaService.getListActivity();
   }
 
   public onSendChange(send: string) {
