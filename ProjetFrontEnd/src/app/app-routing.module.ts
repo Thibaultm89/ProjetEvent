@@ -9,7 +9,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'}, //toujours à mettre en premier
+  {path: '', redirectTo: '/home', pathMatch: 'full'}, // toujours à mettre en premier
   {path: 'home', component: HomeComponent},
   {path: 'create-people', component: CreatePeopleComponent},
   {path: 'create-activity', component: CreateActivityComponent},
@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'events', component: EventsComponent},
   {path: 'activities', component: ActivitiesComponent},
   {path: 'login', component: LoginComponent},
-  {path: '**', redirectTo: '/home'} //toujours à mettre en dernier
+  {path: '**', redirectTo: '/home'} // toujours à mettre en dernier
 ];
 
 @NgModule({
