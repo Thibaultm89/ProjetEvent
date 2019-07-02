@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,37 +35,6 @@ public class DataRepository {
 		List<People>list = new ArrayList<People>();
 		String sql = "";
 		return list;
-	}
-	
-	public List<Activity> findAllActivities() {
-		List<Activity>list = new ArrayList<Activity>();
-		String sql = "SELECT id_activity AS ActivityId, name_activity AS ActivityName FROM \"Activity\"";
-		try (
-			Connection connection = createConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql)
-		) {
-			while (resultSet.next()) {
-				Activity activity = createActivity(resultSet);
-				list.add(activity);
-			}
-		} catch(SQLException sqle) {
-			throw new RuntimeException(sqle);
-		}
-		return list;
-	}
-	
-	protected Activity createActivity(ResultSet rs) throws SQLException {
-		int id = rs.getInt("ActivityId");
-		String name = rs.getString("ActivityName");
-		Timestamp start = rs.getTimestamp("ActivityStart");
-		Timestamp finish = rs.getTimestamp("ActivityFinish");
-		Activity a = new Activity();
-		a.setId(id);
-		a.setName(name);
-		a.setStart(start.toLocalDateTime());
-		a.setFinish(finish.toLocalDateTime());
-		return a;
 	}
 	
 	public List<Event> findAllEvents() {
@@ -103,9 +71,9 @@ public class DataRepository {
 	
 	public List<Activity> findActivitiesByEventId(int i) {
 		List<Activity> list = new ArrayList<Activity>();
-		String sql = "SELECT a.id_activity AS ActivityId, name_activity AS ActivityName, start_activity AS ActivityStart, finish_activity AS ActivityFinish "
-				+ "FROM \"Activity\" a "
-				+ "JOIN \"Event_Activity\" ea ON ea.id_activity = a.id_activity WHERE ea.id_event = "+i;
+		String sql = "SELECT id_activity AS ActivityId, name_activity AS ActivityName, start_activity AS ActivityStart, finish_activity AS ActivityFinish, id_event AS EventId "
+				+ "FROM \"Activity\""
+				+ "WHERE id_event= "+ i;
 		try (
 			Connection connection = createConnection();
 			Statement statement = connection.createStatement();
@@ -121,5 +89,19 @@ public class DataRepository {
 		return list;
 	}
 	
-	
+	protected Activity createActivity(ResultSet rs) throws SQLException {
+		int idA = rs.getInt("ActivityId");
+		String name = rs.getString("ActivityName");
+		Timestamp start = rs.getTimestamp("ActivityStart");
+		Timestamp finish = rs.getTimestamp("ActivityFinish");
+		int idE = rs.getInt("EventId");
+		Activity a = new Activity();
+		a.setId(idA);
+		a.setName(name);
+		a.setStart(start.toLocalDateTime());
+		a.setFinish(finish.toLocalDateTime());
+		a.setIdEvent(idE);
+		return a;
+	}
+
 }

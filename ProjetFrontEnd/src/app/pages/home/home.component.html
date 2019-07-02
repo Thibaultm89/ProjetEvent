@@ -12,6 +12,9 @@
         {{listevents.start.dayOfMonth +"/"+ listevents.start.monthValue +"/"+ listevents.start.year}} au
         {{listevents.finish.dayOfMonth +"/"+ listevents.finish.monthValue +"/"+ listevents.finish.year}}
       </a>
+      <form >
+        <input type= "hidden" value ="{{listevents.id}}">
+      </form>
     </li>
   </ul>
 
@@ -21,8 +24,6 @@
   <a [routerLink]="['/create-activity']">Créer une activité</a>
   <br>
   <a [routerLink]="['/create-event']">Créer un événement</a>
-  <br>
-  <a [routerLink]="['/events']">Page des événements</a>
   <br>
   <a [routerLink]="['/login']">Page login</a>
 

@@ -2,7 +2,7 @@
 
 <p>Liste des Activités: </p>
 <ul>
-  <li *ngFor= "let listactivities of (listActivities | async)">{{listactivities.name}}</li>
+  <li *ngFor= "let listactivities of (listActivitiesByEvent | async)">{{listactivities.name}}</li>
 </ul>
 
 <br>

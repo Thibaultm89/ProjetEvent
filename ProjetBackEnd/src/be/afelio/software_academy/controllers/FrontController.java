@@ -60,15 +60,17 @@ public class FrontController  extends HttpServlet {
 		if (pathInfo != null) {
 			response.setContentType("application/json");
 			response.addHeader("Access-Control-Allow-Origin", "*");
-			if (pathInfo.startsWith("/activity/all")) {
-				activityController.findAllActivities(request, response);
-			} else if (pathInfo.startsWith("/activity")) {
-				activityController.findActivitiesByEvent(request, response);				
-			} else if (pathInfo.startsWith("/event/all")){
+			
+			if (pathInfo.startsWith("/event/all")) {
 				eventController.findAllEvents(request, response);
+				
+			} else if (pathInfo.startsWith("/event")){
+				activityController.findActivitiesByEvent(request, response);
+				
 			} else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
+			
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}

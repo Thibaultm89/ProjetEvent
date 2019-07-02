@@ -10,9 +10,10 @@ public class Activity implements Serializable {
 	
 	protected Integer id;
 	protected String name;
-	protected People manager;
 	protected LocalDateTime start;
 	protected LocalDateTime finish;
+	protected People manager;
+	protected Integer idEvent;
 	protected List<People> listPeople;
 	
 	
@@ -45,6 +46,12 @@ public class Activity implements Serializable {
 	}
 	public void setFinish(LocalDateTime finish) {
 		this.finish = finish;
+	}
+	public Integer getIdEvent() {
+		return idEvent;
+	}
+	public void setIdEvent(Integer idEvent) {
+		this.idEvent = idEvent;
 	}
 	public List<People> getListPeople() {
 		return listPeople;

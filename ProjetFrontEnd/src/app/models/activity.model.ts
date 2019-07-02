@@ -6,5 +6,6 @@ export interface Activity {
   start: string;
   finish: string;
   manager: People;
+  id_event: number;
   listPeople: People[];
 }

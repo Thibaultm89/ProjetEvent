@@ -12,10 +12,10 @@ export class EventsComponent implements OnInit {
 
   constructor(private javaService: JavaService) { }
 
-  public listActivities: Observable<Activity[]>;
+  public listActivitiesByEvent: Observable<Activity[]>;
 
   ngOnInit() {
-    this.listActivities = this.javaService.getListActivity();
+    this.listActivitiesByEvent = this.javaService.getListActivityByEvent(3);
   }
 
 }

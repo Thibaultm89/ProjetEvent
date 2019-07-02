@@ -16,13 +16,7 @@ public class ActivityController extends BaseController{
 	public ActivityController(DataRepository repository, ObjectMapper mapper) {
 		super(repository, mapper);
 	}
-	public void findAllActivities(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		Object o = repository.findAllActivities();
-		response.getWriter().write(objectToJson(o));
 		
-	}
-	
 	public void findActivitiesByEvent(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getPathInfo().split("/")[2]);

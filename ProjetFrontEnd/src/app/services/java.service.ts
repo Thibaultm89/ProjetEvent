@@ -11,9 +11,9 @@ export class JavaService {
 
   constructor(private http: HttpClient) {}
 
-  public getListActivity(): Observable<Activity[]> {
+  public getListActivityByEvent(n: number): Observable<Activity[]> {
     return this.http
-      .get<Activity[]>(`http://localhost:8080/projet-back-end/json/activity/1`)
+      .get<Activity[]>(`http://localhost:8080/projet-back-end/json/event/${n}`)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
