@@ -3,7 +3,11 @@
 <p>Liste des événements: </p>
 
 <ul>
-  <li *ngFor= "let listevents of (listEvents | async)">{{listevents.name}}</li>
+  <li *ngFor= "let listevents of (listEvents | async)">
+    {{listevents.name}} du
+    {{listevents.start.dayOfMonth +"/"+ listevents.start.monthValue +"/"+ listevents.start.year}} au
+    {{listevents.finish.dayOfMonth +"/"+ listevents.finish.monthValue +"/"+ listevents.finish.year}}
+  </li>
 </ul>
 
 <br>

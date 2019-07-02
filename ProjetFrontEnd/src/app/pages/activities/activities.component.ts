@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Activity } from 'src/app/modules/activity.model';
+import { Activity } from 'src/app/models/activity.model';
 import { JavaService } from 'src/app/services/java.service';
 
 @Component({

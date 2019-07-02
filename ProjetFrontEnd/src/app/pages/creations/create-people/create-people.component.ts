@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JavaService } from 'src/app/services/java.service';
-import { Activity } from 'src/app/modules/activity.model';
+import { Activity } from 'src/app/models/activity.model';
 
 @Component({
   selector: 'app-create-people',

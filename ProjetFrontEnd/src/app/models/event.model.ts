@@ -5,5 +5,5 @@ export interface Event {
   name: string;
   start: string;
   finish: string;
-  lisActivity: Activity[];
+  listActivity: Activity[];
 }

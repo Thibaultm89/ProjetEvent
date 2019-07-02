@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Activity } from '../modules/activity.model';
+import { Activity } from '../models/activity.model';
 
 @Injectable({
   providedIn: 'root'
