@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Activity } from 'src/app/models/activity.model';
-import { JavaService } from 'src/app/services/java.service';
 
 @Component({
   selector: 'app-activities',
@@ -10,12 +7,9 @@ import { JavaService } from 'src/app/services/java.service';
 })
 export class ActivitiesComponent implements OnInit {
 
-  constructor(private javaService: JavaService) { }
-
-  public listActivities: Observable<Activity[]>;
+  constructor() { }
 
   ngOnInit() {
-    this.listActivities = this.javaService.getListActivity();
   }
 
 }

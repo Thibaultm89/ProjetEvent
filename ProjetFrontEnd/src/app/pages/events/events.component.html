@@ -1,13 +1,8 @@
 <h1>Page des événements</h1>
 
-<p>Liste des événements: </p>
-
+<p>Liste des Activités: </p>
 <ul>
-  <li *ngFor= "let listevents of (listEvents | async)">
-    {{listevents.name}} du
-    {{listevents.start.dayOfMonth +"/"+ listevents.start.monthValue +"/"+ listevents.start.year}} au
-    {{listevents.finish.dayOfMonth +"/"+ listevents.finish.monthValue +"/"+ listevents.finish.year}}
-  </li>
+  <li *ngFor= "let listactivities of (listActivities | async)">{{listactivities.name}}</li>
 </ul>
 
 <br>

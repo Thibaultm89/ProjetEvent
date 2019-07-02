@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JavaService } from 'src/app/services/java.service';
 import { Observable } from 'rxjs';
+import { Activity } from 'src/app/models/activity.model';
 
 @Component({
   selector: 'app-events',
@@ -11,10 +12,10 @@ export class EventsComponent implements OnInit {
 
   constructor(private javaService: JavaService) { }
 
-  public listEvents: Observable<Event[]>;
+  public listActivities: Observable<Activity[]>;
 
   ngOnInit() {
-    this.listEvents = this.javaService.getListEvent();
+    this.listActivities = this.javaService.getListActivity();
   }
 
 }

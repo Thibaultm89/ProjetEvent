@@ -1,10 +1,5 @@
 <h1>Page des activités de l'événement</h1>
 
-<p>Liste des Activités: </p>
-<ul>
-  <li *ngFor= "let listactivities of (listActivities | async)">{{listactivities.name}}</li>
-</ul>
-
 <br>
 <a [routerLink]="['/create-people']">S'inscrire</a>
 <br>
