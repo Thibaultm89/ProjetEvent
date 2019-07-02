@@ -15,10 +15,12 @@ public class EventController extends BaseController{
 	public EventController(DataRepository repository, ObjectMapper mapper) {
 		super(repository, mapper);
 	}
-	public void findAllEvent(HttpServletRequest request, HttpServletResponse response)
+	
+	public void findAllEvents(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Object o = repository.findAllActivities();
+		Object o = repository.findAllEvents();
 		response.getWriter().write(objectToJson(o));
 		
 	}
+	
 }

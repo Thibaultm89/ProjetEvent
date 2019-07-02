@@ -13,7 +13,7 @@ export class JavaService {
 
   public getListActivity(): Observable<Activity[]> {
     return this.http
-      .get<Activity[]>(`http://localhost:8080/projet-back-end/json/activity/all`)
+      .get<Activity[]>(`http://localhost:8080/projet-back-end/json/activity/1`)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }

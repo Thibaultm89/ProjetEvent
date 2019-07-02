@@ -23,12 +23,14 @@ public class ActivityController extends BaseController{
 		
 	}
 	
-	public void findAllEvents(HttpServletRequest request, HttpServletResponse response) 
+	public void findActivitiesByEvent(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		Object o = repository.findAllEvents();
+		int id = Integer.parseInt(request.getPathInfo().split("/")[2]);
+		Object o = repository.findActivitiesByEventId(id);
 		response.getWriter().write(objectToJson(o));
 		
 	}
+	
 	
 
 }

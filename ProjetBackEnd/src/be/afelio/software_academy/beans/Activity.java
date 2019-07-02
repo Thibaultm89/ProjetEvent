@@ -1,7 +1,7 @@
 package be.afelio.software_academy.beans;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Activity implements Serializable {
@@ -11,8 +11,8 @@ public class Activity implements Serializable {
 	protected Integer id;
 	protected String name;
 	protected People manager;
-	protected Date start;
-	protected Date finish;
+	protected LocalDateTime start;
+	protected LocalDateTime finish;
 	protected List<People> listPeople;
 	
 	
@@ -34,16 +34,16 @@ public class Activity implements Serializable {
 	public void setManager(People manager) {
 		this.manager = manager;
 	}
-	public Date getStart() {
+	public LocalDateTime getStart() {
 		return start;
 	}
-	public void setStart(Date start) {
+	public void setStart(LocalDateTime start) {
 		this.start = start;
 	}
-	public Date getFinish() {
+	public LocalDateTime getFinish() {
 		return finish;
 	}
-	public void setFinish(Date finish) {
+	public void setFinish(LocalDateTime finish) {
 		this.finish = finish;
 	}
 	public List<People> getListPeople() {
