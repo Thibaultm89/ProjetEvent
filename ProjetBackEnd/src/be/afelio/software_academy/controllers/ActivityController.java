@@ -23,5 +23,12 @@ public class ActivityController extends BaseController{
 		
 	}
 	
+	public void findAllEvents(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		Object o = repository.findAllEvents();
+		response.getWriter().write(objectToJson(o));
+		
+	}
+	
 
 }
