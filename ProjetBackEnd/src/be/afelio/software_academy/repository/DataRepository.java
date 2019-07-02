@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,5 +61,37 @@ public class DataRepository {
 		a.setId(id);
 		a.setName(name);
 		return a;
+	}
+	
+	public List<Event> findAllEvents() {
+		List<Event> list = new ArrayList<Event>();
+		String sql = "SELECT id_event AS EventId, name_event AS EventName,"
+				+ " start_event AS EventStart, finish_event AS EventFinish FROM \"Event\"";
+		try (
+			Connection connection = createConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql)
+		) {
+			while (resultSet.next()) {
+				Event event = createEvent(resultSet);
+				list.add(event);
+			}
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+		return list;
+	}
+	
+	protected Event createEvent(ResultSet rs) throws SQLException {
+		int id = rs.getInt("EventId");
+		String name = rs.getString("EventName");
+		String start = rs.getString("EventStart");
+		String finish = rs.getString("EventFinish");
+		Event e = new Event();
+		e.setId(id);
+		e.setName(name);
+		e.setStart(LocalDate.parse(start));
+		e.setFinish(LocalDate.parse(finish));
+		return e;
 	}
 }

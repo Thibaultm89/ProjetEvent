@@ -62,6 +62,8 @@ public class FrontController  extends HttpServlet {
 			response.addHeader("Access-Control-Allow-Origin", "*");
 			if (pathInfo.startsWith("/activity/all")) {
 				activityController.findAllActivities(request, response);
+			} else if (pathInfo.startsWith("/event/all")){
+				activityController.findAllEvents(request, response);
 			} else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
