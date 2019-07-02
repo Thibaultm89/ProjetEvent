@@ -17,4 +17,12 @@ export class JavaService {
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
+
+  public getListEvent(): Observable<Event[]> {
+    return this.http
+      .get<Event[]>(`http://localhost:8080/projet-back-end/json/event/all`)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
 }

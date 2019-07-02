@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreatePeopleComponent } from './pages/creations/create-people/create-people.component';
 import { CreateActivityComponent } from './pages/creations/create-activity/create-activity.component';
 import { CreateEventComponent } from './pages/creations/create-event/create-event.component';
+import { EventsComponent } from './pages/events/events.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { CreateEventComponent } from './pages/creations/create-event/create-even
     HomeComponent,
     CreatePeopleComponent,
     CreateActivityComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    EventsComponent,
+    ActivitiesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

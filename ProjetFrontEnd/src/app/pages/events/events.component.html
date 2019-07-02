@@ -1,0 +1,16 @@
+<h1>Page des événements</h1>
+
+<p>Liste des événements: </p>
+
+<ul>
+  <li *ngFor= "let listevents of (listEvents | async)">{{listevents.name}}</li>
+</ul>
+
+<br>
+<a [routerLink]="['/activities']">Page des activités</a>
+<br>
+<a [routerLink]="['/create-people']">S'inscrire</a>
+<br>
+<a [routerLink]="['/login']">Page login</a>
+<br>
+<a [routerLink]="['/home']">Retour au menu principal</a>

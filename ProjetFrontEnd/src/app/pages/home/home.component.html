@@ -4,15 +4,15 @@
 
   <br>
 
-  <p>Liste des Activités: </p>
-  <ul>
-    <li *ngFor= "let d of (data | async)">{{d.name}}</li>
-  </ul>
-  <a [routerLink]="['/create-people']">Inscrire une personne</a>
+  <a [routerLink]="['/create-people']">S'inscrire</a>
   <br>
   <a [routerLink]="['/create-activity']">Créer une activité</a>
   <br>
   <a [routerLink]="['/create-event']">Créer un événement</a>
+  <br>
+  <a [routerLink]="['/events']">Page des événements</a>
+  <br>
+  <a [routerLink]="['/login']">Page login</a>
 
 </div>
 
