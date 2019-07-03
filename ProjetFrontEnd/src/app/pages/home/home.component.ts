@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JavaService } from 'src/app/services/java.service';
+import { Event } from '../../models/event.model';
 
 @Component({
   selector: 'app-home',
