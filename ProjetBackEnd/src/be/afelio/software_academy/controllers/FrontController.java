@@ -81,6 +81,25 @@ public class FrontController  extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		String pathInfo = request.getPathInfo();
+		if (pathInfo != null) {
+			response.setContentType("application/json");
+			switch (pathInfo) {
+			case "/event":
+				eventController.addEvent(request, response);
+				break;
+			case "/activity":
+				// TODO
+				break;
+			case "/people":
+				// TODO
+				break;				
+			default:
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}			
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 		
 	}
 }

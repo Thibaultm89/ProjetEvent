@@ -9,6 +9,8 @@ public class People implements Serializable  {
 	protected Integer id;
 	protected String firstName;
 	protected String lastName;
+	protected String email;
+	protected String password;
 	
 	
 	public Integer getId() {

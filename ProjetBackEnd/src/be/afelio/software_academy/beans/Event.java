@@ -12,7 +12,6 @@ public class Event implements Serializable {
 	protected String name;
 	protected LocalDate start;
 	protected LocalDate finish;
-	protected List<Activity> listActivity;
 	
 	public Integer getId() {
 		return id;
@@ -38,14 +37,5 @@ public class Event implements Serializable {
 	public void setFinish(LocalDate finish) {
 		this.finish = finish;
 	}
-	public List<Activity> getListActivity() {
-		return listActivity;
-	}
-	public void setListActivity(List<Activity> listActivity) {
-		this.listActivity = listActivity;
-	}
-	
-	LocalDate date = LocalDate.parse("2018-05-05");
-	
 
 }

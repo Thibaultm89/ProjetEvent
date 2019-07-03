@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-07-03 10:34:32
+-- Started on 2019-07-03 16:58:14
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -57,7 +57,7 @@ ALTER TABLE public."Activity_people" OWNER TO postgres;
 --
 
 CREATE TABLE public."Event" (
-    id_event integer NOT NULL,
+	id_event integer NOT NULL,
     name_event character varying NOT NULL,
     start_event date NOT NULL,
     finish_event date NOT NULL
@@ -65,6 +65,31 @@ CREATE TABLE public."Event" (
 
 
 ALTER TABLE public."Event" OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 16880)
+-- Name: Event_id_event_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Event_id_event_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Event_id_event_seq" OWNER TO postgres;
+
+--
+-- TOC entry 2844 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: Event_id_event_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Event_id_event_seq" OWNED BY public."Event".id_event;
+
 
 --
 -- TOC entry 198 (class 1259 OID 16815)
@@ -83,20 +108,28 @@ CREATE TABLE public."People" (
 ALTER TABLE public."People" OWNER TO postgres;
 
 --
--- TOC entry 2832 (class 0 OID 16807)
+-- TOC entry 2700 (class 2604 OID 16882)
+-- Name: Event id_event; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Event" ALTER COLUMN id_event SET DEFAULT nextval('public."Event_id_event_seq"'::regclass);
+
+
+--
+-- TOC entry 2835 (class 0 OID 16807)
 -- Dependencies: 197
 -- Data for Name: Activity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO public."Activity" VALUES (1, 'Concert Dimitri Vegas', '2019-07-20 00:00:01', '2019-07-20 01:00:00', 1, 1);
+INSERT INTO public."Activity" VALUES (5, 'Concert Coone', '2019-07-20 23:00:00', '2019-07-20 00:00:00', 1, 1);
+INSERT INTO public."Activity" VALUES (4, 'Concert Nekfeu', '2019-07-04 19:00:00', '2019-07-04 21:00:00', 2, 3);
 INSERT INTO public."Activity" VALUES (2, 'Concert Orelsan', '2019-07-18 20:00:00', '2019-07-18 23:00:00', 2, 2);
 INSERT INTO public."Activity" VALUES (3, 'Concert Damso', '2019-07-04 15:00:00', '2019-07-04 18:00:00', 2, 3);
-INSERT INTO public."Activity" VALUES (1, 'Concert Dimitri Vegas', '2019-07-20 00:00:01', '2019-07-20 01:00:00', 1, 1);
-INSERT INTO public."Activity" VALUES (4, 'Concert Nekfeu', '2019-07-04 19:00:00', '2019-07-04 21:00:00', 2, 3);
-INSERT INTO public."Activity" VALUES (5, 'Concert Coone', '2019-07-20 23:00:00', '2019-07-20 00:00:00', 1, 1);
 
 
 --
--- TOC entry 2834 (class 0 OID 16823)
+-- TOC entry 2837 (class 0 OID 16823)
 -- Dependencies: 199
 -- Data for Name: Activity_people; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -109,18 +142,20 @@ INSERT INTO public."Activity_people" VALUES (2, 2);
 
 
 --
--- TOC entry 2831 (class 0 OID 16799)
+-- TOC entry 2834 (class 0 OID 16799)
 -- Dependencies: 196
 -- Data for Name: Event; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Event" VALUES (1, 'Tomorrowland', '2019-07-19', '2019-07-28');
-INSERT INTO public."Event" VALUES (2, 'Francofolies', '2019-07-18', '2019-07-21');
-INSERT INTO public."Event" VALUES (3, 'Les Ardentes', '2019-07-04', '2019-07-07');
+INSERT INTO public."Event" VALUES ('Tomorrowland', '2019-07-19', '2019-07-28', 1);
+INSERT INTO public."Event" VALUES ('Francofolies', '2019-07-18', '2019-07-21', 2);
+INSERT INTO public."Event" VALUES ('Les Ardentes', '2019-07-04', '2019-07-07', 3);
+INSERT INTO public."Event" VALUES ('PukkelPop', '2019-08-15', '2019-08-19', 4);
+INSERT INTO public."Event" VALUES ('RockWerchter', '3919-09-21', '3919-09-21', 7);
 
 
 --
--- TOC entry 2833 (class 0 OID 16815)
+-- TOC entry 2836 (class 0 OID 16815)
 -- Dependencies: 198
 -- Data for Name: People; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -132,7 +167,16 @@ INSERT INTO public."People" VALUES (4, 'Damien', 'Bouffioux', 'damb@hotmail.com'
 
 
 --
--- TOC entry 2701 (class 2606 OID 16811)
+-- TOC entry 2845 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: Event_id_event_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Event_id_event_seq"', 7, true);
+
+
+--
+-- TOC entry 2704 (class 2606 OID 16811)
 -- Name: Activity Activity_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -141,7 +185,7 @@ ALTER TABLE ONLY public."Activity"
 
 
 --
--- TOC entry 2699 (class 2606 OID 16803)
+-- TOC entry 2702 (class 2606 OID 16890)
 -- Name: Event Event_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -150,7 +194,7 @@ ALTER TABLE ONLY public."Event"
 
 
 --
--- TOC entry 2703 (class 2606 OID 16822)
+-- TOC entry 2706 (class 2606 OID 16822)
 -- Name: People People_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -159,7 +203,7 @@ ALTER TABLE ONLY public."People"
 
 
 --
--- TOC entry 2705 (class 2606 OID 16869)
+-- TOC entry 2708 (class 2606 OID 16869)
 -- Name: People unique_email; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -168,7 +212,7 @@ ALTER TABLE ONLY public."People"
 
 
 --
--- TOC entry 2706 (class 2606 OID 16836)
+-- TOC entry 2709 (class 2606 OID 16836)
 -- Name: Activity Manager; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -177,7 +221,7 @@ ALTER TABLE ONLY public."Activity"
 
 
 --
--- TOC entry 2707 (class 2606 OID 16863)
+-- TOC entry 2710 (class 2606 OID 16891)
 -- Name: Activity fk_id_event; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -186,7 +230,7 @@ ALTER TABLE ONLY public."Activity"
 
 
 --
--- TOC entry 2709 (class 2606 OID 16831)
+-- TOC entry 2712 (class 2606 OID 16831)
 -- Name: Activity_people id_activity; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -195,7 +239,7 @@ ALTER TABLE ONLY public."Activity_people"
 
 
 --
--- TOC entry 2708 (class 2606 OID 16826)
+-- TOC entry 2711 (class 2606 OID 16826)
 -- Name: Activity_people id_people; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -203,7 +247,7 @@ ALTER TABLE ONLY public."Activity_people"
     ADD CONSTRAINT id_people FOREIGN KEY (id_people) REFERENCES public."People"(id_people);
 
 
--- Completed on 2019-07-03 10:34:32
+-- Completed on 2019-07-03 16:58:14
 
 --
 -- PostgreSQL database dump complete

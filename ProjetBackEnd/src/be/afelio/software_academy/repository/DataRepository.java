@@ -1,7 +1,9 @@
 package be.afelio.software_academy.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -102,6 +104,50 @@ public class DataRepository {
 		a.setFinish(finish.toLocalDateTime());
 		a.setIdEvent(idE);
 		return a;
+	}
+
+	
+	public void addEvent(String name, LocalDate start, LocalDate finish) { 
+		Date start_d = Date.valueOf(start);
+		Date finish_d = Date.valueOf(finish);
+		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {
+			String sql = "INSERT INTO \"Event\" (name_event, start_event, finish_event) values(?,?,?)";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				connection.setAutoCommit(true);
+				statement.setString(1, name);
+				statement.setDate(2, start_d);
+				statement.setDate(3, finish_d);
+				statement.executeUpdate();
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+	}
+	
+	public Event findOneEventByName(String name) {
+		Event event = null;
+		if (name != null && !name.isBlank()) {
+			String sql = "SELECT name_event as EventName, event_start AS EventStart, event_finish AS EventFinish FROM \"Event\" where name_event = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				statement.setString(1, name);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						event = createEvent(resultSet);
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+		return event;
 	}
 
 }
