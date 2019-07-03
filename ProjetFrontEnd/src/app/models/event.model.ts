@@ -1,15 +1,8 @@
+import { DateWithoutTime } from './date.model';
 
 export class Event {
   id: number;
   name: string;
-  start: {
-    dayOfMonth: string,
-    monthValue: string,
-    year: string
-  };
-  finish: {
-    dayOfMonth: string,
-    monthValue: string,
-    year: string
-  };
+  start: DateWithoutTime;
+  finish: DateWithoutTime;
 }

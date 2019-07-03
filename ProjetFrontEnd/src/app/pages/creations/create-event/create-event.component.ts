@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from 'src/app/models/event.model';
+import { DateWithoutTime } from 'src/app/models/date.model';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -15,6 +16,8 @@ export class CreateEventComponent implements OnInit {
   constructor(private fb: FormBuilder) {
 
     this.event = new Event();
+    this.event.start = new DateWithoutTime();
+    this.event.finish = new DateWithoutTime();
 
     this.eventForm = this.fb.group({
 
@@ -27,6 +30,7 @@ export class CreateEventComponent implements OnInit {
       yearfinish: this.fb.control(this.event.finish.year, [Validators.required]),
       monthfinish: this.fb.control(this.event.finish.monthValue, [Validators.required]),
       dayfinish: this.fb.control(this.event.finish.dayOfMonth, [Validators.required]),
+
     });
   }
 
@@ -52,6 +56,11 @@ export class CreateEventComponent implements OnInit {
     this.event = newEvent;
 
     console.log('submit', this.event, newValues);
+  }
+
+  public hasErrorRequire() {
+    const control = this.eventForm.get('name');
+    return control.errors && control.errors.required;
   }
 
 }
