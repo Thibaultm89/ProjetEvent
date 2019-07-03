@@ -1,4 +1,4 @@
-import { DateWithoutTime } from './date.model';
+import { DateWithoutTime } from './date-without-time.model';
 
 export class Event {
   id: number;

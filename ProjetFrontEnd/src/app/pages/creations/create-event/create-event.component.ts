@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from 'src/app/models/event.model';
-import { DateWithoutTime } from 'src/app/models/date.model';
+import { DateWithoutTime } from 'src/app/models/date-without-time.model';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -42,6 +42,8 @@ export class CreateEventComponent implements OnInit {
     const newValues = this.eventForm.value;
 
     const newEvent = new Event();
+    newEvent.start = new DateWithoutTime();
+    newEvent.finish = new DateWithoutTime();
 
     newEvent.name = newValues.name;
 
@@ -58,9 +60,38 @@ export class CreateEventComponent implements OnInit {
     console.log('submit', this.event, newValues);
   }
 
-  public hasErrorRequire() {
+  public hasNameError() {
     const control = this.eventForm.get('name');
     return control.errors && control.errors.required;
   }
 
+  public hasYearstartError() {
+    const control = this.eventForm.get('yearstart');
+    return control.errors && control.errors.required;
+  }
+
+  public hasMonthstartError() {
+    const control = this.eventForm.get('monthstart');
+    return control.errors && control.errors.required;
+  }
+
+  public hasDaystartError() {
+    const control = this.eventForm.get('daystart');
+    return control.errors && control.errors.required;
+  }
+
+  public hasYearfinishError() {
+    const control = this.eventForm.get('yearfinish');
+    return control.errors && control.errors.required;
+  }
+
+  public hasMonthfinishError() {
+    const control = this.eventForm.get('monthfinish');
+    return control.errors && control.errors.required;
+  }
+
+  public hasDayfinishError() {
+    const control = this.eventForm.get('dayfinish');
+    return control.errors && control.errors.required;
+  }
 }
