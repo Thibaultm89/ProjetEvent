@@ -2,7 +2,11 @@
 
 <p>Liste des Activités: </p>
 <ul>
-  <li *ngFor= "let listactivities of (listActivitiesByEvent | async)">{{listactivities.name}}</li>
+  <li *ngFor= "let listactivities of (listActivitiesByEvent | async)">
+    {{listactivities.name}} le
+    {{listactivities.start.dayOfMonth +"/"+listactivities.start.monthValue +"/"+listactivities.start.year}} à
+    {{listactivities.start.hour + "h" + listactivities.start.minute +""}}
+  </li>
 </ul>
 
 <br>

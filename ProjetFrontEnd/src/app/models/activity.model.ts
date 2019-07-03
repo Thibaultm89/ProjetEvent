@@ -1,4 +1,5 @@
 import { People } from './people.model';
+import { min } from 'rxjs/operators';
 
 export interface Activity {
   id: number;
@@ -6,7 +7,10 @@ export interface Activity {
   start: {
     dayOfMonth: string,
     monthValue: string,
-    year: string
+    year: string,
+    hour: string,
+    minute: string,
+    second: string,
   };
   finish: {
     dayOfMonth: string,
