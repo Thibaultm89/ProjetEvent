@@ -18,7 +18,7 @@
   </div>
   <div>
     <label for="name">Mois de début: </label>
-    <input type="text" id="monthstart" name="monthstart" formControlName="yearstart"/>
+    <input type="text" id="monthstart" name="monthstart" formControlName="monthstart"/>
     <!-- <span *ngIf="!name.valid"> Requis !</span> -->
   </div>
   <div>
@@ -36,7 +36,7 @@
   </div>
   <div>
     <label for="name">Mois de fin: </label>
-    <input type="text" id="monthfinish" name="monthfinish" formControlName="yearfinish"/>
+    <input type="text" id="monthfinish" name="monthfinish" formControlName="monthfinish"/>
     <!-- <span *ngIf="!name.valid"> Requis !</span> -->
   </div>
   <div>
@@ -47,6 +47,6 @@
 
   <br>
 
-  <input type="submit" [disabled]="!contactForm.valid" />
+  <input type="submit" [disabled]="!eventForm.valid" />
 
 </form>

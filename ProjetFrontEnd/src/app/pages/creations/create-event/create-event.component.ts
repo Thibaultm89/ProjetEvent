@@ -14,6 +14,8 @@ export class CreateEventComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
 
+    this.event = new Event();
+
     this.eventForm = this.fb.group({
 
       name: this.fb.control(this.event.name, [Validators.required]),
@@ -35,7 +37,7 @@ export class CreateEventComponent implements OnInit {
 
     const newValues = this.eventForm.value;
 
-    let newEvent: Event;
+    const newEvent = new Event();
 
     newEvent.name = newValues.name;
 
