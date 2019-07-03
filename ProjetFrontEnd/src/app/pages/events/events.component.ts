@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JavaService } from 'src/app/services/java.service';
 import { Observable } from 'rxjs';
 import { Activity } from 'src/app/models/activity.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-events',
@@ -10,12 +11,20 @@ import { Activity } from 'src/app/models/activity.model';
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private javaService: JavaService) { }
+  public activity: Activity;
+  public editedActivity: Activity;
+
+  constructor(private javaService: JavaService, private route: ActivatedRoute) { }
 
   public listActivitiesByEvent: Observable<Activity[]>;
 
   ngOnInit() {
-    this.listActivitiesByEvent = this.javaService.getListActivityByEvent(3);
+
+    this.route.params.subscribe(params => {
+
+      const id: number = params.id;
+      this.listActivitiesByEvent = this.javaService.getListActivityByEvent(id);
+    });
   }
 
 }

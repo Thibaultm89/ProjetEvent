@@ -1,4 +1,3 @@
-import { Activity } from './activity.model';
 
 export interface Event {
   id: number;
@@ -13,5 +12,4 @@ export interface Event {
     monthValue: string,
     year: string
   };
-  listActivity: Activity[];
 }
