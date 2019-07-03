@@ -1,1 +1,52 @@
-<h1>Créer un événement</h1>
+<h1>Créer un événement:</h1>
+
+<form (ngSubmit)="submitForm()" [formGroup]="eventForm">
+
+  <div>
+    <label for="name">Nom de l'événement: </label>
+    <input type="text" id="name" name="name" formControlName="name"/>
+    <span *ngIf="hasNameError()">Requis !</span>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+
+  <br>
+
+  <div>
+    <label for="name">Année de début: </label>
+    <input type="text" id="yearstart" name="yearstart" formControlName="yearstart"/>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+  <div>
+    <label for="name">Mois de début: </label>
+    <input type="text" id="monthstart" name="monthstart" formControlName="yearstart"/>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+  <div>
+    <label for="name">Jour de début: </label>
+    <input type="text" id="daystart" name="daystart" formControlName="daystart"/>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+
+  <br>
+
+  <div>
+    <label for="name">Année de fin: </label>
+    <input type="text" id="yearfinish" name="yearfinish" formControlName="yearfinish"/>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+  <div>
+    <label for="name">Mois de fin: </label>
+    <input type="text" id="monthfinish" name="monthfinish" formControlName="yearfinish"/>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+  <div>
+    <label for="name">Jour de fin: </label>
+    <input type="text" id="dayfinish" name="dayfinish" formControlName="dayfinish"/>
+    <!-- <span *ngIf="!name.valid"> Requis !</span> -->
+  </div>
+
+  <br>
+
+  <input type="submit" [disabled]="!contactForm.valid" />
+
+</form>

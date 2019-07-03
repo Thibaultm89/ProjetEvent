@@ -12,6 +12,7 @@ import { CreateEventComponent } from './pages/creations/create-event/create-even
 import { EventsComponent } from './pages/events/events.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { LoginComponent } from './pages/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { LoginComponent } from './pages/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [JavaService],
   bootstrap: [AppComponent]

@@ -3,9 +3,17 @@ import { People } from './people.model';
 export interface Activity {
   id: number;
   name: string;
-  start: string;
-  finish: string;
+  start: {
+    dayOfMonth: string,
+    monthValue: string,
+    year: string
+  };
+  finish: {
+    dayOfMonth: string,
+    monthValue: string,
+    year: string
+  };
   manager: People;
-  id_event: number;
+  idEvent: number;
   listPeople: People[];
 }
