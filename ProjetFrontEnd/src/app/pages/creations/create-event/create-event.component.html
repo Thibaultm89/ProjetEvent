@@ -5,43 +5,47 @@
   <div>
     <label for="name">Nom de l'événement: </label>
     <input type="text" id="name" name="name" formControlName="name"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasNameError()">Requis !</span>
   </div>
 
   <br>
 
   <div>
-    <label for="name">Année de début: </label>
+    <label for="yearstart">Année de début: </label>
     <input type="text" id="yearstart" name="yearstart" formControlName="yearstart"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasYearstartError()">Requis !</span>
   </div>
   <div>
-    <label for="name">Mois de début: </label>
+    <label for="monthstart">Mois de début: </label>
     <input type="text" id="monthstart" name="monthstart" formControlName="monthstart"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasMonthstartError()">Requis !</span>
   </div>
   <div>
-    <label for="name">Jour de début: </label>
+    <label for="daystart">Jour de début: </label>
     <input type="text" id="daystart" name="daystart" formControlName="daystart"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasDaystartError()">Requis !</span>
   </div>
+
+  <select>
+      <option *ngFor= "let hour of hourList "value="hour">{{hour}}</option>
+  </select>
 
   <br>
 
   <div>
-    <label for="name">Année de fin: </label>
+    <label for="yearfinish">Année de fin: </label>
     <input type="text" id="yearfinish" name="yearfinish" formControlName="yearfinish"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasYearfinishError()">Requis !</span>
   </div>
   <div>
-    <label for="name">Mois de fin: </label>
+    <label for="monthfinish">Mois de fin: </label>
     <input type="text" id="monthfinish" name="monthfinish" formControlName="monthfinish"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasMonthfinishError()">Requis !</span>
   </div>
   <div>
-    <label for="name">Jour de fin: </label>
+    <label for="dayfinish">Jour de fin: </label>
     <input type="text" id="dayfinish" name="dayfinish" formControlName="dayfinish"/>
-    <span *ngIf="hasErrorRequire()">Requis !</span>
+    <span *ngIf="hasDayfinishError()">Requis !</span>
   </div>
 
   <br>
@@ -49,3 +53,5 @@
   <input type="submit" [disabled]="!eventForm.valid" />
 
 </form>
+<br>
+<a [routerLink]="['/home']">Retour au menu principal</a>

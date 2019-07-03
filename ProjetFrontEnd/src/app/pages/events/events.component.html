@@ -1,18 +1,16 @@
-<h1>Page des événements</h1>
+<h1>Page de l'événement:</h1>
 
-<p>Liste des Activités: </p>
+<p>Liste des Activités de l'événement: </p>
 <ul>
   <li *ngFor= "let listactivities of (listActivitiesByEvent | async)">
-    {{listactivities.name}} le
-    {{listactivities.start.dayOfMonth +"/"+listactivities.start.monthValue +"/"+listactivities.start.year}} à
-    {{listactivities.start.hour + "h" + listactivities.start.minute +""}}
+    <a [routerLink]="['/activities']">
+      {{listactivities.name}} le
+      {{listactivities.start.dayOfMonth +"/"+listactivities.start.monthValue +"/"+listactivities.start.year}} à
+      {{listactivities.start.hour + "h" + listactivities.start.minute +""}}
+    </a>
   </li>
 </ul>
 
-<br>
-<a [routerLink]="['/activities']">Page des activités</a>
-<br>
-<a [routerLink]="['/create-people']">S'inscrire</a>
 <br>
 <a [routerLink]="['/login']">Page login</a>
 <br>
