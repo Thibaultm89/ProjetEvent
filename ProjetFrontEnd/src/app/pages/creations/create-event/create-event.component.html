@@ -26,6 +26,10 @@
     <span *ngIf="hasDaystartError()">Requis !</span>
   </div>
 
+  <select>
+      <option *ngFor= "let hour of hourList "value="hour">{{hour}}</option>
+  </select>
+
   <br>
 
   <div>
