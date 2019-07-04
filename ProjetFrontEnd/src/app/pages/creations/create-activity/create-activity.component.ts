@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
-import { DateWithTime } from 'src/app/models/date-with-time.model';
+import { JavaService } from 'src/app/services/java.service';
 
 @Component({
   selector: 'app-create-activity',
@@ -19,7 +19,7 @@ export class CreateActivityComponent implements OnInit {
   public activity: Activity;
   public activityForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private javaService: JavaService) {
 
     this.tabMonth();
     this.tabYear();
@@ -28,22 +28,22 @@ export class CreateActivityComponent implements OnInit {
     this.tabMinute();
 
     this.activity = new Activity();
-    this.activity.start = new DateWithTime();
-    this.activity.finish = new DateWithTime();
+    this.activity.start = new Date();
+    this.activity.finish = new Date();
 
     this.activityForm = this.fb.group({
 
       name: this.fb.control(this.activity.name, [Validators.required]),
 
-      yearstart: this.fb.control(this.activity.start.year, [Validators.required]),
-      monthstart: this.fb.control(this.activity.start.monthValue, [Validators.required]),
-      daystart: this.fb.control(this.activity.start.dayOfMonth, [Validators.required]),
+      yearstart: this.fb.control(this.activity.start.getFullYear, [Validators.required]),
+      monthstart: this.fb.control(this.activity.start.getMonth, [Validators.required]),
+      daystart: this.fb.control(this.activity.start.getDay, [Validators.required]),
 
-      hourstart: this.fb.control(this.activity.start.dayOfMonth, [Validators.required]),
-      minutestart: this.fb.control(this.activity.start.dayOfMonth, [Validators.required]),
+      hourstart: this.fb.control(this.activity.start.getHours, [Validators.required]),
+      minutestart: this.fb.control(this.activity.start.getMinutes, [Validators.required]),
 
-      hourfinish: this.fb.control(this.activity.finish.dayOfMonth, [Validators.required]),
-      minutefinish: this.fb.control(this.activity.finish.dayOfMonth, [Validators.required]),
+      hourfinish: this.fb.control(this.activity.finish.getHours, [Validators.required]),
+      minutefinish: this.fb.control(this.activity.finish.getMinutes, [Validators.required]),
 
     });
   }
@@ -56,24 +56,28 @@ export class CreateActivityComponent implements OnInit {
     const newValues = this.activityForm.value;
 
     const newActivity = new Activity();
-    newActivity.start = new DateWithTime();
-    newActivity.finish = new DateWithTime();
+    newActivity.start = new Date();
+    newActivity.finish = new Date();
 
     newActivity.name = newValues.name;
 
-    newActivity.start.year = newValues.yearstart;
-    newActivity.start.monthValue = newValues.monthstart;
-    newActivity.start.dayOfMonth = newValues.daystart;
-    newActivity.start.hour = newValues.hourstart;
-    newActivity.start.minute = newValues.minutestart;
+    newActivity.start.setFullYear(newValues.yearstart);
+    newActivity.start.setMonth(newValues.monthstart);
+    newActivity.start.setDate(newValues.daystart);
+    newActivity.start.setHours(newValues.hourstart);
+    newActivity.start.setMinutes(newValues.minutestart);
 
-    newActivity.finish.year = newValues.yearstart;
-    newActivity.finish.monthValue = newValues.monthstart;
-    newActivity.finish.dayOfMonth = newValues.daystart;
-    newActivity.finish.hour = newValues.hourfinish;
-    newActivity.finish.minute = newValues.minutefinish;
+    newActivity.finish.setFullYear(newValues.yearstart);
+    newActivity.finish.setMonth(newValues.monthstart);
+    newActivity.finish.setDate(newValues.daystart);
+    newActivity.finish.setHours(newValues.hourfinish);
+    newActivity.finish.setMinutes(newValues.minutefinish);
 
     this.activity = newActivity;
+
+    this.javaService.createActivity(this.activity).subscribe(e => {
+      this.activity = e;
+    });
 
     console.log('submit', this.activity, newValues);
   }

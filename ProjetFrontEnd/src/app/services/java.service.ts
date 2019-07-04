@@ -33,4 +33,11 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+  public createActivity(payload: Activity): Observable<Activity> {
+    return this.http
+      .post<Activity>(`http://localhost:8080/projet-back-end/json/create-activity/`, payload)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from 'src/app/models/event.model';
-import { DateWithoutTime } from 'src/app/models/date-without-time.model';
 import { JavaService } from 'src/app/services/java.service';
 
 @Component({
@@ -26,7 +25,7 @@ export class CreateEventComponent implements OnInit {
 
     this.event = new Event();
     this.event.start = new Date();
-    this.event.finish = new DateWithoutTime();
+    this.event.finish = new Date();
 
     this.eventForm = this.fb.group({
 
@@ -36,9 +35,9 @@ export class CreateEventComponent implements OnInit {
       monthstart: this.fb.control(this.event.start.getMonth, [Validators.required]),
       daystart: this.fb.control(this.event.start.getDay, [Validators.required]),
 
-      yearfinish: this.fb.control(this.event.finish.year, [Validators.required]),
-      monthfinish: this.fb.control(this.event.finish.monthValue, [Validators.required]),
-      dayfinish: this.fb.control(this.event.finish.dayOfMonth, [Validators.required]),
+      yearfinish: this.fb.control(this.event.finish.getFullYear, [Validators.required]),
+      monthfinish: this.fb.control(this.event.finish.getMonth, [Validators.required]),
+      dayfinish: this.fb.control(this.event.finish.getDay, [Validators.required]),
 
     });
   }
@@ -52,7 +51,7 @@ export class CreateEventComponent implements OnInit {
 
     const newEvent = new Event();
     newEvent.start = new Date();
-    newEvent.finish = new DateWithoutTime();
+    newEvent.finish = new Date();
 
     newEvent.name = newValues.name;
 
@@ -60,15 +59,22 @@ export class CreateEventComponent implements OnInit {
     newEvent.start.setMonth(newValues.monthstart);
     newEvent.start.setDate(newValues.daystart);
 
-    newEvent.finish.year = newValues.yearfinish;
-    newEvent.finish.monthValue = newValues.monthfinish;
-    newEvent.finish.dayOfMonth = newValues.dayfinish;
+    newEvent.finish.setFullYear(newValues.yearfinish);
+    newEvent.finish.setMonth(newValues.monthfinish);
+    newEvent.finish.setDate(newValues.dayfinish);
+
+    this.event = newEvent;
 
     this.javaService.createEvent(this.event).subscribe(e => {
       this.event = e;
     });
 
     console.log('submit', this.event, newValues);
+  }
+
+  public hasNameError() {
+    const control = this.eventForm.get('name');
+    return control.errors && control.errors.required;
   }
 
   public tabMonth() {
@@ -95,10 +101,5 @@ export class CreateEventComponent implements OnInit {
         this.dayList[i] = i.toString();
       }
     }
-  }
-
-  public hasNameError() {
-    const control = this.eventForm.get('name');
-    return control.errors && control.errors.required;
   }
 }
