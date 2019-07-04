@@ -34,11 +34,9 @@ public class EventController extends BaseController{
 	} catch(Exception e) {
 		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	}
-	
-	System.out.println(event.getName());
 	if (event != null) {		
 		repository.addEvent(event.getName(), event.getStart(), event.getFinish());
-		//event = repository.findOneEventByName(event.getName());
+		event = repository.findOneEventByName(event.getName());
 	} 
 	response.getWriter().write(objectToJson(event));
 }

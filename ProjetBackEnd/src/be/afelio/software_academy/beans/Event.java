@@ -4,13 +4,24 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import be.afelio.software_academy.JsonDeserial;
+import be.afelio.software_academy.JsonSerial;
+
 public class Event implements Serializable {
 	
 	private static final long serialVersionUID = -1172079574826305882L;
 	
 	protected Integer id;
 	protected String name;
+	
+	@JsonDeserialize(using = JsonDeserial.class)
+	@JsonSerialize(using = JsonSerial.class)
 	protected LocalDate start;
+	@JsonSerialize(using = JsonSerial.class)
+	@JsonDeserialize(using = JsonDeserial.class)
 	protected LocalDate finish;
 	
 	public Integer getId() {
