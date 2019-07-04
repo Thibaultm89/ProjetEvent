@@ -4,17 +4,26 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import be.afelio.software_academy.JsonDeserial;
+import be.afelio.software_academy.JsonSerial;
+
 public class Activity implements Serializable {
 
 	private static final long serialVersionUID = 809180280680054447L;
 	
 	protected Integer id;
 	protected String name;
+	@JsonDeserialize(using = JsonDeserial.class)
+	@JsonSerialize(using = JsonSerial.class)
 	protected LocalDateTime start;
+	@JsonSerialize(using = JsonSerial.class)
+	@JsonDeserialize(using = JsonDeserial.class)
 	protected LocalDateTime finish;
 	protected People manager;
 	protected Integer idEvent;
-	protected List<People> listPeople;
 	
 	
 	public Integer getId() {
@@ -53,17 +62,10 @@ public class Activity implements Serializable {
 	public void setIdEvent(Integer idEvent) {
 		this.idEvent = idEvent;
 	}
-	public List<People> getListPeople() {
-		return listPeople;
-	}
-	public void setListPeople(List<People> listPeople) {
-		this.listPeople = listPeople;
-	}
-	
 	
 	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", name=" + name + ", manager=" + manager + ", start=" + start + ", finish="
-				+ finish + ", listPeople=" + listPeople + "]";
+				+ finish + "]";
 	}
 }
