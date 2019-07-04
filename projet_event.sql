@@ -57,10 +57,10 @@ ALTER TABLE public."Activity_people" OWNER TO postgres;
 --
 
 CREATE TABLE public."Event" (
-    id_event integer NOT NULL
+    id_event integer NOT NULL,
 	name_event character varying NOT NULL,
     start_event timestamp(6) without time zone NOT NULL,
-    finish_event timestamp(6) without time zone NOT NULL,
+    finish_event timestamp(6) without time zone NOT NULL
 );
 
 
@@ -147,9 +147,9 @@ INSERT INTO public."Activity_people" VALUES (2, 2);
 -- Data for Name: Event; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Event" VALUES ('Tomorrowland', '2019-07-19 00:00:00', '2019-07-28 00:00:00', 1);
-INSERT INTO public."Event" VALUES ('Francofolies', '2019-07-18 00:00:00', '2019-07-21 00:00:00', 2);
-INSERT INTO public."Event" VALUES ('Les Ardentes', '2019-07-04 00:00:00', '2019-07-07 00:00:00', 3);
+INSERT INTO public."Event" VALUES (1, 'Tomorrowland', '2019-07-19 00:00:00', '2019-07-28 00:00:00');
+INSERT INTO public."Event" VALUES (2, 'Francofolies', '2019-07-18 00:00:00', '2019-07-21 00:00:00');
+INSERT INTO public."Event" VALUES (3, 'Les Ardentes', '2019-07-04 00:00:00', '2019-07-07 00:00:00');
 
 
 --
