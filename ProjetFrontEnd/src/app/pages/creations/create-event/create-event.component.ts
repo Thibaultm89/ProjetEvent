@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from 'src/app/models/event.model';
 import { DateWithoutTime } from 'src/app/models/date-without-time.model';
+
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -9,14 +10,18 @@ import { DateWithoutTime } from 'src/app/models/date-without-time.model';
 })
 export class CreateEventComponent implements OnInit {
 
-  public hourList = [null, '00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
-   '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+  public yearList: string[] = [null];
+  public monthList: string[] = [null];
+  public dayList: string[] = [null];
 
   public event: Event;
-
   public eventForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
+
+    this.tabMonth();
+    this.tabYear();
+    this.tabDay();
 
     this.event = new Event();
     this.event.start = new DateWithoutTime();
@@ -63,38 +68,34 @@ export class CreateEventComponent implements OnInit {
     console.log('submit', this.event, newValues);
   }
 
+  public tabMonth() {
+    for (let i = 1 ; i < 13 ; i++) {
+      if (i < 10) {
+        this.monthList[i] = '0' + i.toString();
+      } else {
+         this.monthList[i] = i.toString();
+      }
+    }
+  }
+
+  public tabYear() {
+    for (let i = 2018 ; i < 2100 ; i++) {
+      this.yearList[i - 2017] = i.toString();
+    }
+  }
+
+  public tabDay() {
+    for (let i = 1 ; i < 32 ; i++) {
+      if (i < 10) {
+        this.dayList[i] = '0' + i.toString();
+      } else {
+        this.dayList[i] = i.toString();
+      }
+    }
+  }
+
   public hasNameError() {
     const control = this.eventForm.get('name');
-    return control.errors && control.errors.required;
-  }
-
-  public hasYearstartError() {
-    const control = this.eventForm.get('yearstart');
-    return control.errors && control.errors.required;
-  }
-
-  public hasMonthstartError() {
-    const control = this.eventForm.get('monthstart');
-    return control.errors && control.errors.required;
-  }
-
-  public hasDaystartError() {
-    const control = this.eventForm.get('daystart');
-    return control.errors && control.errors.required;
-  }
-
-  public hasYearfinishError() {
-    const control = this.eventForm.get('yearfinish');
-    return control.errors && control.errors.required;
-  }
-
-  public hasMonthfinishError() {
-    const control = this.eventForm.get('monthfinish');
-    return control.errors && control.errors.required;
-  }
-
-  public hasDayfinishError() {
-    const control = this.eventForm.get('dayfinish');
     return control.errors && control.errors.required;
   }
 }

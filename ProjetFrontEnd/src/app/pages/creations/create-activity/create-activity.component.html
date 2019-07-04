@@ -11,45 +11,53 @@
   <br>
 
   <div>
-    <label for="yearstart">Année de l'activité: </label>
-    <input type="text" id="yearstart" name="yearstart" formControlName="yearstart"/>
-    <span *ngIf="hasYearstartError()">Requis !</span>
-  </div>
-  <div>
-    <label for="monthstart">Mois de l'activité: </label>
-    <input type="text" id="monthstart" name="monthstart" formControlName="monthstart"/>
-    <span *ngIf="hasMonthstartError()">Requis !</span>
-  </div>
-  <div>
-    <label for="daystart">Jour de l'activité: </label>
-    <input type="text" id="daystart" name="daystart" formControlName="daystart"/>
-    <span *ngIf="hasDaystartError()">Requis !</span>
+    <span>Date de l'événement:</span>
+    <br><br>
+    <span> Jour: </span>
+    <span></span>
+    <select formControlName="daystart">
+      <option *ngFor= "let day of dayList " value="{{day}}">{{day}}</option>
+    </select>
+
+    <span> Mois: </span>
+    <select formControlName="monthstart">
+        <option *ngFor= "let month of monthList " value="{{month}}">{{month}}</option>
+    </select>
+
+    <span> Année: </span>
+    <select formControlName="yearstart">
+      <option *ngFor= "let year of yearList " value="{{year}}">{{year}}</option>
+    </select>
   </div>
 
   <br>
 
   <div>
-    <label for="hourstart">Heure de début: </label>
-    <input type="text" id="hourstart" name="hourstart" formControlName="hourstart"/>
-    <span *ngIf="hasHourstartError()">Requis !</span>
-  </div>
-  <div>
-    <label for="minutestart">Minute de début: </label>
-    <input type="text" id="minutestart" name="minutestart" formControlName="minutestart"/>
-    <span *ngIf="hasMinutestartError()">Requis !</span>
+    <span>Heure de début de l'événement: </span>
+
+    <select formControlName="hourstart">
+      <option *ngFor= "let hour of hourList " value="{{hour}}">{{hour}}</option>
+    </select>
+
+    <span> h </span>
+    <select formControlName="minutestart">
+        <option *ngFor= "let minute of minuteList " value="{{minute}}">{{minute}}</option>
+    </select>
   </div>
 
   <br>
 
   <div>
-    <label for="hourfinish">Heure de fin: </label>
-    <input type="text" id="hourfinish" name="hourfinish" formControlName="hourfinish"/>
-    <span *ngIf="hasHourfinishError()">Requis !</span>
-  </div>
-  <div>
-    <label for="minutefinish">Minute de fin: </label>
-    <input type="text" id="minutefinish" name="minutefinish" formControlName="minutefinish"/>
-    <span *ngIf="hasMinutefinishError()">Requis !</span>
+    <span>Heure de fin de l'événement: </span>
+
+    <select formControlName="hourfinish">
+      <option *ngFor= "let hour of hourList " value="{{hour}}">{{hour}}</option>
+    </select>
+
+    <span> h </span>
+    <select formControlName="minutefinish">
+        <option *ngFor= "let minute of minuteList " value="{{minute}}">{{minute}}</option>
+    </select>
   </div>
 
   <br>

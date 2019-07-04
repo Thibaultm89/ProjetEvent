@@ -10,11 +10,22 @@ import { DateWithTime } from 'src/app/models/date-with-time.model';
 })
 export class CreateActivityComponent implements OnInit {
 
-  public activity: Activity;
+  public yearList: string[] = [null];
+  public monthList: string[] = [null];
+  public dayList: string[] = [null];
+  public hourList: string[] = [null];
+  public minuteList: string[] = [null];
 
+  public activity: Activity;
   public activityForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
+
+    this.tabMonth();
+    this.tabYear();
+    this.tabDay();
+    this.tabHour();
+    this.tabMinute();
 
     this.activity = new Activity();
     this.activity.start = new DateWithTime();
@@ -72,39 +83,50 @@ export class CreateActivityComponent implements OnInit {
     return control.errors && control.errors.required;
   }
 
-  public hasYearstartError() {
-    const control = this.activityForm.get('yearstart');
-    return control.errors && control.errors.required;
+  public tabMonth() {
+    for (let i = 1 ; i < 13 ; i++) {
+      if (i < 10) {
+        this.monthList[i] = '0' + i.toString();
+      } else {
+         this.monthList[i] = i.toString();
+      }
+    }
   }
 
-  public hasMonthstartError() {
-    const control = this.activityForm.get('monthstart');
-    return control.errors && control.errors.required;
+  public tabYear() {
+    for (let i = 2018 ; i < 2100 ; i++) {
+      this.yearList[i - 2017] = i.toString();
+    }
   }
 
-  public hasDaystartError() {
-    const control = this.activityForm.get('daystart');
-    return control.errors && control.errors.required;
+  public tabDay() {
+    for (let i = 1 ; i < 32 ; i++) {
+      if (i < 10) {
+        this.dayList[i] = '0' + i.toString();
+      } else {
+        this.dayList[i] = i.toString();
+      }
+    }
   }
 
-  public hasHourstartError() {
-    const control = this.activityForm.get('hourstart');
-    return control.errors && control.errors.required;
+  public tabHour() {
+    for (let i = 0 ; i < 24 ; i++) {
+      if (i < 10) {
+        this.hourList[i + 1] = '0' + i.toString();
+      } else {
+        this.hourList[i + 1] = i.toString();
+      }
+    }
   }
 
-  public hasMinutestartError() {
-    const control = this.activityForm.get('minutestart');
-    return control.errors && control.errors.required;
-  }
-
-  public hasHourfinishError() {
-    const control = this.activityForm.get('hourfinish');
-    return control.errors && control.errors.required;
-  }
-
-  public hasMinutefinishError() {
-    const control = this.activityForm.get('minutefinish');
-    return control.errors && control.errors.required;
+  public tabMinute() {
+    for (let i = 0 ; i < 60 ; i++) {
+      if (i < 10) {
+        this.minuteList[i + 1] = '0' + i.toString();
+      } else {
+        this.minuteList[i + 1] = i.toString();
+      }
+    }
   }
 
 }
