@@ -59,9 +59,19 @@ export class CreateEventComponent implements OnInit {
     newEvent.start.setMonth((newValues.monthstart) - 1);
     newEvent.start.setDate(newValues.daystart);
 
+    newEvent.start.setHours(0);
+    newEvent.start.setMinutes(0);
+    newEvent.start.setSeconds(0);
+    newEvent.start.setMilliseconds(0);
+
     newEvent.finish.setFullYear(newValues.yearfinish);
     newEvent.finish.setMonth((newValues.monthfinish) - 1);
     newEvent.finish.setDate(newValues.dayfinish);
+
+    newEvent.finish.setHours(0);
+    newEvent.finish.setMinutes(0);
+    newEvent.finish.setSeconds(0);
+    newEvent.finish.setMilliseconds(0);
 
     this.event = newEvent;
 

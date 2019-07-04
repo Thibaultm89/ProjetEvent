@@ -62,16 +62,22 @@ export class CreateActivityComponent implements OnInit {
     newActivity.name = newValues.name;
 
     newActivity.start.setFullYear(newValues.yearstart);
-    newActivity.start.setMonth(newValues.monthstart);
+    newActivity.start.setMonth((newValues.monthstart) - 1);
     newActivity.start.setDate(newValues.daystart);
+
     newActivity.start.setHours(newValues.hourstart);
     newActivity.start.setMinutes(newValues.minutestart);
+    newActivity.start.setSeconds(0);
+    newActivity.start.setMilliseconds(0);
 
     newActivity.finish.setFullYear(newValues.yearstart);
-    newActivity.finish.setMonth(newValues.monthstart);
+    newActivity.finish.setMonth((newValues.monthstart) - 1);
     newActivity.finish.setDate(newValues.daystart);
+
     newActivity.finish.setHours(newValues.hourfinish);
     newActivity.finish.setMinutes(newValues.minutefinish);
+    newActivity.finish.setSeconds(0);
+    newActivity.finish.setMilliseconds(0);
 
     this.activity = newActivity;
 

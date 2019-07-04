@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { People } from 'src/app/models/people.model';
+import { JavaService } from 'src/app/services/java.service';
 
 @Component({
   selector: 'app-create-people',
@@ -11,10 +12,9 @@ import { People } from 'src/app/models/people.model';
 export class CreatePeopleComponent implements OnInit {
 
   public people: People;
-
   public peopleForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private javaService: JavaService) {
 
     this.people = new People();
 
@@ -43,6 +43,10 @@ export class CreatePeopleComponent implements OnInit {
     newPeople.password = newValues.password;
 
     this.people = newPeople;
+
+    this.javaService.createPeople(this.people).subscribe(p => {
+      this.people = p;
+    });
 
     console.log('submit', this.people, newValues);
   }

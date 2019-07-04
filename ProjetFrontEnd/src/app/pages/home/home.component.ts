@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
 import { JavaService } from 'src/app/services/java.service';
 import { Event } from '../../models/event.model';
 
@@ -7,16 +6,15 @@ import { Event } from '../../models/event.model';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
 
   constructor(private javaService: JavaService) { }
 
-  public listEvents: Observable<Event[]>;
+  public listEvents: Event[];
 
   ngOnInit() {
-    this.listEvents = this.javaService.getListEvent();
+    this.javaService.getListEvent().subscribe((p) => this.listEvents = p);
   }
 
 }

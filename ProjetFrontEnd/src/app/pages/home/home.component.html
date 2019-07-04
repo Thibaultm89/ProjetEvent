@@ -6,15 +6,11 @@
 
   <p>Liste des événements: </p>
   <ul>
-    <li *ngFor= "let listevents of (listEvents | async)">
+    <li *ngFor= "let listevents of (listEvents)">
       <a [routerLink]="['/events', listevents.id]">
         {{listevents.name}} du
-        {{listevents.start.dayOfMonth +"/"+ listevents.start.monthValue +"/"+ listevents.start.year}} au
-        {{listevents.finish.dayOfMonth +"/"+ listevents.finish.monthValue +"/"+ listevents.finish.year}}
+        {{listevents.start | date: 'dd/MM/yy'}} au {{listevents.finish | date: 'dd/MM/yy'}}
       </a>
-      <form >
-        <input type= "hidden" value ="{{listevents.id}}">
-      </form>
     </li>
   </ul>
 
