@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-07-03 16:58:14
+-- Started on 2019-07-04 14:56:46
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -57,10 +57,10 @@ ALTER TABLE public."Activity_people" OWNER TO postgres;
 --
 
 CREATE TABLE public."Event" (
-	id_event integer NOT NULL,
-    name_event character varying NOT NULL,
-    start_event date NOT NULL,
-    finish_event date NOT NULL
+    id_event integer NOT NULL
+	name_event character varying NOT NULL,
+    start_event timestamp(6) without time zone NOT NULL,
+    finish_event timestamp(6) without time zone NOT NULL,
 );
 
 
@@ -147,11 +147,9 @@ INSERT INTO public."Activity_people" VALUES (2, 2);
 -- Data for Name: Event; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Event" VALUES ('Tomorrowland', '2019-07-19', '2019-07-28', 1);
-INSERT INTO public."Event" VALUES ('Francofolies', '2019-07-18', '2019-07-21', 2);
-INSERT INTO public."Event" VALUES ('Les Ardentes', '2019-07-04', '2019-07-07', 3);
-INSERT INTO public."Event" VALUES ('PukkelPop', '2019-08-15', '2019-08-19', 4);
-INSERT INTO public."Event" VALUES ('RockWerchter', '3919-09-21', '3919-09-21', 7);
+INSERT INTO public."Event" VALUES ('Tomorrowland', '2019-07-19 00:00:00', '2019-07-28 00:00:00', 1);
+INSERT INTO public."Event" VALUES ('Francofolies', '2019-07-18 00:00:00', '2019-07-21 00:00:00', 2);
+INSERT INTO public."Event" VALUES ('Les Ardentes', '2019-07-04 00:00:00', '2019-07-07 00:00:00', 3);
 
 
 --
@@ -172,7 +170,7 @@ INSERT INTO public."People" VALUES (4, 'Damien', 'Bouffioux', 'damb@hotmail.com'
 -- Name: Event_id_event_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Event_id_event_seq"', 7, true);
+SELECT pg_catalog.setval('public."Event_id_event_seq"', 19, true);
 
 
 --
@@ -247,7 +245,7 @@ ALTER TABLE ONLY public."Activity_people"
     ADD CONSTRAINT id_people FOREIGN KEY (id_people) REFERENCES public."People"(id_people);
 
 
--- Completed on 2019-07-03 16:58:14
+-- Completed on 2019-07-04 14:56:46
 
 --
 -- PostgreSQL database dump complete

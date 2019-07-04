@@ -15,15 +15,12 @@ public class JsonSerial extends StdSerializer<LocalDateTime> {
 	private static final long serialVersionUID = -7715993065947890827L;
 
 	public JsonSerial() {
-	        super(LocalDateTime.class);
-	    }
+		super(LocalDateTime.class);
+	}
 
 	@Override
-	    public void serialize(LocalDateTime value, JsonGenerator generator, SerializerProvider provider) throws IOException {
-	        generator.writeString(value.toInstant(ZoneOffset.UTC).toString()); //(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
-	        
-	
-	
-
-}
+	public void serialize(LocalDateTime value, JsonGenerator generator, SerializerProvider provider)
+			throws IOException {
+		generator.writeString(value.toInstant(ZoneOffset.UTC).toString());
+	}
 }

@@ -59,7 +59,7 @@ public class FrontController  extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 		if (pathInfo != null) {
 			response.setContentType("application/json");
-			response.addHeader("Access-Control-Allow-Origin", "*");
+			setHeaders(response);
 			
 			if (pathInfo.startsWith("/event/all")) {
 				eventController.findAllEvents(request, response);
@@ -84,8 +84,9 @@ public class FrontController  extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 		if (pathInfo != null) {
 			response.setContentType("application/json");
+			setHeaders(response);
 			switch (pathInfo) {
-			case "/event":
+			case "/create-event/":
 				eventController.addEvent(request, response);
 				break;
 			case "/activity":
@@ -101,5 +102,17 @@ public class FrontController  extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 		
+	}
+	
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		super.doOptions(request, response);
+		setHeaders(response);
+	}
+	
+	private void setHeaders( HttpServletResponse response ) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "*");
+		response.addHeader("Access-Control-Allow-Headers", "*");
 	}
 }

@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
-
 
 import be.afelio.software_academy.beans.Event;
 import be.afelio.software_academy.repository.DataRepository;

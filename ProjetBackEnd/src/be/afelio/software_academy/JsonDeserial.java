@@ -30,11 +30,7 @@ public class JsonDeserial extends StdDeserializer<LocalDateTime>{
 
 	@Override
 	public LocalDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-		//Event event = new Event();
-		//return LocalDateTime.parse(parser.readValueAs(String.class), DateTimeFormatter.  );
 		return LocalDateTime.ofInstant(Instant.parse(parser.readValueAs(String.class)), ZoneOffset.UTC);
-
-	
 	}
 
 }
