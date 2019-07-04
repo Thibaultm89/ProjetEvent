@@ -140,4 +140,46 @@ public class DataRepository {
 		return event;
 	}
 
+	public Activity findOneActivityByName(String name) {
+		Activity activity = null;
+		if (name != null && !name.isBlank()) {
+			String sql = "SELECT id_activity AS ActivityId, name_activity as ActivityName, start_activity AS ActivityStart,"
+					+ " finish_activity AS ActivityFinish, id_event AS EventId FROM \"Activity\" where name_activity = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				statement.setString(1, name);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						activity = createActivity(resultSet);
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+		return activity;
+	}
+
+	
+	public void addActivity(String name, LocalDateTime start, LocalDateTime finish) {
+		if (name != null && !name.isBlank() && findOneActivityByName(name) == null) {
+			String sql = "INSERT INTO \"Activity\" (id_activity, name_activity, start_activity, finish_activity, manager, id_event) values(100,?,?,?,1,1)";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				connection.setAutoCommit(true);
+				statement.setString(1, name);
+				statement.setObject(2,start);
+				statement.setObject(3,finish);
+				statement.executeUpdate();
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+	}
 }

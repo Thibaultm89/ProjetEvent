@@ -16,7 +16,6 @@ public class Event implements Serializable {
 	
 	protected Integer id;
 	protected String name;
-	
 	@JsonDeserialize(using = JsonDeserial.class)
 	@JsonSerialize(using = JsonSerial.class)
 	protected LocalDateTime start;

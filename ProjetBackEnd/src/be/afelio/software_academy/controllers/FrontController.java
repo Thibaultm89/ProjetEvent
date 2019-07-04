@@ -89,8 +89,8 @@ public class FrontController  extends HttpServlet {
 			case "/create-event/":
 				eventController.addEvent(request, response);
 				break;
-			case "/activity":
-				// TODO
+			case "/create-activity/":
+				activityController.addActivity(request,response);
 				break;
 			case "/people":
 				// TODO
