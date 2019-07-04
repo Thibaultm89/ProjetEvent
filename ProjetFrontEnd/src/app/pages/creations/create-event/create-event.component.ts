@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from 'src/app/models/event.model';
 import { DateWithoutTime } from 'src/app/models/date-without-time.model';
+import { JavaService } from 'src/app/services/java.service';
 
 @Component({
   selector: 'app-create-event',
@@ -17,23 +18,23 @@ export class CreateEventComponent implements OnInit {
   public event: Event;
   public eventForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private javaService: JavaService) {
 
     this.tabMonth();
     this.tabYear();
     this.tabDay();
 
     this.event = new Event();
-    this.event.start = new DateWithoutTime();
+    this.event.start = new Date();
     this.event.finish = new DateWithoutTime();
 
     this.eventForm = this.fb.group({
 
       name: this.fb.control(this.event.name, [Validators.required]),
 
-      yearstart: this.fb.control(this.event.start.year, [Validators.required]),
-      monthstart: this.fb.control(this.event.start.monthValue, [Validators.required]),
-      daystart: this.fb.control(this.event.start.dayOfMonth, [Validators.required]),
+      yearstart: this.fb.control(this.event.start.getFullYear, [Validators.required]),
+      monthstart: this.fb.control(this.event.start.getMonth, [Validators.required]),
+      daystart: this.fb.control(this.event.start.getDay, [Validators.required]),
 
       yearfinish: this.fb.control(this.event.finish.year, [Validators.required]),
       monthfinish: this.fb.control(this.event.finish.monthValue, [Validators.required]),
@@ -50,20 +51,22 @@ export class CreateEventComponent implements OnInit {
     const newValues = this.eventForm.value;
 
     const newEvent = new Event();
-    newEvent.start = new DateWithoutTime();
+    newEvent.start = new Date();
     newEvent.finish = new DateWithoutTime();
 
     newEvent.name = newValues.name;
 
-    newEvent.start.year = newValues.yearstart;
-    newEvent.start.monthValue = newValues.monthstart;
-    newEvent.start.dayOfMonth = newValues.daystart;
+    newEvent.start.setFullYear(newValues.yearstart);
+    newEvent.start.setMonth(newValues.monthstart);
+    newEvent.start.setDate(newValues.daystart);
 
     newEvent.finish.year = newValues.yearfinish;
     newEvent.finish.monthValue = newValues.monthfinish;
     newEvent.finish.dayOfMonth = newValues.dayfinish;
 
-    this.event = newEvent;
+    this.javaService.createEvent(this.event).subscribe(e => {
+      this.event = e;
+    });
 
     console.log('submit', this.event, newValues);
   }

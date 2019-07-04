@@ -29,6 +29,7 @@ export class JavaService {
   public createEvent(payload: Event): Observable<Event> {
     return this.http
       .post<Event>(`http://localhost:8080/projet-back-end/json/create-event/`, payload)
+// tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
