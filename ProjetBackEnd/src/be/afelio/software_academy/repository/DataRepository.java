@@ -108,8 +108,6 @@ public class DataRepository {
 
 	
 	public void addEvent(String name, LocalDate start, LocalDate finish) { 
-		Date start_d = Date.valueOf(start);
-		Date finish_d = Date.valueOf(finish);
 		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {
 			String sql = "INSERT INTO \"Event\" (name_event, start_event, finish_event) values(?,?,?)";
 			try (
@@ -118,8 +116,8 @@ public class DataRepository {
 			) {
 				connection.setAutoCommit(true);
 				statement.setString(1, name);
-				statement.setDate(2, start_d);
-				statement.setDate(3, finish_d);
+				statement.setObject(2,start);
+				statement.setObject(3,finish);
 				statement.executeUpdate();
 			} catch(SQLException sqle) {
 				throw new RuntimeException(sqle);
@@ -130,7 +128,7 @@ public class DataRepository {
 	public Event findOneEventByName(String name) {
 		Event event = null;
 		if (name != null && !name.isBlank()) {
-			String sql = "SELECT name_event as EventName, event_start AS EventStart, event_finish AS EventFinish FROM \"Event\" where name_event = ?";
+			String sql = "SELECT id_event AS EventID, name_event as EventName, start_event AS EventStart, finish_event AS EventFinish FROM \"Event\" where name_event = ?";
 			try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);

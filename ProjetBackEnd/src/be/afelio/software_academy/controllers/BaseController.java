@@ -4,7 +4,6 @@ import java.io.InputStream;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import be.afelio.software_academy.repository.DataRepository;
 
 
@@ -42,6 +41,7 @@ public abstract class BaseController {
 			throw new RuntimeException(e);
 		}
 	}
+	
 	
 	protected <T> T jsonStreamToObject(InputStream jsonStream, Class<T> type) {
 		try {
