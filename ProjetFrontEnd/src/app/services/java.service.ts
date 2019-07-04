@@ -26,4 +26,10 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+  public createEvent(payload: Event): Observable<Event> {
+    return this.http
+      .post<Event>(`http://localhost:8080/projet-back-end/json/create-event/`, payload)
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
 }
