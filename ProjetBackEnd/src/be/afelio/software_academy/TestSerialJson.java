@@ -15,7 +15,7 @@ public class TestSerialJson {
         Event event = new Event();
         event.setId(100);
         event.setName("Twist and Shout");
-        event.setStart(LocalDate.of(1964, Month.FEBRUARY, 3));
+       // event.setStart(LocalDate.of(1964, Month.FEBRUARY, 3));
 
         ObjectMapper mapper = new ObjectMapper();
         try {

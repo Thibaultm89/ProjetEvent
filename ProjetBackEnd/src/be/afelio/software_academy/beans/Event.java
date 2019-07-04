@@ -2,6 +2,7 @@ package be.afelio.software_academy.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -19,10 +20,10 @@ public class Event implements Serializable {
 	
 	@JsonDeserialize(using = JsonDeserial.class)
 	@JsonSerialize(using = JsonSerial.class)
-	protected LocalDate start;
+	protected LocalDateTime start;
 	@JsonSerialize(using = JsonSerial.class)
 	@JsonDeserialize(using = JsonDeserial.class)
-	protected LocalDate finish;
+	protected LocalDateTime finish;
 	
 	public Integer getId() {
 		return id;
@@ -36,16 +37,16 @@ public class Event implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public LocalDate getStart() {
+	public LocalDateTime getStart() {
 		return start;
 	}
-	public void setStart(LocalDate start) {
+	public void setStart(LocalDateTime start) {
 		this.start = start;
 	}
-	public LocalDate getFinish() {
+	public LocalDateTime getFinish() {
 		return finish;
 	}
-	public void setFinish(LocalDate finish) {
+	public void setFinish(LocalDateTime finish) {
 		this.finish = finish;
 	}
 

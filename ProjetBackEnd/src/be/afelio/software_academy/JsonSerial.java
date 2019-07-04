@@ -6,21 +6,24 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-public class JsonSerial extends StdSerializer<LocalDate> {
+public class JsonSerial extends StdSerializer<LocalDateTime> {
 
 	private static final long serialVersionUID = -7715993065947890827L;
 
 	public JsonSerial() {
-	        super(LocalDate.class);
+	        super(LocalDateTime.class);
 	    }
 
 	@Override
-	    public void serialize(LocalDate value, JsonGenerator generator, SerializerProvider provider) throws IOException {
-	        generator.writeString(value.format(DateTimeFormatter.ISO_LOCAL_DATE));
-	    }
+	    public void serialize(LocalDateTime value, JsonGenerator generator, SerializerProvider provider) throws IOException {
+	        generator.writeString(value.toInstant(ZoneOffset.UTC).toString()); //(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+	        
 	
 	
 
+}
 }

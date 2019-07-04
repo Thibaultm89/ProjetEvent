@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,13 +62,17 @@ public class DataRepository {
 	protected Event createEvent(ResultSet rs) throws SQLException {
 		int id = rs.getInt("EventId");
 		String name = rs.getString("EventName");
-		String start = rs.getString("EventStart");
-		String finish = rs.getString("EventFinish");
+	//	String start = rs.getString("EventStart");
+	//	String finish = rs.getString("EventFinish");
+		Timestamp start = rs.getTimestamp("EventStart");
+		Timestamp finish = rs.getTimestamp("EventFinish");
 		Event e = new Event();
 		e.setId(id);
 		e.setName(name);
-		e.setStart(LocalDate.parse(start));
-		e.setFinish(LocalDate.parse(finish));
+		//e.setStart(LocalDateTime.parse(start));
+		//e.setFinish(LocalDateTime.parse(finish));
+		e.setStart(start.toLocalDateTime());
+		e.setFinish(finish.toLocalDateTime());
 		return e;
 	}
 	
@@ -107,7 +112,7 @@ public class DataRepository {
 	}
 
 	
-	public void addEvent(String name, LocalDate start, LocalDate finish) { 
+	public void addEvent(String name, LocalDateTime start, LocalDateTime finish) { 
 		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {
 			String sql = "INSERT INTO \"Event\" (name_event, start_event, finish_event) values(?,?,?)";
 			try (
