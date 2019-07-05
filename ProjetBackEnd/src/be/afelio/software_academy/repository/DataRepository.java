@@ -68,7 +68,8 @@ public class DataRepository {
 	
 	public List<Activity> findActivitiesByEventId(int i) {
 		List<Activity> list = new ArrayList<Activity>();
-		String sql = "SELECT id_activity AS ActivityId, name_activity AS ActivityName, start_activity AS ActivityStart, finish_activity AS ActivityFinish, id_event AS EventId "
+		String sql = "SELECT id_activity AS ActivityId, name_activity AS ActivityName, start_activity AS ActivityStart, "
+				+ "finish_activity AS ActivityFinish, id_event AS EventId, img_activity AS ImgActivity "
 				+ "FROM \"Activity\""
 				+ "WHERE id_event= "+ i;
 		try (
@@ -92,12 +93,14 @@ public class DataRepository {
 		Timestamp start = rs.getTimestamp("ActivityStart");
 		Timestamp finish = rs.getTimestamp("ActivityFinish");
 		int idE = rs.getInt("EventId");
+		String img = rs.getString("ImgActivity");
 		Activity a = new Activity();
 		a.setId(idA);
 		a.setName(name);
 		a.setStart(start.toLocalDateTime());
 		a.setFinish(finish.toLocalDateTime());
 		a.setIdEvent(idE);
+		a.setImg(img);
 		return a;
 	}
 
@@ -190,6 +193,69 @@ public class DataRepository {
 			}
 		}
 		return activity;
+	}
+	
+	public Activity findOneActivityById(Integer id) {
+		Activity activity = null;
+		String sql = "SELECT id_activity AS ActivityId, name_activity as ActivityName, start_activity AS ActivityStart,"
+					+ " finish_activity AS ActivityFinish, id_event AS EventId, img_activity AS ImgActivity "
+					+ "FROM \"Activity\" where id_activity = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				statement.setInt(1, id);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						activity = createActivity(resultSet);
+						activity.setListPeople(findPeopleByActivityId(id));
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		
+		return activity;
+	}
+
+	
+	public List<People> findPeopleByActivityId(Integer id) {
+		List<People> list = new ArrayList<People>();
+		String sql = "SELECT id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople, "
+				+ "email AS EmailPeople, password AS PasswordPeople "
+				+ "FROM \"People\" "
+				+ "WHERE id_people= "+ id;
+		try (
+			Connection connection = createConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql)
+		) {
+			while (resultSet.next()) {
+				People p = createPeople(resultSet);
+				list.add(p);
+			}
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+		return list;
+	}
+	
+	
+	private People createPeople(ResultSet rs) throws SQLException {
+		int id = rs.getInt("PeopleId");
+		String firstname = rs.getString("FirstNamePeople");
+		String lastname = rs.getString("LastNamePeople");
+		String email = rs.getString("EmailPeople");
+		String pwd = rs.getString("PasswordPeople");
+		People p = new People();
+		p.setId(id);
+		p.setFirstName(firstname);
+		p.setLastName(lastname);
+		p.setEmail(email);
+		p.setPassword(pwd);
+		return p;
 	}
 
 	public void addActivity(String name, LocalDateTime start, LocalDateTime finish) {

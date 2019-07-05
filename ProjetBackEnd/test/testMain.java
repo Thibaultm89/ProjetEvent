@@ -1,3 +1,4 @@
+import be.afelio.software_academy.beans.Activity;
 import be.afelio.software_academy.beans.Event;
 import be.afelio.software_academy.repository.DataRepository;
 
@@ -9,7 +10,11 @@ public class testMain {
 		String password = "postgres";
 		DataRepository dataRepository = new DataRepository(url, user, password);
 		Event findOneEventById = dataRepository.findOneEventById(1);
-		System.out.println(findOneEventById);
+		
+		Activity activity = dataRepository.findOneActivityById(1);
+		System.out.println(activity);
+		
+		
 	}
 
 }

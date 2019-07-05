@@ -13,6 +13,23 @@ public class People implements Serializable  {
 	protected String password;
 	
 	
+	@Override
+	public String toString() {
+		return "People [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + "]";
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -33,8 +50,4 @@ public class People implements Serializable  {
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "People [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
-	}
 }
