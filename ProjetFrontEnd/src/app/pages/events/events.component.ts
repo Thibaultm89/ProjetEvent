@@ -14,12 +14,17 @@ export class EventsComponent implements OnInit {
 
   public listActivitiesByEvent: Activity[];
 
+  public findEventImgById: string;
+
   ngOnInit() {
 
     this.route.params.subscribe(params => {
 
       const id: number = params.id;
-      this.javaService.getListActivityByEvent(id).subscribe((p) => this.listActivitiesByEvent = p);
+
+      this.javaService.getFindEventImgById(id).subscribe((ei) => this.findEventImgById = ei);
+
+      this.javaService.getListActivityByEvent(id).subscribe((el) => this.listActivitiesByEvent = el);
     });
   }
 
