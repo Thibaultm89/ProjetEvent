@@ -16,6 +16,8 @@ export class EventsComponent implements OnInit {
 
   public eventImg: string;
 
+  public eventName: string;
+
   ngOnInit() {
 
     this.route.params.subscribe(params => {
@@ -23,7 +25,7 @@ export class EventsComponent implements OnInit {
       const id: number = params.id;
       console.log(id);
       this.javaService.getEventById(id).subscribe((ei) => this.eventImg = ei.img);
-
+      this.javaService.getEventById(id).subscribe((ei) => this.eventName = ei.name);
       this.javaService.getEventById(id).subscribe((el) => this.listActivities = el.listActi);
     });
   }

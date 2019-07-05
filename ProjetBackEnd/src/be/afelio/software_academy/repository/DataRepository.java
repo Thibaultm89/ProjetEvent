@@ -34,7 +34,7 @@ public class DataRepository {
 	
 	public List<Event> findAllEvents() {
 		List<Event> list = new ArrayList<Event>();
-		String sql = "SELECT id_event AS EventId, name_event AS EventName,"
+		String sql = "SELECT id_event AS EventId, name_event AS EventName, img_event AS ImgEvent,"
 				+ " start_event AS EventStart, finish_event AS EventFinish FROM \"Event\"";
 		try (
 			Connection connection = createConnection();
