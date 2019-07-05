@@ -24,7 +24,14 @@ public class Activity implements Serializable {
 	protected LocalDateTime finish;
 	protected People manager;
 	protected Integer idEvent;
+	protected String img;
 	
+	@Override
+	public String toString() {
+		return "Activity [id=" + id + ", name=" + name + ", start=" + start + ", finish=" + finish + ", manager="
+				+ manager + ", idEvent=" + idEvent + ", img=" + img + ", listPeople=" + listPeople + "]";
+	}
+	protected List<People> listPeople;
 	
 	public Integer getId() {
 		return id;
@@ -62,10 +69,18 @@ public class Activity implements Serializable {
 	public void setIdEvent(Integer idEvent) {
 		this.idEvent = idEvent;
 	}
-	
-	@Override
-	public String toString() {
-		return "Activity [id=" + id + ", name=" + name + ", manager=" + manager + ", start=" + start + ", finish="
-				+ finish + "]";
+	public String getImg() {
+		return img;
 	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public List<People> getListPeople() {
+		return listPeople;
+	}
+	public void setListPeople(List<People> listPeople) {
+		this.listPeople = listPeople;
+	}
+	
+	
 }

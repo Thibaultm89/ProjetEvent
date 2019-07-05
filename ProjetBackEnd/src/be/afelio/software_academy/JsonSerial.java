@@ -20,6 +20,6 @@ public class JsonSerial extends StdSerializer<LocalDateTime> {
 	@Override
 	public void serialize(LocalDateTime value, JsonGenerator generator, SerializerProvider provider)
 			throws IOException {
-		generator.writeString(value.toInstant(ZoneOffset.UTC).toString());
+		generator.writeString(value.toInstant(ZoneOffset.of("+02:00")).toString());
 	}
 }
