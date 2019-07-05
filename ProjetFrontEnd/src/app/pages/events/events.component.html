@@ -4,10 +4,7 @@
 <ul>
   <li *ngFor= "let listactivities of (listActivitiesByEvent)">
     <a [routerLink]="['/activities']">
-      {{listactivities.name}} le
-      {{listactivities.start.dayOfMonth +"/"+listactivities.start.monthValue +"/"+listactivities.start.year}} à
-      {{listactivities.start.hour + "h" + listactivities.start.minute +""}}
-      <!-- {{listactivities.start | date: 'medium'}} à {{listactivities.start | date : 'time'}} -->
+      {{listactivities.name}} le {{listactivities.start | date: 'dd/MM/yy'}} à {{listactivities.start | date : 'HH'}}h{{listactivities.start | date : 'mm'}}
     </a>
   </li>
 </ul>
