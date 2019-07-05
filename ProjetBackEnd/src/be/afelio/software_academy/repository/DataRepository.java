@@ -164,10 +164,9 @@ public class DataRepository {
 		return activity;
 	}
 
-	
 	public void addActivity(String name, LocalDateTime start, LocalDateTime finish) {
 		if (name != null && !name.isBlank() && findOneActivityByName(name) == null) {
-			String sql = "INSERT INTO \"Activity\" (id_activity, name_activity, start_activity, finish_activity, manager, id_event) values(100,?,?,?,1,1)";
+			String sql = "INSERT INTO \"Activity\" (name_activity, start_activity, finish_activity, manager, id_event) values(?,?,?,1,2)";
 			try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);
@@ -182,4 +181,9 @@ public class DataRepository {
 			}
 		}
 	}
+
+	public String findEventImgById() {
+		
+	}
+
 }
