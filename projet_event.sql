@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-07-05 14:17:13
+-- Started on 2019-07-05 16:26:20
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -176,6 +176,13 @@ INSERT INTO public."Activity_people" VALUES (1, 2);
 INSERT INTO public."Activity_people" VALUES (1, 3);
 INSERT INTO public."Activity_people" VALUES (2, 4);
 INSERT INTO public."Activity_people" VALUES (2, 2);
+INSERT INTO public."Activity_people" VALUES (8, 7);
+INSERT INTO public."Activity_people" VALUES (8, 8);
+INSERT INTO public."Activity_people" VALUES (5, 6);
+INSERT INTO public."Activity_people" VALUES (3, 5);
+INSERT INTO public."Activity_people" VALUES (7, 2);
+INSERT INTO public."Activity_people" VALUES (4, 3);
+INSERT INTO public."Activity_people" VALUES (4, 4);
 
 
 --
@@ -199,6 +206,10 @@ INSERT INTO public."People" VALUES (1, 'Thibault', 'Molle', 'thibault@coucou.be'
 INSERT INTO public."People" VALUES (2, 'Philippe', 'Vancom', 'philippe@hotmail.com', 'philou');
 INSERT INTO public."People" VALUES (3, 'Maxime', 'Quoilin', 'maximusdecimus@hotmailus.com', 'nicotinus');
 INSERT INTO public."People" VALUES (4, 'Damien', 'Bouffioux', 'damb@hotmail.com', 'bingbangboum');
+INSERT INTO public."People" VALUES (5, 'Delphine', 'Franquinet', 'Delphinefranquinet@gmail.com', 'Coucou');
+INSERT INTO public."People" VALUES (6, 'Zarah', 'Al-Sudani', 'Zara-AlSudani@gmail.com', 'bishmila');
+INSERT INTO public."People" VALUES (7, 'Jean', 'Leclercq', 'jeanleclercq@gmail.com', 'legeekdu64');
+INSERT INTO public."People" VALUES (8, 'Melissa', 'Schyns', 'melissaschyns@gmail.com', 'melimeli');
 
 
 --
@@ -291,7 +302,7 @@ ALTER TABLE ONLY public."Activity_people"
     ADD CONSTRAINT id_people FOREIGN KEY (id_people) REFERENCES public."People"(id_people);
 
 
--- Completed on 2019-07-05 14:17:13
+-- Completed on 2019-07-05 16:26:20
 
 --
 -- PostgreSQL database dump complete
