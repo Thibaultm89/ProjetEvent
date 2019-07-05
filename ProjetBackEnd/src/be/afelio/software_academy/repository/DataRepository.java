@@ -182,8 +182,27 @@ public class DataRepository {
 		}
 	}
 
-	public String findEventImgById() {
-		
+	public String findEventImgById(Integer id) {
+		String eventImg = "";
+	if (eventImg != null && !eventImg.isBlank()) {
+		String sql = "SELECT img_event AS EventImg"
+				+ "FROM \"Event\" where id_event = ?";
+		try (
+			Connection connection = createConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+		) {
+			statement.setInt(1, id);
+			try (
+				ResultSet resultSet = statement.executeQuery()
+			) {
+				eventImg = resultSet.getString("EventImg");
+				System.out.println("test"+eventImg);
+			}
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
 	}
+	return eventImg;
+}
 
 }
