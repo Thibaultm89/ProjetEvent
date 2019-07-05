@@ -27,9 +27,7 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-
-
-  public getFindActivityImgById(n: number): Observable<string> {
+  public getActivityById(n: number): Observable<string> {
     return this.http
       .get<string>(`http://localhost:8080/projet-back-end/json/activity/${n}`)
 // tslint:disable-next-line: deprecation

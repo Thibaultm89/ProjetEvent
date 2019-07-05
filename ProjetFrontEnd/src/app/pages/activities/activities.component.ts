@@ -11,14 +11,14 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(private javaService: JavaService, private route: ActivatedRoute) { }
 
-  public findActivityImgById: string;
+  public activityById: string;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
 
       const id: number = params.id;
 
-      this.javaService.getFindActivityImgById(id).subscribe((ai) => this.findActivityImgById = ai);
+      this.javaService.getActivityById(id).subscribe((ai) => this.activityById = ai);
     });
   }
 
