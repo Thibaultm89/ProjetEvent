@@ -9,7 +9,8 @@ import { Event } from '../../models/event.model';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private javaService: JavaService) { }
+  constructor(
+    private javaService: JavaService) { }
 
   public listEvents: Event[];
 

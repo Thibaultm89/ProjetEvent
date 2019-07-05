@@ -1,1 +1,16 @@
 <h1>Page Login</h1>
+
+<h2>Se connecter :</h2>
+
+<form [formGroup]="LogForm">
+  <div>
+    <label for="login">Identifiant : </label>
+      <input id="login" name="login" formControlName="LogForm" >
+  </div>
+  <div>
+    <label for="pwd">Mot de passe : </label>
+        <input id="pwd" name="pwd" formControlName="LogForm">
+  </div>
+
+  <input type="submit" value="Se connecter">
+</form>
