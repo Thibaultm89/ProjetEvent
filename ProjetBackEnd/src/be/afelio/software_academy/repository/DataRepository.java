@@ -139,6 +139,32 @@ public class DataRepository {
 		}
 		return event;
 	}
+	
+	public Event findOneEventById(Integer id) {
+		Event event = null;
+		
+			String sql = "SELECT id_event AS EventID, name_event as EventName, "
+					+ "start_event AS EventStart, finish_event AS EventFinish FROM \"Event\" "
+					+ "WHERE id_event = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				statement.setInt(1, id);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						event = createEvent(resultSet);
+						event.setListActivities(findActivitiesByEventId(id));
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		
+		return event;
+	}
 
 	public Activity findOneActivityByName(String name) {
 		Activity activity = null;
@@ -184,9 +210,7 @@ public class DataRepository {
 
 	public String findEventImgById(Integer id) {
 		String eventImg = "";
-	if (eventImg != null && !eventImg.isBlank()) {
-		String sql = "SELECT img_event AS EventImg"
-				+ "FROM \"Event\" where id_event = ?";
+		String sql = "SELECT img_event AS EventImg FROM \"Event\" where id_event = ?";
 		try (
 			Connection connection = createConnection();
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -195,13 +219,14 @@ public class DataRepository {
 			try (
 				ResultSet resultSet = statement.executeQuery()
 			) {
-				eventImg = resultSet.getString("EventImg");
-				System.out.println("test"+eventImg);
+				if (resultSet.next()) {
+					eventImg = resultSet.getString("EventImg");
+				}
 			}
 		} catch(SQLException sqle) {
 			throw new RuntimeException(sqle);
 		}
-	}
+
 	return eventImg;
 }
 

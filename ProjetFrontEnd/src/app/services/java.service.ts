@@ -13,16 +13,9 @@ export class JavaService {
 
   constructor(private http: HttpClient) {}
 
-  public getListActivityByEvent(n: number): Observable<Activity[]> {
+  public getEventById(n: number): Observable<Event> {
     return this.http
-      .get<Activity[]>(`http://localhost:8080/projet-back-end/json/event/${n}`)
-// tslint:disable-next-line: deprecation
-      .pipe(catchError((error: any) => Observable.throw(error.json())));
-  }
-
-  public getFindEventImgById(n: number): Observable<string> {
-    return this.http
-      .get<string>(`http://localhost:8080/projet-back-end/json/event/${n}`)
+      .get<Event>(`http://localhost:8080/projet-back-end/json/event/${n}`)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }

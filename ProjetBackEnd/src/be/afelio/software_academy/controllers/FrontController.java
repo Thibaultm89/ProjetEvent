@@ -64,7 +64,7 @@ public class FrontController  extends HttpServlet {
 			if (pathInfo.startsWith("/event/all")) {
 				eventController.findAllEvents(request, response);
 				
-			} else if (pathInfo.startsWith("/event")){
+			} else if (pathInfo.startsWith("/event/")){
 				activityController.findActivitiesByEvent(request, response);
 				eventController.findEventImgById(request,response);
 				
