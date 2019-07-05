@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-07-05 10:46:14
+-- Started on 2019-07-05 14:17:13
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -184,9 +184,9 @@ INSERT INTO public."Activity_people" VALUES (2, 2);
 -- Data for Name: Event; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Event" VALUES (1, 'Tomorrowland', '2019-07-19 00:00:00', '2019-07-28 00:00:00', 'tomorrolowland.jpg');
 INSERT INTO public."Event" VALUES (2, 'Francofolies', '2019-07-18 00:00:00', '2019-07-21 00:00:00', 'francofolies.jpg');
 INSERT INTO public."Event" VALUES (3, 'Les Ardentes', '2019-07-04 00:00:00', '2019-07-07 00:00:00', 'ardentes.jpg');
+INSERT INTO public."Event" VALUES (1, 'Tomorrowland', '2019-07-19 00:00:00', '2019-07-28 00:00:00', 'tomorrowland.jpg');
 
 
 --
@@ -291,7 +291,7 @@ ALTER TABLE ONLY public."Activity_people"
     ADD CONSTRAINT id_people FOREIGN KEY (id_people) REFERENCES public."People"(id_people);
 
 
--- Completed on 2019-07-05 10:46:14
+-- Completed on 2019-07-05 14:17:13
 
 --
 -- PostgreSQL database dump complete
