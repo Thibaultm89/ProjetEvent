@@ -39,7 +39,9 @@ public class EventController extends BaseController{
 	response.getWriter().write(objectToJson(event));
 }
 
-	public void findEventImgById(HttpServletRequest request, HttpServletResponse response) 
+
+	
+	public void findOneEventById(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getPathInfo().split("/")[2]);
 		Object o = repository.findEventImgById(id);
