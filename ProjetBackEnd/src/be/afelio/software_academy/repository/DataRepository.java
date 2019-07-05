@@ -56,11 +56,13 @@ public class DataRepository {
 		String name = rs.getString("EventName");
 		Timestamp start = rs.getTimestamp("EventStart");
 		Timestamp finish = rs.getTimestamp("EventFinish");
+		String img = rs.getString("Imgevent");
 		Event e = new Event();
 		e.setId(id);
 		e.setName(name);
 		e.setStart(start.toLocalDateTime());
 		e.setFinish(finish.toLocalDateTime());
+		e.setImg(img);
 		return e;
 	}
 	
@@ -144,7 +146,7 @@ public class DataRepository {
 		Event event = null;
 		
 			String sql = "SELECT id_event AS EventID, name_event as EventName, "
-					+ "start_event AS EventStart, finish_event AS EventFinish FROM \"Event\" "
+					+ "start_event AS EventStart, finish_event AS EventFinish, img_event AS ImgEvent FROM \"Event\" "
 					+ "WHERE id_event = ?";
 			try (
 				Connection connection = createConnection();
