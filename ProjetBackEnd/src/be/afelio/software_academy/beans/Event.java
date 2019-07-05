@@ -16,38 +16,25 @@ public class Event implements Serializable {
 	
 	protected Integer id;
 	protected String name;
+	
 	@JsonDeserialize(using = JsonDeserial.class)
 	@JsonSerialize(using = JsonSerial.class)
 	protected LocalDateTime start;
+	
 	@JsonSerialize(using = JsonSerial.class)
 	@JsonDeserialize(using = JsonDeserial.class)
 	protected LocalDateTime finish;
-	protected List<Activity> listActivities;
+	
 	protected String img;
-
+	protected List<Activity> listActivities;
+	
 	
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", name=" + name + ", start=" + start + ", finish=" + finish + ", listActivities="
-				+ listActivities + ", img=" + img + "]";
+		return "Event [id=" + id + ", name=" + name + ", start=" + start + ", finish=" + finish + ", img=" + img
+				+ ", listActivities=" + listActivities + "]";
 	}
-	
-	public String getImg() {
-		return img;
-	}
-	
-	public void setImg(String img) {
-		this.img = img;
-	}
-	
-	public List<Activity> getListActivities() {
-		return listActivities;
-	}
-	
-	public void setListActivities(List<Activity> listActivities) {
-		this.listActivities = listActivities;
-	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -80,5 +67,20 @@ public class Event implements Serializable {
 		this.finish = finish;
 	}
 	
+	public String getImg() {
+		return img;
+	}
+	
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
+	public List<Activity> getListActivities() {
+		return listActivities;
+	}
+	
+	public void setListActivities(List<Activity> listActivities) {
+		this.listActivities = listActivities;
+	}
 
 }
