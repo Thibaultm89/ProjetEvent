@@ -223,10 +223,12 @@ public class DataRepository {
 	
 	public List<People> findPeopleByActivityId(Integer id) {
 		List<People> list = new ArrayList<People>();
-		String sql = "SELECT id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople, "
+		String sql = "SELECT p.id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople, "
 				+ "email AS EmailPeople, password AS PasswordPeople "
-				+ "FROM \"People\" "
-				+ "WHERE id_people= "+ id;
+				+ "FROM \"People\" p "
+				+ "JOIN \"Activity_people\" ap ON p.id_people = ap.id_people "
+				+ "JOIN \"Activity\" a ON a.id_activity = ap.id_activity "
+				+ "WHERE a.id_activity =" + id;
 		try (
 			Connection connection = createConnection();
 			Statement statement = connection.createStatement();

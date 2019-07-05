@@ -18,7 +18,7 @@ public class ActivityController extends BaseController{
 		super(repository, mapper);
 	}
 		
-	public void findActivitiesByEvent(HttpServletRequest request, HttpServletResponse response) 
+	public void findActivitiesByEventId(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getPathInfo().split("/")[2]);
 		Object o = repository.findActivitiesByEventId(id);
@@ -40,6 +40,13 @@ public class ActivityController extends BaseController{
 	response.getWriter().write(objectToJson(activity));
 }
 	
+	public void findOneActivitysById(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getPathInfo().split("/")[2]);
+		Object o = repository.findOneActivityById(id);
+		response.getWriter().write(objectToJson(o));
+		
+	}
 	
 
 }
