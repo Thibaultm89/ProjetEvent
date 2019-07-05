@@ -5,6 +5,6 @@ export class Event {
   name: string;
   start: Date;
   finish: Date;
-  listActi: Activity[];
   img: string;
+  listActi: Activity[];
 }
