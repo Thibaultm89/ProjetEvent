@@ -12,9 +12,9 @@ export class EventsComponent implements OnInit {
 
   constructor(private javaService: JavaService, private route: ActivatedRoute) { }
 
-  public listActivitiesByEvent: Activity[];
+  public listActivities: Activity[];
 
-  public findEventImgById: string;
+  public eventImg: string;
 
   ngOnInit() {
 
@@ -22,12 +22,10 @@ export class EventsComponent implements OnInit {
 
       const id: number = params.id;
       console.log(id);
-      this.javaService.getFindEventImgById(id).subscribe((ei) => {this.findEventImgById = ei; console.log(ei);
-      });
+      this.javaService.getEventById(id).subscribe((ei) => this.eventImg = ei.img);
 
-      this.javaService.getListActivityByEvent(id).subscribe((el) => this.listActivitiesByEvent = el);
+      this.javaService.getEventById(id).subscribe((el) => this.listActivities = el.listActi);
     });
-    console.log(this.findEventImgById);
   }
 
 }
