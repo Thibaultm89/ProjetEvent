@@ -10,15 +10,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
-import be.afelio.software_academy.beans.Event;
-
 public class JsonDeserial extends StdDeserializer<LocalDateTime>{
 
 	private static final long serialVersionUID = 5149531892383681980L;
 
 	protected JsonDeserial() {
 	        super(LocalDateTime.class);
-	    }
+	}
 
 	@Override
 	public LocalDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {

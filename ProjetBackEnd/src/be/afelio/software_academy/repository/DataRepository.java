@@ -31,6 +31,59 @@ public class DataRepository {
 	protected Connection createConnection() throws SQLException {
 		return DriverManager.getConnection(url, user, password);
 	}
+
+
+	
+	
+	protected Event createEvent(ResultSet rs) throws SQLException {
+		int id = rs.getInt("EventId");
+		String name = rs.getString("EventName");
+		Timestamp start = rs.getTimestamp("EventStart");
+		Timestamp finish = rs.getTimestamp("EventFinish");
+		String img = rs.getString("Imgevent");
+		Event e = new Event();
+		e.setId(id);
+		e.setName(name);
+		e.setStart(start.toLocalDateTime());
+		e.setFinish(finish.toLocalDateTime());
+		e.setImg(img);
+		return e;
+	}	
+
+	protected Activity createActivity(ResultSet rs) throws SQLException {
+		int idA = rs.getInt("ActivityId");
+		String name = rs.getString("ActivityName");
+		Timestamp start = rs.getTimestamp("ActivityStart");
+		Timestamp finish = rs.getTimestamp("ActivityFinish");
+		int idE = rs.getInt("EventId");
+		String img = rs.getString("ImgActivity");
+		Activity a = new Activity();
+		a.setId(idA);
+		a.setName(name);
+		a.setStart(start.toLocalDateTime());
+		a.setFinish(finish.toLocalDateTime());
+		a.setIdEvent(idE);
+		a.setImg(img);
+		return a;
+	}	
+
+	protected People createPeople(ResultSet rs) throws SQLException {
+		int id = rs.getInt("PeopleId");
+		String firstname = rs.getString("FirstNamePeople");
+		String lastname = rs.getString("LastNamePeople");
+		String email = rs.getString("EmailPeople");
+		String pwd = rs.getString("PasswordPeople");
+		People p = new People();
+		p.setId(id);
+		p.setFirstName(firstname);
+		p.setLastName(lastname);
+		p.setEmail(email);
+		p.setPassword(pwd);
+		return p;
+	}	
+
+
+	
 	
 	public List<Event> findAllEvents() {
 		List<Event> list = new ArrayList<Event>();
@@ -49,21 +102,6 @@ public class DataRepository {
 			throw new RuntimeException(sqle);
 		}
 		return list;
-	}
-	
-	protected Event createEvent(ResultSet rs) throws SQLException {
-		int id = rs.getInt("EventId");
-		String name = rs.getString("EventName");
-		Timestamp start = rs.getTimestamp("EventStart");
-		Timestamp finish = rs.getTimestamp("EventFinish");
-		String img = rs.getString("Imgevent");
-		Event e = new Event();
-		e.setId(id);
-		e.setName(name);
-		e.setStart(start.toLocalDateTime());
-		e.setFinish(finish.toLocalDateTime());
-		e.setImg(img);
-		return e;
 	}
 	
 	public List<Activity> findActivitiesByEventId(int i) {
@@ -87,40 +125,31 @@ public class DataRepository {
 		return list;
 	}
 	
-	protected Activity createActivity(ResultSet rs) throws SQLException {
-		int idA = rs.getInt("ActivityId");
-		String name = rs.getString("ActivityName");
-		Timestamp start = rs.getTimestamp("ActivityStart");
-		Timestamp finish = rs.getTimestamp("ActivityFinish");
-		int idE = rs.getInt("EventId");
-		String img = rs.getString("ImgActivity");
-		Activity a = new Activity();
-		a.setId(idA);
-		a.setName(name);
-		a.setStart(start.toLocalDateTime());
-		a.setFinish(finish.toLocalDateTime());
-		a.setIdEvent(idE);
-		a.setImg(img);
-		return a;
-	}
-
-	public void addEvent(String name, LocalDateTime start, LocalDateTime finish) { 
-		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {
-			String sql = "INSERT INTO \"Event\" (name_event, start_event, finish_event) values(?,?,?)";
-			try (
-				Connection connection = createConnection();
-				PreparedStatement statement = connection.prepareStatement(sql);
-			) {
-				connection.setAutoCommit(true);
-				statement.setString(1, name);
-				statement.setObject(2,start);
-				statement.setObject(3,finish);
-				statement.executeUpdate();
-			} catch(SQLException sqle) {
-				throw new RuntimeException(sqle);
+	public List<People> findPeopleByActivityId(Integer id) {
+		List<People> list = new ArrayList<People>();
+		String sql = "SELECT p.id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople, "
+				+ "email AS EmailPeople, password AS PasswordPeople "
+				+ "FROM \"People\" p "
+				+ "JOIN \"Activity_people\" ap ON p.id_people = ap.id_people "
+				+ "JOIN \"Activity\" a ON a.id_activity = ap.id_activity "
+				+ "WHERE a.id_activity =" + id;
+		try (
+			Connection connection = createConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql)
+		) {
+			while (resultSet.next()) {
+				People p = createPeople(resultSet);
+				list.add(p);
 			}
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
 		}
-	}
+		return list;
+	}	
+
+
+	
 	
 	public Event findOneEventByName(String name) {
 		Event event = null;
@@ -220,44 +249,25 @@ public class DataRepository {
 		return activity;
 	}
 
+
 	
-	public List<People> findPeopleByActivityId(Integer id) {
-		List<People> list = new ArrayList<People>();
-		String sql = "SELECT p.id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople, "
-				+ "email AS EmailPeople, password AS PasswordPeople "
-				+ "FROM \"People\" p "
-				+ "JOIN \"Activity_people\" ap ON p.id_people = ap.id_people "
-				+ "JOIN \"Activity\" a ON a.id_activity = ap.id_activity "
-				+ "WHERE a.id_activity =" + id;
-		try (
-			Connection connection = createConnection();
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql)
-		) {
-			while (resultSet.next()) {
-				People p = createPeople(resultSet);
-				list.add(p);
+	
+	public void addEvent(String name, LocalDateTime start, LocalDateTime finish) { 
+		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {
+			String sql = "INSERT INTO \"Event\" (name_event, start_event, finish_event) values(?,?,?)";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				connection.setAutoCommit(true);
+				statement.setString(1, name);
+				statement.setObject(2,start);
+				statement.setObject(3,finish);
+				statement.executeUpdate();
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
 			}
-		} catch(SQLException sqle) {
-			throw new RuntimeException(sqle);
 		}
-		return list;
-	}
-	
-	
-	private People createPeople(ResultSet rs) throws SQLException {
-		int id = rs.getInt("PeopleId");
-		String firstname = rs.getString("FirstNamePeople");
-		String lastname = rs.getString("LastNamePeople");
-		String email = rs.getString("EmailPeople");
-		String pwd = rs.getString("PasswordPeople");
-		People p = new People();
-		p.setId(id);
-		p.setFirstName(firstname);
-		p.setLastName(lastname);
-		p.setEmail(email);
-		p.setPassword(pwd);
-		return p;
 	}
 
 	public void addActivity(String name, LocalDateTime start, LocalDateTime finish) {
@@ -276,28 +286,8 @@ public class DataRepository {
 				throw new RuntimeException(sqle);
 			}
 		}
-	}
+	}	
 
-	public String findEventImgById(Integer id) {
-		String eventImg = "";
-		String sql = "SELECT img_event AS EventImg FROM \"Event\" where id_event = ?";
-		try (
-			Connection connection = createConnection();
-			PreparedStatement statement = connection.prepareStatement(sql);
-		) {
-			statement.setInt(1, id);
-			try (
-				ResultSet resultSet = statement.executeQuery()
-			) {
-				if (resultSet.next()) {
-					eventImg = resultSet.getString("EventImg");
-				}
-			}
-		} catch(SQLException sqle) {
-			throw new RuntimeException(sqle);
-		}
 
-	return eventImg;
-}
 
 }

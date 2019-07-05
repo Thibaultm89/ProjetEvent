@@ -51,7 +51,6 @@ public class FrontController  extends HttpServlet {
 			throw new ServletException(e);
 		}
 	}
-
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -79,8 +78,7 @@ public class FrontController  extends HttpServlet {
 		}
 		
 	}
-	
-	
+		
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -106,7 +104,7 @@ public class FrontController  extends HttpServlet {
 		}
 		
 	}
-	
+
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doOptions(request, response);

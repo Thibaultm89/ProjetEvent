@@ -22,34 +22,27 @@ public class EventController extends BaseController{
 			throws ServletException, IOException {
 		Object o = repository.findAllEvents();
 		response.getWriter().write(objectToJson(o));
-		
 	}
-	
-	public void addEvent(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Event event = null;
-	try {
-		event = jsonStreamToObject(request.getInputStream(), Event.class);
-	} catch(Exception e) {
-		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-	}
-	if (event != null) {		
-		repository.addEvent(event.getName(), event.getStart(), event.getFinish());
-		event = repository.findOneEventByName(event.getName());
-	} 
-	response.getWriter().write(objectToJson(event));
-}
 
-
-	
 	public void findOneEventById(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getPathInfo().split("/")[2]);
 		Object o = repository.findOneEventById(id);
-		response.getWriter().write(objectToJson(o));
-			
-		
+		response.getWriter().write(objectToJson(o));	
 	}
-
 	
+	public void addEvent(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Event event = null;
+		try {
+			event = jsonStreamToObject(request.getInputStream(), Event.class);
+		} catch(Exception e) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		if (event != null) {		
+			repository.addEvent(event.getName(), event.getStart(), event.getFinish());
+			event = repository.findOneEventByName(event.getName());
+		} 
+		response.getWriter().write(objectToJson(event));
+	}
 	
 }
