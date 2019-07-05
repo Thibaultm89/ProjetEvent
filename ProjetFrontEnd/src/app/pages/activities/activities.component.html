@@ -1,4 +1,4 @@
-<h1>Activité: {{activityName}}<h1>
+<h1>Activité: {{activityName}}</h1>
 
 <div>
   <img width="600" [src]=" '/assets/img/imgActivity/' + activityImg">
@@ -7,7 +7,7 @@
 <p>Liste des personnes de l'activité: </p>
 <ul>
   <li *ngFor= "let people of (listPeople)">
-      {{people.firstname}} {{people.lastname}}
+      {{people.firstName}} {{people.lastName}}
   </li>
 </ul>
 
