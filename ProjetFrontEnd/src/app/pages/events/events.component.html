@@ -6,7 +6,7 @@
 
 <p>Liste des Activités de l'événement: </p>
 <ul>
-  <li *ngFor= "let listactivities of (listActivitiesByEvent)">
+  <li *ngFor= "let listactivities of (listActivities)">
     <a [routerLink]="['/activities', listactivities.id]">
       {{listactivities.name}} le {{listactivities.start | date: 'dd/MM/yy'}} à
       {{listactivities.start | date : 'HH'}}h{{listactivities.start | date : 'mm'}}

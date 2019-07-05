@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public listEvents: Event[];
 
   ngOnInit() {
-    this.javaService.getListEvent().subscribe((p) => this.listEvents = p);
+    this.javaService.getListEvent().subscribe((e) => this.listEvents = e);
   }
 
 }
