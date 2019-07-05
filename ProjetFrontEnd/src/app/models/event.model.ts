@@ -6,5 +6,5 @@ export class Event {
   start: Date;
   finish: Date;
   img: string;
-  listActi: Activity[];
+  listActivities: Activity[];
 }

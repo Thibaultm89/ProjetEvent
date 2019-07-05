@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JavaService } from 'src/app/services/java.service';
+import { People } from 'src/app/models/people.model';
 
 @Component({
   selector: 'app-activities',
@@ -11,14 +12,20 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(private javaService: JavaService, private route: ActivatedRoute) { }
 
-  public activityById: string;
+  public listPeople: People[];
+
+  public activityImg: string;
+
+  public activityName: string;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
 
       const id: number = params.id;
 
-      this.javaService.getActivityById(id).subscribe((ai) => this.activityById = ai);
+      // this.javaService.getActivityById(id).subscribe((ai) => this.activityImg = ai.img);
+      // this.javaService.getActivityById(id).subscribe((ai) => this.activityName = ai.name);
+      // this.javaService.getActivityById(id).subscribe((ai) => this.activityName = ai.listPeople);
     });
   }
 

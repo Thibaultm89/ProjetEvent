@@ -1,3 +1,4 @@
+import { People } from './people.model';
 
 export class Activity {
   id: number;
@@ -6,4 +7,6 @@ export class Activity {
   finish: Date;
   manager: number;
   idEvent: number;
+  img: string;
+  listPeople: People[];
 }

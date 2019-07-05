@@ -1,8 +1,17 @@
-<h1>Page de l'activité:</h1>
+<h1>Activité: {{activityName}}<h1>
 
 <div>
-  <!-- <img [src]=" '/assets/img/imgActivity/' + ..." width="800"> -->
+  <img width="600" [src]=" '/assets/img/imgActivity/' + activityImg">
 </div>
+
+<p>Liste des personnes de l'activité: </p>
+<ul>
+  <li *ngFor= "let listpeople of (listPeople)">
+    <a>
+      {{listpeople.firstname}} {{listpeople.lastname}}
+    </a>
+  </li>
+</ul>
 
 <br>
 <a [routerLink]="['/login']">Page login</a>
