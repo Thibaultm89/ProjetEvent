@@ -27,9 +27,9 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-  public getActivityById(n: number): Observable<string> {
+  public getActivityById(n: number): Observable<Activity> {
     return this.http
-      .get<string>(`http://localhost:8080/projet-back-end/json/activity/${n}`)
+      .get<Activity>(`http://localhost:8080/projet-back-end/json/activity/${n}`)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }

@@ -6,10 +6,8 @@
 
 <p>Liste des personnes de l'activité: </p>
 <ul>
-  <li *ngFor= "let listpeople of (listPeople)">
-    <a>
-      {{listpeople.firstname}} {{listpeople.lastname}}
-    </a>
+  <li *ngFor= "let people of (listPeople)">
+      {{people.firstname}} {{people.lastname}}
   </li>
 </ul>
 

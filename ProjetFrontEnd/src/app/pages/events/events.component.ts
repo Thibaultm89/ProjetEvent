@@ -23,9 +23,11 @@ export class EventsComponent implements OnInit {
     this.route.params.subscribe(params => {
 
       const id: number = params.id;
-      this.javaService.getEventById(id).subscribe((ei) => this.eventImg = ei.img);
-      this.javaService.getEventById(id).subscribe((en) => this.eventName = en.name);
-      this.javaService.getEventById(id).subscribe((al) => this.listActivities = al.listActivities);
+      this.javaService.getEventById(id).subscribe((e) => {
+        this.eventImg = e.img;
+        this.eventName = e.name;
+        this.listActivities = e.listActivities;
+      });
     });
   }
 

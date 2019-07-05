@@ -23,9 +23,11 @@ export class ActivitiesComponent implements OnInit {
 
       const id: number = params.id;
 
-      // this.javaService.getActivityById(id).subscribe((ai) => this.activityImg = ai.img);
-      // this.javaService.getActivityById(id).subscribe((ai) => this.activityName = ai.name);
-      // this.javaService.getActivityById(id).subscribe((ai) => this.activityName = ai.listPeople);
+      this.javaService.getActivityById(id).subscribe((act) => {
+        this.activityImg = act.img;
+        this.activityName = act.name;
+        this.listPeople = act.listPeople;
+      });
     });
   }
 

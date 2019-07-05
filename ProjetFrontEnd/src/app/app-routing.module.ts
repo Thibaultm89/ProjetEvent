@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'create-activity', component: CreateActivityComponent},
   {path: 'create-event', component: CreateEventComponent},
   {path: 'events/:id', component: EventsComponent},
-  {path: 'activities/:id', component: ActivitiesComponent},
+  {path: 'activity/:id', component: ActivitiesComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: '/home'} // toujours à mettre en dernier
 ];
