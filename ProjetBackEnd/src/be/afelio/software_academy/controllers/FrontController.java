@@ -93,8 +93,8 @@ public class FrontController  extends HttpServlet {
 			case "/create-activity/":
 				activityController.addActivity(request,response);
 				break;
-			case "/people":
-				// TODO
+			case "/create-people/":
+				peopleController.addPeople(request,response);
 				break;				
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);

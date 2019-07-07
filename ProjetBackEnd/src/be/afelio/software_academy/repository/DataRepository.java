@@ -248,7 +248,16 @@ public class DataRepository {
 		
 		return activity;
 	}
-
+	
+	public People findOnePeopleById(Integer id) {
+		return new People();
+	}
+	
+	public People findOnePeopleByFirstNameAndLastName(String firstName, String lastName) {
+		//return id de db
+		
+		return new People();
+	}
 
 	
 	
@@ -289,6 +298,23 @@ public class DataRepository {
 		}
 	}	
 
-
+	public void addPeople(String firstName, String lastName, String email, String pwd) {
+		if (firstName != null && !firstName.isBlank()) { //&& findOnePeopleByFirstName(name) == null) {
+			String sql = "INSERT INTO \"People\" (firstname_people, lastname_people, email, password) values(?,?,?,?)";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+				connection.setAutoCommit(true);
+				statement.setString(1, firstName);
+				statement.setString(2,lastName);
+				statement.setString(3,email);
+				statement.setString(4, pwd);
+				statement.executeUpdate();
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+	}	
 
 }
