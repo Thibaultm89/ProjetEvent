@@ -1,27 +1,28 @@
 <div>
-  <h1> Bienvenue sur My Project Event</h1>
-  <img width="800" alt="Fond Home Event" src="assets/img/Events.jpg">
 
-  <br>
+  <div id ="titleHome">
+    <a [routerLink]="['/login']" id="connect">Se connecter</a>
+    <h1> Bienvenue sur My Project Event</h1>
+  </div>
 
-  <p>Liste des événements: </p>
-  <ul>
-    <li *ngFor= "let listevents of (listEvents)">
-      <a [routerLink]="['/events', listevents.id]">
-        {{listevents.name}} du
-        {{listevents.start | date: 'dd/MM/yy'}} au {{listevents.finish | date: 'dd/MM/yy'}}
-      </a>
-    </li>
-  </ul>
+  <div id="blockMenu">
+  <a [routerLink]="['/create-people']" class="menu">S'inscrire</a>
 
-  <br>
-  <a [routerLink]="['/create-people']">S'inscrire</a>
-  <br>
-  <a [routerLink]="['/create-activity']">Créer une activité</a>
-  <br>
-  <a [routerLink]="['/create-event']">Créer un événement</a>
-  <br>
-  <a [routerLink]="['/login']">Page login</a>
+  <a [routerLink]="['/create-activity']" class="menu">Créer une activité</a>
 
+  <a [routerLink]="['/create-event']" class="menu">Créer un événement</a>
+  </div>
+
+  <div>
+    <h3>Liste des événements: </h3>
+    <ul>
+      <li *ngFor= "let listevents of (listEvents)">
+        <a [routerLink]="['/events', listevents.id]">
+          {{listevents.name}} du
+          {{listevents.start | date: 'dd/MM/yy'}} au {{listevents.finish | date: 'dd/MM/yy'}}
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 
