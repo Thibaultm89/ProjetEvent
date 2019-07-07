@@ -204,7 +204,7 @@ public class DataRepository {
 		Activity activity = null;
 		if (name != null && !name.isBlank()) {
 			String sql = "SELECT id_activity AS ActivityId, name_activity as ActivityName, start_activity AS ActivityStart,"
-					+ " finish_activity AS ActivityFinish, id_event AS EventId FROM \"Activity\" where name_activity = ?";
+					+ " finish_activity AS ActivityFinish, id_event AS EventId, img_activity AS ImgActivity FROM \"Activity\" where name_activity = ?";
 			try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);
@@ -270,9 +270,9 @@ public class DataRepository {
 		}
 	}
 
-	public void addActivity(String name, LocalDateTime start, LocalDateTime finish) {
+	public void addActivity(String name, LocalDateTime start, LocalDateTime finish, int idEvent) {
 		if (name != null && !name.isBlank() && findOneActivityByName(name) == null) {
-			String sql = "INSERT INTO \"Activity\" (name_activity, start_activity, finish_activity, manager, id_event) values(?,?,?,1,2)";
+			String sql = "INSERT INTO \"Activity\" (name_activity, start_activity, finish_activity, manager, id_event) values(?,?,?,1,?)";
 			try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);
@@ -281,6 +281,7 @@ public class DataRepository {
 				statement.setString(1, name);
 				statement.setObject(2,start);
 				statement.setObject(3,finish);
+				statement.setInt(4, idEvent);
 				statement.executeUpdate();
 			} catch(SQLException sqle) {
 				throw new RuntimeException(sqle);

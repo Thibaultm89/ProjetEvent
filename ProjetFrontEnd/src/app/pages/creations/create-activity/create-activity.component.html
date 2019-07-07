@@ -9,6 +9,12 @@
   </div>
 
   <br>
+  <div>
+    <label for="idEvent">Événement : </label>
+    <select formControlName="idEvent">
+      <option *ngFor="let eve of eventForActivity" value="{{eve.id}}">{{eve.name}}</option>
+    </select>
+  </div>
 
   <div>
     <span>Date de l'événement:</span>
