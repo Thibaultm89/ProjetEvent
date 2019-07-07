@@ -32,7 +32,7 @@ public class ActivityController extends BaseController{
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		if (activity != null) {		
-			repository.addActivity(activity.getName(), activity.getStart(), activity.getFinish());
+			repository.addActivity(activity.getName(), activity.getStart(), activity.getFinish(), activity.getIdEvent());
 			activity = repository.findOneActivityByName(activity.getName());
 		} 
 		response.getWriter().write(objectToJson(activity));

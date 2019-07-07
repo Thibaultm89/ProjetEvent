@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
+import { Event } from 'src/app/models/event.model';
 import { JavaService } from 'src/app/services/java.service';
+import { cleanSession } from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-create-activity',
@@ -16,6 +18,8 @@ export class CreateActivityComponent implements OnInit {
   public hourList: string[] = [null];
   public minuteList: string[] = [null];
 
+  public eventForActivity: Event[] = [null];
+
   public activity: Activity;
   public activityForm: FormGroup;
 
@@ -27,13 +31,18 @@ export class CreateActivityComponent implements OnInit {
     this.tabHour();
     this.tabMinute();
 
+    this.tabEvent();
+
     this.activity = new Activity();
     this.activity.start = new Date();
     this.activity.finish = new Date();
 
+
     this.activityForm = this.fb.group({
 
       name: this.fb.control(this.activity.name, [Validators.required]),
+
+      idEvent: this.fb.control(this.activity.idEvent),
 
       yearstart: this.fb.control(this.activity.start.getFullYear, [Validators.required]),
       monthstart: this.fb.control(this.activity.start.getMonth, [Validators.required]),
@@ -59,7 +68,9 @@ export class CreateActivityComponent implements OnInit {
     newActivity.start = new Date();
     newActivity.finish = new Date();
 
+
     newActivity.name = newValues.name;
+    newActivity.idEvent = newValues.idEvent;
 
     newActivity.start.setFullYear(newValues.yearstart);
     newActivity.start.setMonth((newValues.monthstart) - 1);
@@ -84,7 +95,7 @@ export class CreateActivityComponent implements OnInit {
     this.javaService.createActivity(this.activity).subscribe(e => {
       this.activity = e;
     });
-
+    console.log('subimti de newValues' , newValues);
     console.log('submit', this.activity, newValues);
   }
 
@@ -137,6 +148,12 @@ export class CreateActivityComponent implements OnInit {
         this.minuteList[i + 1] = i.toString();
       }
     }
+  }
+
+  public tabEvent() {
+    this.javaService.getListEvent().subscribe(e => {
+      this.eventForActivity = e;
+    });
   }
 
 }
