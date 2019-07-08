@@ -5,7 +5,7 @@
 
     <h3>Already registered? -> Sing In:</h3>
 
-    <form [formGroup]="logForm">
+    <form (ngSubmit)="submitForm1()" [formGroup]="logForm">
 
       <div>
         <label for="login">Identifiant : </label>
@@ -36,7 +36,7 @@
 
     <h3>New on our site? -> Sign Up</h3>
 
-    <form (ngSubmit)="submitForm()" [formGroup]="peopleForm">
+    <form (ngSubmit)="submitForm2()" [formGroup]="peopleForm">
 
       <div>
         <label for="firstName">Prénom: </label>
@@ -66,15 +66,6 @@
         <label for="password">Mot de passe: </label>
         <input type="password" id="password" name="password" formControlName="password"/>
         <span *ngIf="hasPasswordError()">Requis !</span>
-      </div>
-
-      <br>
-
-      <div>
-        <label for="idActivity">Activité: </label>
-        <select formControlName="idActivity">
-          <option *ngFor="let acti of listActivitiesByEvent" value="{{acti.id}}">{{acti.name}}</option>
-        </select>
       </div>
 
       <br>
