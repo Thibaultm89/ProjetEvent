@@ -371,6 +371,19 @@ public class DataRepository {
 			throw new RuntimeException(sqle);
 		}
 	}
-
+	
+	public void deleteEventById(int idEvent) {
+		String sql = "DELETE FROM \"Event\" where id_event = ?";
+		try (
+			Connection connection = createConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+		) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, idEvent);
+			statement.executeUpdate();
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+	}
 
 }
