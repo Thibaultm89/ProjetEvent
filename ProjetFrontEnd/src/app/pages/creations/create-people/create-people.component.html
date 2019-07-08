@@ -39,7 +39,7 @@
     <div>
       <label for="idActivity">Activité: </label>
       <select formControlName="idActivity">
-        <option *ngFor="let acti of activityForPeople" value="{{acti.id}}">{{acti.name}}</option>
+        <option *ngFor="let acti of listActivitiesByEvent" value="{{acti.id}}">{{acti.name}}</option>
       </select>
     </div>
 

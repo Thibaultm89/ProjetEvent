@@ -174,7 +174,7 @@ public class DataRepository {
 	public Event findOneEventByName(String name) {
 		Event event = null;
 		if (name != null && !name.isBlank()) {
-			String sql = "SELECT id_event AS EventID, name_event as EventName, start_event AS EventStart, finish_event AS EventFinish FROM \"Event\" where name_event = ?";
+			String sql = "SELECT id_event AS EventID, name_event as EventName, start_event AS EventStart, finish_event AS EventFinish, img_event as ImgEvent FROM \"Event\" where name_event = ?";
 			try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);

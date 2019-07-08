@@ -4,6 +4,7 @@ import { Activity } from 'src/app/models/activity.model';
 import { Event } from 'src/app/models/event.model';
 import { JavaService } from 'src/app/services/java.service';
 import { cleanSession } from 'selenium-webdriver/safari';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-activity',
@@ -18,20 +19,26 @@ export class CreateActivityComponent implements OnInit {
   public hourList: string[] = [null];
   public minuteList: string[] = [null];
 
-  public eventForActivity: Event[] = [null];
-
   public activity: Activity;
   public activityForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private javaService: JavaService) {
+  public idEvent: number;
+
+  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute) {
+
+    this.route.params.subscribe(params => {
+
+      const id: number = params.id;
+      this.javaService.getEventById(id).subscribe((e) => {
+        this.idEvent = e.id;
+      });
+    });
 
     this.tabMonth();
     this.tabYear();
     this.tabDay();
     this.tabHour();
     this.tabMinute();
-
-    this.tabEvent();
 
     this.activity = new Activity();
     this.activity.start = new Date();
@@ -70,7 +77,7 @@ export class CreateActivityComponent implements OnInit {
 
 
     newActivity.name = newValues.name;
-    newActivity.idEvent = newValues.idEvent;
+    newActivity.idEvent = this.idEvent;
 
     newActivity.start.setFullYear(newValues.yearstart);
     newActivity.start.setMonth((newValues.monthstart) - 1);
@@ -95,7 +102,6 @@ export class CreateActivityComponent implements OnInit {
     this.javaService.createActivity(this.activity).subscribe(e => {
       this.activity = e;
     });
-    console.log('submit de newValues' , newValues);
     console.log('submit', this.activity, newValues);
   }
 
@@ -148,12 +154,6 @@ export class CreateActivityComponent implements OnInit {
         this.minuteList[i + 1] = i.toString();
       }
     }
-  }
-
-  public tabEvent() {
-    this.javaService.getListEvent().subscribe(e => {
-      this.eventForActivity = e;
-    });
   }
 
 }

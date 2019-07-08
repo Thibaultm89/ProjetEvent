@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { People } from 'src/app/models/people.model';
 import { JavaService } from 'src/app/services/java.service';
 import { Activity } from 'src/app/models/activity.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-people',
@@ -15,12 +16,19 @@ export class CreatePeopleComponent implements OnInit {
   public people: People;
   public peopleForm: FormGroup;
 
-  public activityForPeople: Activity[] = [null];
+  public listActivitiesByEvent: Activity[];
 
-  constructor(private fb: FormBuilder, private javaService: JavaService) {
+  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute) {
+
+    this.route.params.subscribe(params => {
+
+      const id: number = params.id;
+      this.javaService.getEventById(id).subscribe((e) => {
+        this.listActivitiesByEvent = e.listActivities;
+      });
+    });
 
     this.people = new People();
-    this.tabActivity();
 
     this.peopleForm = this.fb.group({
 
@@ -76,12 +84,6 @@ export class CreatePeopleComponent implements OnInit {
   public hasPasswordError() {
     const control = this.peopleForm.get('password');
     return control.errors && control.errors.required;
-  }
-
-  public tabActivity() {
-    this.javaService.getListActivity().subscribe(e => {
-      this.activityForPeople = e;
-    });
   }
 
 }
