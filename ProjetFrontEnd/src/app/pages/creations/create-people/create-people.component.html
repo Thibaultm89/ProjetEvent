@@ -33,6 +33,15 @@
 
   <br>
 
+  <div>
+    <label for="idActivity">Activité de: </label>
+    <select formControlName="idActivity">
+      <option *ngFor="let acti of activityForPeople" value="{{acti.id}}">{{acti.name}}</option>
+    </select>
+  </div>
+
+  <br>
+
   <input type="submit" [disabled]="!peopleForm.valid" />
 
 </form>

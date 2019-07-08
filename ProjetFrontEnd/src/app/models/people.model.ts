@@ -4,4 +4,5 @@ export class People {
   lastName: string;
   email: string;
   password: string;
+  idActivity: number;
 }

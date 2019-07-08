@@ -1,61 +1,66 @@
-<h1>Créer un événement:</h1>
+<div>
+  <h2>Créer un événement:</h2>
 
-<form (ngSubmit)="submitForm()" [formGroup]="eventForm">
+  <form (ngSubmit)="submitForm()" [formGroup]="eventForm">
 
-  <div>
-    <label for="name">Nom de l'événement: </label>
-    <input type="text" id="name" name="name" formControlName="name"/>
-    <span *ngIf="hasNameError()">Requis !</span>
-  </div>
+    <div>
+      <label for="name">Nom de l'événement: </label>
+      <input type="text" id="name" name="name" formControlName="name"/>
+      <span *ngIf="hasNameError()">Requis !</span>
+    </div>
 
-  <br>
+    <br>
 
-  <div>
-    <span>Date de début de l'événement:</span>
-    <br><br>
-    <span> Jour: </span>
-    <span></span>
-    <select formControlName="daystart">
-      <option *ngFor= "let day of dayList " value="{{day}}">{{day}}</option>
-    </select>
+    <div>
+      <span>Date de début de l'événement:</span>
+      <br><br>
+      <span> Jour: </span>
+      <span></span>
+      <select formControlName="daystart">
+        <option *ngFor= "let day of dayList " value="{{day}}">{{day}}</option>
+      </select>
 
-    <span> Mois: </span>
-    <select formControlName="monthstart">
-        <option *ngFor= "let month of monthList " value="{{month}}">{{month}}</option>
-    </select>
+      <span> Mois: </span>
+      <select formControlName="monthstart">
+          <option *ngFor= "let month of monthList " value="{{month}}">{{month}}</option>
+      </select>
 
-    <span> Année: </span>
-    <select formControlName="yearstart">
-      <option *ngFor= "let year of yearList " value="{{year}}">{{year}}</option>
-    </select>
-  </div>
+      <span> Année: </span>
+      <select formControlName="yearstart">
+        <option *ngFor= "let year of yearList " value="{{year}}">{{year}}</option>
+      </select>
+    </div>
 
-  <br>
+    <br>
 
-  <div>
-    <span>Date de fin de l'événement:</span>
-    <br><br>
-    <span> Jour: </span>
-    <span></span>
-    <select formControlName="dayfinish">
-      <option *ngFor= "let day of dayList " value="{{day}}">{{day}}</option>
-    </select>
+    <div>
+      <span>Date de fin de l'événement:</span>
+      <br><br>
+      <span> Jour: </span>
+      <span></span>
+      <select formControlName="dayfinish">
+        <option *ngFor= "let day of dayList " value="{{day}}">{{day}}</option>
+      </select>
 
-    <span> Mois: </span>
-    <select formControlName="monthfinish">
-        <option *ngFor= "let month of monthList " value="{{month}}">{{month}}</option>
-    </select>
+      <span> Mois: </span>
+      <select formControlName="monthfinish">
+          <option *ngFor= "let month of monthList " value="{{month}}">{{month}}</option>
+      </select>
 
-    <span> Année: </span>
-    <select formControlName="yearfinish">
-      <option *ngFor= "let year of yearList " value="{{year}}">{{year}}</option>
-    </select>
-  </div>
+      <span> Année: </span>
+      <select formControlName="yearfinish">
+        <option *ngFor= "let year of yearList " value="{{year}}">{{year}}</option>
+      </select>
+    </div>
 
-  <br>
+    <br>
 
-  <input type="submit" [disabled]="!eventForm.valid"/>
+    <input type="submit" [disabled]="!eventForm.valid"/>
 
-</form>
-<br>
-<a [routerLink]="['/home']">Retour au menu principal</a>
+  </form>
+
+  <a [routerLink]="['/home']" id="retourMenu">Retour au menu principal</a>
+
+  <footer id="basDePage"></footer>
+
+</div>

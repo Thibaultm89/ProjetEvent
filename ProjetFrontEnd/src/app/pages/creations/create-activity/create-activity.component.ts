@@ -95,7 +95,7 @@ export class CreateActivityComponent implements OnInit {
     this.javaService.createActivity(this.activity).subscribe(e => {
       this.activity = e;
     });
-    console.log('subimti de newValues' , newValues);
+    console.log('submit de newValues' , newValues);
     console.log('submit', this.activity, newValues);
   }
 
