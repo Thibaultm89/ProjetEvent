@@ -76,7 +76,10 @@ public class FrontController  extends HttpServlet {
 				System.out.println("FrontController.doGet()");
 				peopleController.findOnePeopleByEmail(request, response);
 				
-			} else {			
+			} else if (pathInfo.startsWith("/login/")){		
+				peopleController.findOnePeopleByEmailAndPassword(request, response);
+					
+			} else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 			
@@ -148,7 +151,9 @@ public class FrontController  extends HttpServlet {
 	}
 
 	private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
-		request.getSession().setAttribute("mollethibault@hotmail.com", "non");
+		int id = 1;
+		request.getSession().setAttribute("idUser", id);
+		//getSession.invalidate (pour logout)
 	}
 	
 

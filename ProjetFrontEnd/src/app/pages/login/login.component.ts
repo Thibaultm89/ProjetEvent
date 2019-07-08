@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
-    this.js.getPeople(this.logForm.value.login).subscribe(e => {
+    this.js.getLogin(this.logForm.value.login, this.logForm.value.pwd).subscribe(e => {
       this.logForm.value.login = e;
     });
     console.log(this.logForm.value);

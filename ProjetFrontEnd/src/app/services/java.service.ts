@@ -50,6 +50,13 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+  public getLogin(email: string, pwd: string): Observable<People> {
+    return this.http
+    .get<People>(`http://localhost:8080/projet-back-end/json/login/${email}/${pwd}`, {withCredentials: true} )
+    // tslint:disable-next-line: deprecation
+    .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
 
 
 
