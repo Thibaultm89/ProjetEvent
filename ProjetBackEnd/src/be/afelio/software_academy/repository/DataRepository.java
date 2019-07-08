@@ -82,6 +82,19 @@ public class DataRepository {
 		p.setPassword(pwd);
 		return p;
 	}	
+	
+	protected People createPeopleWithoutPassword(ResultSet rs) throws SQLException {
+		int id = rs.getInt("PeopleId");
+		String firstname = rs.getString("FirstNamePeople");
+		String lastname = rs.getString("LastNamePeople");
+		String email = rs.getString("EmailPeople");
+		People p = new People();
+		p.setId(id);
+		p.setFirstName(firstname);
+		p.setLastName(lastname);
+		p.setEmail(email);
+		return p;
+	}	
 
 
 	
@@ -299,7 +312,54 @@ public class DataRepository {
 		return people;
 	}
 
+	public People findOnePeopleByEmail(String email) {
+		People people = new People();
+		if (email != null && !email.isBlank()) {
+			String sql = "SELECT id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople,"
+					+ " email AS EmailPeople, password AS PasswordPeople FROM \"People\" WHERE email = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)
+			) {
+				statement.setString(1, email);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						people = createPeople(resultSet);
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+		return people;
+	}
 	
+	public People findOnePeopleByEmailAndPassword(String email, String password) {
+		People people = new People();
+		if (email != null && !email.isBlank()) {
+			String sql = "SELECT id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople,"
+					+ " email AS EmailPeople, password AS PasswordPeople FROM \"People\" WHERE email = ? AND password = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)
+			) {
+				statement.setString(1, email);
+				statement.setString(2, password);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						people = createPeopleWithoutPassword(resultSet);
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+		return people;
+	}
 	
 	public void addEvent(String name, LocalDateTime start, LocalDateTime finish) { 
 		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {
