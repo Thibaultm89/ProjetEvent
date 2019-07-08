@@ -11,8 +11,8 @@ import { LoginComponent } from './pages/login/login.component';
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'}, // toujours à mettre en premier
   {path: 'home', component: HomeComponent},
-  {path: 'create-people', component: CreatePeopleComponent},
-  {path: 'create-activity', component: CreateActivityComponent},
+  {path: 'create-people/:id', component: CreatePeopleComponent},
+  {path: 'create-activity/:id', component: CreateActivityComponent},
   {path: 'create-event', component: CreateEventComponent},
   {path: 'events/:id', component: EventsComponent},
   {path: 'activity/:id', component: ActivitiesComponent},

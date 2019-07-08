@@ -4,6 +4,12 @@
 
   <h2>Événement: {{eventName}}</h2>
 
+  <div id="blockMenu">
+      <a [routerLink]="['/create-people', eventId]" class="menu">S'inscrire</a>
+
+      <a [routerLink]="['/create-activity', eventId]" class="menu">Créer une activité</a>
+  </div>
+
   <div id="img">
     <img width="700" [src]=" '/assets/img/imgEvent/' + eventImg">
   </div>

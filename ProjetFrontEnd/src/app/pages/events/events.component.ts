@@ -14,6 +14,8 @@ export class EventsComponent implements OnInit {
 
   public listActivities: Activity[];
 
+  public eventId: number;
+
   public eventImg: string;
 
   public eventName: string;
@@ -27,6 +29,7 @@ export class EventsComponent implements OnInit {
         this.eventImg = e.img;
         this.eventName = e.name;
         this.listActivities = e.listActivities;
+        this.eventId = e.id;
       });
     });
   }
