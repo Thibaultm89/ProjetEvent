@@ -20,6 +20,7 @@ export class CreatePeopleComponent implements OnInit {
   constructor(private fb: FormBuilder, private javaService: JavaService) {
 
     this.people = new People();
+    this.tabActivity();
 
     this.peopleForm = this.fb.group({
 
