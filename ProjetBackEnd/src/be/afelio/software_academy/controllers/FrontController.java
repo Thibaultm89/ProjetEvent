@@ -75,10 +75,7 @@ public class FrontController  extends HttpServlet {
 			} else if (pathInfo.startsWith("/people/")){
 				System.out.println("FrontController.doGet()");
 				peopleController.findOnePeopleByEmail(request, response);
-				
-			} else if (pathInfo.startsWith("/login/")){		
-				peopleController.findOnePeopleByEmailAndPassword(request, response);
-					
+							
 			} else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -105,7 +102,9 @@ public class FrontController  extends HttpServlet {
 				break;
 			case "/create-people/":
 				peopleController.addPeople(request,response);
-				break;				
+				break;	
+			case "/login/":
+				peopleController.findOnePeopleByEmailAndPassword(request, response);
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}			
