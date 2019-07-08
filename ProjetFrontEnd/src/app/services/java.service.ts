@@ -27,6 +27,15 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+
+
+  public getListActivity(): Observable<Activity[]> {
+    return this.http
+      .get<Activity[]>(`http://localhost:8080/projet-back-end/json/activity/all`)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
   public getActivityById(n: number): Observable<Activity> {
     return this.http
       .get<Activity>(`http://localhost:8080/projet-back-end/json/activity/${n}`)

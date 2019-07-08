@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { People } from 'src/app/models/people.model';
 import { JavaService } from 'src/app/services/java.service';
+import { Activity } from 'src/app/models/activity.model';
 
 @Component({
   selector: 'app-create-people',
@@ -14,11 +15,15 @@ export class CreatePeopleComponent implements OnInit {
   public people: People;
   public peopleForm: FormGroup;
 
+  public activityForPeople: Activity[] = [null];
+
   constructor(private fb: FormBuilder, private javaService: JavaService) {
 
     this.people = new People();
 
     this.peopleForm = this.fb.group({
+
+      idActivity: this.fb.control(this.people.idActivity),
 
       firstName: this.fb.control(this.people.firstName, [Validators.required]),
       lastName: this.fb.control(this.people.lastName, [Validators.required]),
@@ -41,6 +46,7 @@ export class CreatePeopleComponent implements OnInit {
     newPeople.lastName = newValues.lastName;
     newPeople.email = newValues.email;
     newPeople.password = newValues.password;
+    newPeople.idActivity = newValues.idActivity;
 
     this.people = newPeople;
 
@@ -70,4 +76,11 @@ export class CreatePeopleComponent implements OnInit {
     const control = this.peopleForm.get('password');
     return control.errors && control.errors.required;
   }
+
+  public tabActivity() {
+    this.javaService.getListActivity().subscribe(e => {
+      this.activityForPeople = e;
+    });
+  }
+
 }
