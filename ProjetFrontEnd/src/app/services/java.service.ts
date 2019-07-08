@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { Activity } from '../models/activity.model';
 import { Event } from '../models/event.model';
 import { People } from '../models/people.model';
+import { MyLogin } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,9 +51,9 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-  public getLogin(email: string, pwd: string): Observable<People> {
+  public getLogin(login: MyLogin): Observable<People> {
     return this.http
-    .get<People>(`http://localhost:8080/projet-back-end/json/login/${email}/${pwd}`, {withCredentials: true} )
+    .get<People>(`http://localhost:8080/projet-back-end/json/login`, {withCredentials: true} )
     // tslint:disable-next-line: deprecation
     .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
@@ -63,14 +64,14 @@ export class JavaService {
 
   public createEvent(payload: Event): Observable<Event> {
     return this.http
-      .post<Event>(`http://localhost:8080/projet-back-end/json/create-event/`, payload, {withCredentials: true})
+      .post<Event>(`http://localhost:8080/projet-back-end/json/create-event/`, payload)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
   public createActivity(payload: Activity): Observable<Activity> {
     return this.http
-      .post<Activity>(`http://localhost:8080/projet-back-end/json/create-activity/`, payload, {withCredentials: true})
+      .post<Activity>(`http://localhost:8080/projet-back-end/json/create-activity/`, payload)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }

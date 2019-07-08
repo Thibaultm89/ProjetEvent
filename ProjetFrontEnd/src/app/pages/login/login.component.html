@@ -21,7 +21,7 @@
 
       <br>
 
-      <input type="submit" value="Se connecter" id="button">
+      <input type="submit" value="Se connecter" class="button">
 
     </form>
 
@@ -70,13 +70,13 @@
 
       <br>
 
-      <input type="submit" [disabled]="!peopleForm.valid" id="button"/>
+      <input type="submit" [disabled]="!peopleForm.valid" class="button"/>
 
     </form>
 
-    <a [routerLink]="['/home']" id="retourMenu">Retour au menu principal</a>
-
   </div>
+
+  <a [routerLink]="['/home']" id="retourMenu">Retour au menu principal</a>
 
   <footer id="basDePage"></footer>
 

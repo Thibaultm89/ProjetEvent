@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
 import { ActivatedRoute } from '@angular/router';
 import { People } from 'src/app/models/people.model';
+import { MyLogin } from 'src/app/models/login.model';
 import { JavaService } from 'src/app/services/java.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { JavaService } from 'src/app/services/java.service';
 })
 export class LoginComponent implements OnInit {
 
+  public login: MyLogin;
   public logForm: FormGroup;
   public person: People;
 
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute) {
 
     this.person = new People();
+
     this.logForm = this.fb.group({
       login : this.fb.control(this.person.email),
       pwd : this.fb.control(this.person.password)
@@ -47,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   public submitForm1() {
 
-    this.javaService.getLogin(this.logForm.value.login, this.logForm.value.pwd).subscribe(e => {
+    this.javaService.getLogin(this.login).subscribe(e => {
       this.logForm.value.login = e;
     });
     console.log(this.logForm.value);
@@ -95,6 +98,4 @@ export class LoginComponent implements OnInit {
     const control = this.peopleForm.get('password');
     return control.errors && control.errors.required;
   }
-
-
 }

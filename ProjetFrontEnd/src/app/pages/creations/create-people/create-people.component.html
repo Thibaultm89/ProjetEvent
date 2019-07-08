@@ -5,22 +5,6 @@
   <form (ngSubmit)="submitForm()" [formGroup]="peopleForm">
 
     <div>
-      <label for="firstName">Prénom: </label>
-      <input type="text" id="firstName" name="firstName" formControlName="firstName"/>
-      <span *ngIf="hasFirstnameError()">Requis !</span>
-    </div>
-
-    <br>
-
-    <div>
-      <label for="lastName">Nom de famille: </label>
-      <input type="text" id="lastName" name="lastName" formControlName="lastName"/>
-      <span *ngIf="hasLastnameError()">Requis !</span>
-    </div>
-
-    <br>
-
-    <div>
       <label for="email">Adresse e-mail: </label>
       <input type="text" id="email" name="email" formControlName="email"/>
       <span *ngIf="hasEmailError()">Requis !</span>

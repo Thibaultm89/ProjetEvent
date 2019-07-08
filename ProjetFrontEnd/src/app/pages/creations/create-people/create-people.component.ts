@@ -34,8 +34,6 @@ export class CreatePeopleComponent implements OnInit {
 
       idActivity: this.fb.control(this.people.idActivity),
 
-      firstName: this.fb.control(this.people.firstName, [Validators.required]),
-      lastName: this.fb.control(this.people.lastName, [Validators.required]),
       email: this.fb.control(this.people.email, [Validators.required]),
       password: this.fb.control(this.people.password, [Validators.required]),
 
@@ -51,8 +49,6 @@ export class CreatePeopleComponent implements OnInit {
 
     const newPeople = new People();
 
-    newPeople.firstName = newValues.firstName;
-    newPeople.lastName = newValues.lastName;
     newPeople.email = newValues.email;
     newPeople.password = newValues.password;
     newPeople.idActivity = newValues.idActivity;
@@ -64,16 +60,6 @@ export class CreatePeopleComponent implements OnInit {
     });
 
     console.log('submit', this.people, newValues);
-  }
-
-  public hasFirstnameError() {
-    const control = this.peopleForm.get('firstName');
-    return control.errors && control.errors.required;
-  }
-
-  public hasLastnameError() {
-    const control = this.peopleForm.get('lastName');
-    return control.errors && control.errors.required;
   }
 
   public hasEmailError() {
