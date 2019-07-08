@@ -108,6 +108,23 @@ public class FrontController  extends HttpServlet {
 		
 	}
 
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String pathInfo = request.getPathInfo();
+		if (pathInfo != null) {
+			response.setContentType("application/json");
+			if (pathInfo.startsWith("/delete-event/")) {
+				eventController.deleteEventById(request, response);
+			} else if (pathInfo.startsWith("/delete-activity/")) {
+			//TODO	activityController.deleteActivityById(request, response);
+			} else if (pathInfo.startsWith("/delete-people/")) {
+				//TODO peopleController.deletePeopleById(request, response);
+			} else {
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}			
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
+	}
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doOptions(request, response);
