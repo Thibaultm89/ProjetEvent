@@ -11,12 +11,21 @@ public class People implements Serializable  {
 	protected String lastName;
 	protected String email;
 	protected String password;
+	protected int idActivity;
 	
 	
+	public int getIdActivity() {
+		return idActivity;
+	}
+
+	public void setIdActivity(int idActivity) {
+		this.idActivity = idActivity;
+	}
+
 	@Override
 	public String toString() {
 		return "People [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", idActivity=" + idActivity + "]";
 	}
 
 	public Integer getId() {

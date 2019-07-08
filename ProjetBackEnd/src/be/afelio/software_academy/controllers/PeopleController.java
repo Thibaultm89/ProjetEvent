@@ -18,6 +18,7 @@ public class PeopleController extends BaseController {
 	
 	public void addPeople(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		People people = null;
+		int idActivity;
 		try {
 			people = jsonStreamToObject(request.getInputStream(),People.class);
 			} catch (Exception e) {
@@ -25,8 +26,14 @@ public class PeopleController extends BaseController {
 			}
 		if (people != null) {
 			repository.addPeople(people.getFirstName(), people.getLastName(), people.getEmail(), people.getPassword());
-			//TODO iddem ? people = repository.findOnePeopleByFirstNameAndLastName(people.getFirstName(), people.getLastName());
-			//possib de récup id auto incrémenté de db
+			idActivity = people.getIdActivity();
+			System.out.println("le nom est"+people.getFirstName()+people.getLastName());
+			System.out.println("idActivity vaut: " + idActivity);
+			people = repository.findOnePeopleByFirstNameAndLastName(people.getFirstName(), people.getLastName()); // après cette ligne perte de idActivity, faut il le conversr dans people?
+			//récup id auto incrémenté de db
+			// après avoir récup id people , ajout dans activity_people aveec id_acvitivy récup de angular
+			repository.addActivityPeople(idActivity, people.getId());
+			//je pense que activiy_id sera perdu car on écrase people, il faudrait peut etre la récup dans un variable avant *
 		}
 		//TODO  ne sert à rien ? response.getWriter().write(objectToJson(people));
 	}
