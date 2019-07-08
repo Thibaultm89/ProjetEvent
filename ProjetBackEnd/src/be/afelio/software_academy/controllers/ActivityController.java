@@ -24,6 +24,12 @@ public class ActivityController extends BaseController{
 		response.getWriter().write(objectToJson(o));
 	}
 	
+	public void findAllActivity(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Object o = repository.findAllActivity();
+		response.getWriter().write(objectToJson(o));
+	}
+	
 	public void addActivity(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Activity activity = null;
 		try {

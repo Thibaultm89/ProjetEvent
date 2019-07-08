@@ -21,6 +21,7 @@ public class DataRepository {
 	private String user;
 	private String password;
 	
+	
 	public DataRepository(String url, String user, String password) {
 		super();
 		this.url = url;
@@ -97,6 +98,25 @@ public class DataRepository {
 			while (resultSet.next()) {
 				Event event = createEvent(resultSet);
 				list.add(event);
+			}
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+		return list;
+	}
+	
+	public List<Activity> findAllActivity() {
+		List<Activity> list = new ArrayList<Activity>();
+		String sql ="SELECT id_activity AS ActivityId, name_activity AS ActivityName, img_activity AS ImgActivity,"
+				+ " start_activity AS ActivityStart, finish_activity AS ActivityFinish, id_event AS EventId FROM \"Activity\"";
+		try (
+			Connection connection = createConnection();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql)
+		) {
+			while (resultSet.next()) {
+				Activity activity = createActivity(resultSet);
+				list.add(activity);
 			}
 		} catch(SQLException sqle) {
 			throw new RuntimeException(sqle);
