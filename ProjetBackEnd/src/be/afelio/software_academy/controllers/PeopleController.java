@@ -37,4 +37,13 @@ public class PeopleController extends BaseController {
 		}
 		//TODO  ne sert à rien ? response.getWriter().write(objectToJson(people));
 	}
+
+
+	public void findOnePeopleByEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String email = getPathParameter(request.getPathInfo());
+		Object o = repository.findOnePeopleByEmail(email);
+		response.getWriter().write(objectToJson(o));	
+	}
 }
+
+	

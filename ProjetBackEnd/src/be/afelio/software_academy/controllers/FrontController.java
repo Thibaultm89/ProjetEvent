@@ -72,7 +72,11 @@ public class FrontController  extends HttpServlet {
 			} else if (pathInfo.startsWith("/activity/")){
 				activityController.findOneActivitysById(request, response);
 				
-			}else {
+			} else if (pathInfo.startsWith("/people/")){
+				System.out.println("FrontController.doGet()");
+				peopleController.findOnePeopleByEmail(request, response);
+				
+			} else {			
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 			
@@ -108,6 +112,10 @@ public class FrontController  extends HttpServlet {
 		
 	}
 
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) {
+		
+	}
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String pathInfo = request.getPathInfo();
 		if (pathInfo != null) {
@@ -117,7 +125,7 @@ public class FrontController  extends HttpServlet {
 			} else if (pathInfo.startsWith("/delete-activity/")) {
 			//TODO	activityController.deleteActivityById(request, response);
 			} else if (pathInfo.startsWith("/delete-people/")) {
-				//TODO peopleController.deletePeopleById(request, response);
+			//TODO peopleController.deletePeopleById(request, response);
 			} else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}			
@@ -125,6 +133,7 @@ public class FrontController  extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 	}
+	
 	@Override
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		super.doOptions(request, response);
@@ -132,8 +141,16 @@ public class FrontController  extends HttpServlet {
 	}
 	
 	private void setHeaders( HttpServletResponse response ) {
-		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 		response.addHeader("Access-Control-Allow-Methods", "*");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
 		response.addHeader("Access-Control-Allow-Headers", "*");
 	}
+
+	private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().setAttribute("mollethibault@hotmail.com", "non");
+	}
+	
+
 }
+

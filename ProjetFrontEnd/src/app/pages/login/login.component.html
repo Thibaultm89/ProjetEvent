@@ -2,18 +2,18 @@
 
   <h2>Se connecter :</h2>
 
-  <form [formGroup]="LogForm">
+  <form [formGroup]="logForm" (ngSubmit)="submitForm()">
 
     <div>
       <label for="login">Identifiant : </label>
-        <input id="login" name="login" formControlName="LogForm" >
+        <input id="login" name="login" formControlName="login" >
     </div>
 
     <br>
 
     <div>
       <label for="pwd">Mot de passe : </label>
-          <input id="pwd" name="pwd" formControlName="LogForm">
+          <input type="password" id="pwd" name="pwd" formControlName="pwd">
     </div>
 
     <br>

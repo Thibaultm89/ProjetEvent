@@ -299,7 +299,29 @@ public class DataRepository {
 		return people;
 	}
 
-	
+	public People findOnePeopleByEmail(String email) {
+		People people = new People();
+		if (email != null && !email.isBlank()) {
+			String sql = "SELECT id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople,"
+					+ " email AS EmailPeople, password AS PasswordPeople FROM \"People\" WHERE email = ?";
+			try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)
+			) {
+				statement.setString(1, email);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						people = createPeople(resultSet);
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
+		}
+		return people;
+	}
 	
 	public void addEvent(String name, LocalDateTime start, LocalDateTime finish) { 
 		if (name != null && !name.isBlank() && findOneEventByName(name) == null) {

@@ -43,20 +43,27 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+  public getPeople(email: string): Observable<People> {
+    return this.http
+      .get<People>(`http://localhost:8080/projet-back-end/json/people/${email}`, {withCredentials: true} )
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
 
 
 
 
   public createEvent(payload: Event): Observable<Event> {
     return this.http
-      .post<Event>(`http://localhost:8080/projet-back-end/json/create-event/`, payload)
+      .post<Event>(`http://localhost:8080/projet-back-end/json/create-event/`, payload, {withCredentials: true})
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
   public createActivity(payload: Activity): Observable<Activity> {
     return this.http
-      .post<Activity>(`http://localhost:8080/projet-back-end/json/create-activity/`, payload)
+      .post<Activity>(`http://localhost:8080/projet-back-end/json/create-activity/`, payload, {withCredentials: true})
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
