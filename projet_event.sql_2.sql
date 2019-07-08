@@ -124,11 +124,11 @@ ALTER SEQUENCE public."Event_id_event_seq" OWNED BY public."Event".id_event;
 --
 
 CREATE TABLE public."People" (
+	id_people integer NOT NULL,
     firstname_people character varying NOT NULL,
     lastname_people character varying NOT NULL,
     email character varying NOT NULL,
-    password character varying NOT NULL,
-    id_people integer NOT NULL
+    password character varying NOT NULL
 );
 
 
@@ -188,14 +188,13 @@ ALTER TABLE ONLY public."People" ALTER COLUMN id_people SET DEFAULT nextval('pub
 -- Dependencies: 200
 -- Data for Name: Activity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
-
+INSERT INTO public."Activity" VALUES (1, 'Concert Dimitri Vegas', '2019-07-20 00:00:00', '2019-07-20 00:00:00', 1, 1, 'dimitrivegas.jpg');
 INSERT INTO public."Activity" VALUES (2, 'Concert Coone', '2019-07-20 23:00:00', '2019-07-20 00:00:00', 1, 1, 'coone.jpg');
 INSERT INTO public."Activity" VALUES (3, 'Concert Nekfeu', '2019-07-04 19:00:00', '2019-07-04 21:00:00', 2, 3, 'nekfeu.jpg');
 INSERT INTO public."Activity" VALUES (4, 'Concert Orelsan', '2019-07-18 20:00:00', '2019-07-18 23:00:00', 2, 2, 'orelsan.jpg');
 INSERT INTO public."Activity" VALUES (5, 'Concert Damso', '2019-07-04 15:00:00', '2019-07-04 18:00:00', 2, 3, 'damso.jpg');
 INSERT INTO public."Activity" VALUES (7, 'Concert Lorenzo', '2019-07-05 22:00:00', '2019-07-05 23:00:00', 2, 3, 'lorenzo.jpg');
 INSERT INTO public."Activity" VALUES (8, 'Concert Patrick Bruel', '2019-07-18 14:00:00', '2019-07-18 15:00:00', 1, 2, 'patrickbruel.jpg');
-INSERT INTO public."Activity" VALUES (1, 'Concert Dimitri Vegas', '2019-07-20 00:00:00', '2019-07-20 00:00:00', 1, 1, 'dimitrivegas.jpg');
 
 
 --
@@ -234,15 +233,15 @@ INSERT INTO public."Event" VALUES (3, 'Les Ardentes', '2019-07-04 00:00:00', '20
 -- Dependencies: 197
 -- Data for Name: People; Type: TABLE DATA; Schema: public; Owner: postgres
 --
+INSERT INTO public."People" VALUES (1, 'Thibault', 'Molle', 'mollethibault@hotmail.com', 'non');
+INSERT INTO public."People" VALUES (2, 'Philippe', 'Vancom', 'philippe@hotmail.com', 'philou' );
+INSERT INTO public."People" VALUES (3, 'Maxime', 'Quoilin', 'maximusdecimus@hotmailus.com', 'nicotinus');
+INSERT INTO public."People" VALUES (4, 'Damien', 'Bouffioux', 'damb@hotmail.com', 'bingbangboum');
+INSERT INTO public."People" VALUES (5, 'Delphine', 'Franquinet', 'Delphinefranquinet@gmail.com', 'Coucou');
+INSERT INTO public."People" VALUES (6, 'Zarah', 'Al-Sudani', 'Zara-AlSudani@gmail.com', 'bishmila');
+INSERT INTO public."People" VALUES (7, 'Jean', 'Leclercq', 'jeanleclercq@gmail.com', 'legeekdu64');
+INSERT INTO public."People" VALUES (8, 'Melissa', 'Schyns', 'melissaschyns@gmail.com', 'melimeli');
 
-INSERT INTO public."People" VALUES ('Philippe', 'Vancom', 'philippe@hotmail.com', 'philou', 2);
-INSERT INTO public."People" VALUES ('Maxime', 'Quoilin', 'maximusdecimus@hotmailus.com', 'nicotinus', 3);
-INSERT INTO public."People" VALUES ('Damien', 'Bouffioux', 'damb@hotmail.com', 'bingbangboum', 4);
-INSERT INTO public."People" VALUES ('Delphine', 'Franquinet', 'Delphinefranquinet@gmail.com', 'Coucou', 5);
-INSERT INTO public."People" VALUES ('Zarah', 'Al-Sudani', 'Zara-AlSudani@gmail.com', 'bishmila', 6);
-INSERT INTO public."People" VALUES ('Jean', 'Leclercq', 'jeanleclercq@gmail.com', 'legeekdu64', 7);
-INSERT INTO public."People" VALUES ('Melissa', 'Schyns', 'melissaschyns@gmail.com', 'melimeli', 8);
-INSERT INTO public."People" VALUES ('Thibault', 'Molle', 'mollethibault@hotmail.com', 'non', 1);
 
 
 --
