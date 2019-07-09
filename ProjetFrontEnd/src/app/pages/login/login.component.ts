@@ -70,8 +70,8 @@ export class LoginComponent implements OnInit {
     this.login = newLogin;
     console.log(this.login);
     this.javaService.postLogin(this.login).subscribe(p =>  {
+      console.log('voici', p);
       this.connection(p);
-      console.log(p);
     });
   }
 
@@ -119,9 +119,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-
-
-
   public hasLoginError() {
     const control = this.logForm.get('login');
     return control.errors && control.errors.required;
@@ -132,13 +129,12 @@ export class LoginComponent implements OnInit {
     return control.errors && control.errors.required;
   }
 
-  public connection(person: People) {
-    if (person === null || person === undefined) {
+  public connection(pers: People) {
+    if (pers === null || pers === undefined) {
      this.isConnected = false;
     } else {
       this.isConnected = true;
-      console.log(this.person);
-      this.authService.setLoggedInUser(this.person.id);
+      this.authService.setLoggedInUser(pers.id);
       this.next();
     }
   }

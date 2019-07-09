@@ -53,7 +53,7 @@ public class PeopleController extends BaseController {
 			int id = p.getId();
 			request.getSession().setAttribute("idUser", id);
 		}
-		
+		System.out.println(objectToJson(p));
 		response.getWriter().write(objectToJson(p));
 	}
 }
