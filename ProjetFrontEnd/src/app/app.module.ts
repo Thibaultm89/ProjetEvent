@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { JavaService } from './services/java.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CreatePeopleComponent } from './pages/creations/create-people/create-people.component';
 import { CreateActivityComponent } from './pages/creations/create-activity/create-activity.component';
 import { CreateEventComponent } from './pages/creations/create-event/create-event.component';
 import { EventsComponent } from './pages/events/events.component';
@@ -19,7 +18,6 @@ import { AuthenticationService } from './services/authentication.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    CreatePeopleComponent,
     CreateActivityComponent,
     CreateEventComponent,
     EventsComponent,

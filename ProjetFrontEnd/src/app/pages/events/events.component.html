@@ -6,8 +6,6 @@
   <h2>Événement: {{eventName}}</h2>
 
   <div id="blockMenu">
-      <a [routerLink]="['/create-people', eventId]" class="button">S'inscrire</a>
-
       <a [routerLink]="['/create-activity', eventId]" class="button" *ngIf="isManager">Créer une activité</a>
 
       <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deleteEvent(eventId)">Supprimer cet événement</a>

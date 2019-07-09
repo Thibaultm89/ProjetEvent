@@ -29,6 +29,8 @@ export class ActivitiesComponent implements OnInit {
 
   public activityId: number;
 
+  public p = new People();
+
   ngOnInit() {
     this.route.params.subscribe(params => {
 
@@ -39,6 +41,9 @@ export class ActivitiesComponent implements OnInit {
         this.activityName = act.name;
         this.listPeople = act.listPeople;
         this.activityId = act.id;
+
+        this.p.id = Number(this.authService.getLoggedInUser());
+        this.p.idActivity = this.activityId;
       });
     });
 
@@ -47,6 +52,9 @@ export class ActivitiesComponent implements OnInit {
     if (this.authService.getLoggedInUser() === '1' || this.authService.getLoggedInUser() === '2') {
       this.isManager = true;
     }
+
+
+    console.log(this.p);
   }
 
   next() {
@@ -64,5 +72,9 @@ export class ActivitiesComponent implements OnInit {
 
   public deletePeople(id: number) {
     this.javaService.deletePeople(id).subscribe();
+  }
+
+  public registerPeopleToActivity(p: People) {
+    this.javaService.registerPeople(p).subscribe();
   }
 }

@@ -10,6 +10,7 @@ import { MyLogin } from '../models/login.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class JavaService {
 
   constructor(private http: HttpClient) {}
@@ -72,6 +73,13 @@ export class JavaService {
   public createPeople(payload: People): Observable<People> {
     return this.http
       .post<People>(`http://localhost:8080/projet-back-end/json/create-people/`, payload)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
+  public registerPeople(payload: People): Observable<People> {
+    return this.http
+      .post<People>(`http://localhost:8080/projet-back-end/json/register-people/`, payload)
 // tslint:disable-next-line: deprecation
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }

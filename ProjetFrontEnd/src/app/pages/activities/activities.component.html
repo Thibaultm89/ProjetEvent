@@ -6,6 +6,8 @@
   <h2>Activité: {{activityName}}</h2>
 
   <div id="blockMenu">
+    <a [routerLink]="['/home']" class="button" *ngIf="isConnected" (click)="registerPeopleToActivity(p)">S'inscrire à cette activité</a>
+
     <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deleteActivity(activityId)">Supprimer cette activité</a>
   </div>
 
@@ -23,7 +25,7 @@
     <ul>
       <li *ngFor= "let people of (listPeople)">
           {{people.firstName}} {{people.lastName}}
-          <!-- <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deletePeople({{people.id}})">Supprimer cette personne</a> -->
+          <!-- <a [routerLink]="['/home']" id="littlebutton" *ngIf="isManager" (click)="deletePeople(people.id)">Supprimer cette personne</a> -->
       </li>
     </ul>
   </div>
