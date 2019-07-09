@@ -52,9 +52,6 @@ export class ActivitiesComponent implements OnInit {
     if (this.authService.getLoggedInUser() === '1' || this.authService.getLoggedInUser() === '2') {
       this.isManager = true;
     }
-
-
-    console.log(this.p);
   }
 
   next() {
@@ -74,7 +71,8 @@ export class ActivitiesComponent implements OnInit {
     this.javaService.deletePeople(id).subscribe();
   }
 
-  public registerPeopleToActivity(p: People) {
-    this.javaService.registerPeople(p).subscribe();
+  public registerPeopleToActivity() {
+    this.javaService.registerPeople(this.p).subscribe();
+    console.log(this.p);
   }
 }

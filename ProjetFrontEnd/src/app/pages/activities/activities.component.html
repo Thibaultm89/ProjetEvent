@@ -6,7 +6,7 @@
   <h2>Activité: {{activityName}}</h2>
 
   <div id="blockMenu">
-    <a [routerLink]="['/home']" class="button" *ngIf="isConnected" (click)="registerPeopleToActivity(p)">S'inscrire à cette activité</a>
+    <a [routerLink]="['/home']" class="button" *ngIf="isConnected" (click)="registerPeopleToActivity()">S'inscrire à cette activité</a>
 
     <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deleteActivity(activityId)">Supprimer cette activité</a>
   </div>
