@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
-import { Event } from 'src/app/models/event.model';
 import { JavaService } from 'src/app/services/java.service';
-import { cleanSession } from 'selenium-webdriver/safari';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

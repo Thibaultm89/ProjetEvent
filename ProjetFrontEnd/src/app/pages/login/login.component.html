@@ -10,6 +10,7 @@
       <div>
         <label for="login">Identifiant : </label>
           <input id="login" name="login" formControlName="login" >
+          <span *ngIf="hasLoginError()">Requis !</span>
       </div>
 
       <br>
@@ -17,6 +18,7 @@
       <div>
         <label for="pwd">Mot de passe : </label>
             <input type=" password" id="pwd" name="pwd" formControlName="pwd">
+            <span *ngIf="hasPwdError()">Requis !</span>
       </div>
 
       <br>

@@ -15,7 +15,7 @@ h2{
   margin-bottom: 6%;
 }
 
-a.menu{
+.button{
 	text-decoration: none;
 	color:rgb(179, 48, 0);
 	border: 4px solid rgb(179, 48, 0);
@@ -23,6 +23,11 @@ a.menu{
   text-align: center;
   padding: 2%;
   margin: 0% 3%;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: rgb(179, 48, 0);
+  color: white;
 }
 
 #img{
@@ -66,13 +71,21 @@ li{
 }
 
 #retourMenu{
+  text-decoration: none;
   border: 4px solid rgb(179, 48, 0);
   font-size: 20px;
   color:  rgb(179, 48, 0);
   padding: 1%;
+  cursor: pointer;
+}
+
+#retourMenu:hover {
+  background-color: rgb(179, 48, 0);
+  color: white;
 }
 
 #basDePage{
   margin-top: 10%;
 }
+
 
