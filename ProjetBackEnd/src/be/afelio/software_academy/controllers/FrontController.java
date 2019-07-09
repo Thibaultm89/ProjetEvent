@@ -72,7 +72,7 @@ public class FrontController  extends HttpServlet {
 			} else if (pathInfo.startsWith("/activity/")){
 				activityController.findOneActivitysById(request, response);
 				
-			} else if (pathInfo.startsWith("/people/")){ // sert-il encore àqqch?
+			} else if (pathInfo.startsWith("/people/")){
 				peopleController.findOnePeopleByEmail(request, response);
 							
 			} else {
