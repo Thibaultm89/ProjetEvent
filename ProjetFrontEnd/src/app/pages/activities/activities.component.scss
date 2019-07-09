@@ -63,7 +63,7 @@ li{
   padding: 1% 0%;
 }
 
-#littlebutton{
+.littlebutton{
   text-decoration: none;
 	color:rgb(179, 48, 0);
 	border: 4px solid rgb(179, 48, 0);
@@ -74,7 +74,7 @@ li{
   cursor: pointer;
 }
 
-#littlebutton:hover {
+.littlebutton:hover {
   background-color: rgb(179, 48, 0);
   color: white;
 }

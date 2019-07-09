@@ -25,7 +25,7 @@
     <ul>
       <li *ngFor= "let people of (listPeople)">
           {{people.firstName}} {{people.lastName}}
-          <!-- <a [routerLink]="['/home']" id="littlebutton" *ngIf="isManager" (click)="deletePeople(people.id)">Supprimer cette personne</a> -->
+          <a [routerLink]="['/home']" class="littlebutton" *ngIf="isManager" (click)="deletePeople(people.id)">Supprimer cette personne</a>
       </li>
     </ul>
   </div>

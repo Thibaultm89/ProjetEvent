@@ -60,6 +60,6 @@ export class EventsComponent implements OnInit {
   }
 
   public deleteEvent(id: number) {
-    this.javaService.deleteEvent(id).subscribe();
+    this.javaService.deleteEvent(id).subscribe(d => this.next());
   }
 }

@@ -64,15 +64,15 @@ export class ActivitiesComponent implements OnInit {
   }
 
   public deleteActivity(id: number) {
-    this.javaService.deleteActivity(id).subscribe();
+    this.javaService.deleteActivity(id).subscribe(r => this.router.navigate(['/home']));
   }
 
   public deletePeople(id: number) {
-    this.javaService.deletePeople(id).subscribe();
+    this.javaService.deletePeople(id).subscribe(r => this.router.navigate(['/activity', this.activityId]));
   }
 
   public registerPeopleToActivity() {
-    this.javaService.registerPeople(this.p).subscribe();
+    this.javaService.registerPeople(this.p).subscribe(r => this.router.navigate(['/activity', this.activityId]));
     console.log(this.p);
   }
 }

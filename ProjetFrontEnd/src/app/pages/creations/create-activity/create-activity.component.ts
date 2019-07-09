@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Activity } from 'src/app/models/activity.model';
 import { JavaService } from 'src/app/services/java.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-activity',
@@ -22,7 +22,7 @@ export class CreateActivityComponent implements OnInit {
 
   public idEvent: number;
 
-  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute, private router: Router) {
 
     this.route.params.subscribe(params => {
 
@@ -99,6 +99,7 @@ export class CreateActivityComponent implements OnInit {
 
     this.javaService.createActivity(this.activity).subscribe(e => {
       this.activity = e;
+      this.router.navigate(['/events', this.idEvent]);
     });
     console.log('submit', this.activity, newValues);
   }

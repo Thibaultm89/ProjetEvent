@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Event } from 'src/app/models/event.model';
 import { JavaService } from 'src/app/services/java.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-event',
@@ -17,7 +18,7 @@ export class CreateEventComponent implements OnInit {
   public event: Event;
   public eventForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private javaService: JavaService) {
+  constructor(private fb: FormBuilder, private javaService: JavaService, private router: Router) {
 
     this.tabMonth();
     this.tabYear();
@@ -77,6 +78,7 @@ export class CreateEventComponent implements OnInit {
 
     this.javaService.createEvent(this.event).subscribe(e => {
       this.event = e;
+      this.router.navigate(['/home']);
     });
 
     console.log('submit', this.event, newValues);

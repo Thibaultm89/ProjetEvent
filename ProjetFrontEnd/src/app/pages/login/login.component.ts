@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { People } from 'src/app/models/people.model';
 import { MyLogin } from 'src/app/models/login.model';
 import { JavaService } from 'src/app/services/java.service';
@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private javaService: JavaService,
-    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthenticationService
     ) {
@@ -71,6 +70,7 @@ export class LoginComponent implements OnInit {
 
     this.javaService.postLogin(this.login).subscribe(p =>  {
       this.connection(p);
+      this.router.navigate(['/home']);
     });
   }
 
@@ -92,6 +92,7 @@ export class LoginComponent implements OnInit {
 
     this.javaService.createPeople(this.people).subscribe(p => {
       this.people = p;
+      this.router.navigate(['/home']);
     });
 
     console.log('submit', this.people, newValues);
