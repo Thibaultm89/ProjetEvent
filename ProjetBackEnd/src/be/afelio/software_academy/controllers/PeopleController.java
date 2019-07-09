@@ -56,8 +56,12 @@ public class PeopleController extends BaseController {
 	}
 	
 	public void findOnePeopleById(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Integer id = Integer.parseInt(request.getPathInfo().split("/")[2]);
-		People p = repository.findOnePeopleById(id);
+		Integer idActivity;
+		People p = jsonStreamToObject(request.getInputStream(), People.class);
+		idActivity = p.getIdActivity();
+		p = repository.findOnePeopleById(p.getId());
+		p.setIdActivity(idActivity);
+		repository.addActivityPeople(p.getIdActivity(), p.getId());
 		response.getWriter().write(objectToJson(p));	
 	}
 	

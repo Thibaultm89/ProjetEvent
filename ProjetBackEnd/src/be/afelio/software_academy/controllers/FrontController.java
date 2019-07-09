@@ -109,7 +109,7 @@ public class FrontController  extends HttpServlet {
 				request.getSession().invalidate();
 				break;
 			case "/register-people/":
-				//peopleController.findOnePeopleById(request,response);
+				peopleController.findOnePeopleById(request,response);
 				break;
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
