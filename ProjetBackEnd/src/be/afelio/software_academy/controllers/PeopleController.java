@@ -28,13 +28,11 @@ public class PeopleController extends BaseController {
 		if (people != null) {
 			repository.addPeople(people.getFirstName(), people.getLastName(), people.getEmail(), people.getPassword());
 			idActivity = people.getIdActivity();
-			System.out.println("le nom est"+people.getFirstName()+people.getLastName());
 			System.out.println("idActivity vaut: " + idActivity);
-			people = repository.findOnePeopleByFirstNameAndLastName(people.getFirstName(), people.getLastName()); // après cette ligne perte de idActivity, faut il le conversr dans people?
+			people = repository.findOnePeopleByFirstNameAndLastName(people.getFirstName(), people.getLastName()); 
 			//récup id auto incrémenté de db
 			// après avoir récup id people , ajout dans activity_people aveec id_acvitivy récup de angular
 			repository.addActivityPeople(idActivity, people.getId());
-			//je pense que activiy_id sera perdu car on écrase people, il faudrait peut etre la récup dans un variable avant *
 		}
 		response.getWriter().write(objectToJson(people));
 	}
@@ -55,6 +53,12 @@ public class PeopleController extends BaseController {
 		}
 		System.out.println(objectToJson(p));
 		response.getWriter().write(objectToJson(p));
+	}
+	
+	public void findOnePeopleById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Integer id = Integer.parseInt(request.getPathInfo().split("/")[2]);
+		People p = repository.findOnePeopleById(id);
+		response.getWriter().write(objectToJson(p));	
 	}
 }
 

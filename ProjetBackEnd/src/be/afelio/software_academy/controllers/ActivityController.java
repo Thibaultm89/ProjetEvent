@@ -44,4 +44,20 @@ public class ActivityController extends BaseController{
 		response.getWriter().write(objectToJson(activity));
 	}
 	
+	public void deleteActivityById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = 0;
+		try {
+			id = Integer.parseInt(getPathParameter(request.getPathInfo()));
+		} catch(NumberFormatException e) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		Object o = null;
+		if (id > 0) {
+			o = repository.findOneActivityById(id);
+			if (o != null) {
+				repository.deleteActivityById(id);
+			}
+		}
+		response.getWriter().write(objectToJson(o));
+	}
 }

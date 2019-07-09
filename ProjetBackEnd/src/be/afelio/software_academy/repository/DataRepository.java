@@ -283,6 +283,26 @@ public class DataRepository {
 	}
 	
 	public People findOnePeopleById(Integer id) {
+		People people = null;
+		String sql = "SELECT id_people AS PeopleId, firstname_people as FirstNamePeople, lastname_people AS LastNamePeople,"
+				+ " email AS EmailPeople, password AS PasswordPeople "
+				+ "FROM \"People\" where firstname_people = ? AND lastname_people = ?";
+		try (
+				Connection connection = createConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+			) {
+			//	statement.setString(1, firstName);
+			//	statement.setString(2, lastName);
+				try (
+					ResultSet resultSet = statement.executeQuery()
+				) {
+					if (resultSet.next()) {
+						people = createPeople(resultSet);
+					}
+				}
+			} catch(SQLException sqle) {
+				throw new RuntimeException(sqle);
+			}
 		return new People();
 	}
 	
@@ -441,6 +461,20 @@ public class DataRepository {
 		) {
 			connection.setAutoCommit(true);
 			statement.setInt(1, idEvent);
+			statement.executeUpdate();
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+	}
+	
+	public void deleteActivityById(int idActivity) {
+		String sql = "DELETE FROM \"Activity\" where id_activity = ?";
+		try (
+			Connection connection = createConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+		) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, idActivity);
 			statement.executeUpdate();
 		} catch(SQLException sqle) {
 			throw new RuntimeException(sqle);
