@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JavaService } from 'src/app/services/java.service';
 import { People } from 'src/app/models/people.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-activities',
@@ -10,13 +11,23 @@ import { People } from 'src/app/models/people.model';
 })
 export class ActivitiesComponent implements OnInit {
 
-  constructor(private javaService: JavaService, private route: ActivatedRoute) { }
+  public isConnected: boolean;
+
+  public isManager = false;
+
+  constructor(
+    private javaService: JavaService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthenticationService) { }
 
   public listPeople: People[];
 
   public activityImg: string;
 
   public activityName: string;
+
+  public activityId: number;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -27,8 +38,31 @@ export class ActivitiesComponent implements OnInit {
         this.activityImg = act.img;
         this.activityName = act.name;
         this.listPeople = act.listPeople;
+        this.activityId = act.id;
       });
     });
+
+    this.isConnected = this.authService.isConnected();
+    this.isConnected = this.authService.isConnected();
+    if (this.authService.getLoggedInUser() === '1' || this.authService.getLoggedInUser() === '2') {
+      this.isManager = true;
+    }
   }
 
+  next() {
+    this.router.navigate(['/home']);
+  }
+
+  public disconnect() {
+    this.authService.removeLoggedInUser();
+    this.next();
+  }
+
+  public deleteActivity(id: number) {
+    this.javaService.deleteActivity(id).subscribe();
+  }
+
+  public deletePeople(id: number) {
+    this.javaService.deletePeople(id).subscribe();
+  }
 }

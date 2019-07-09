@@ -1,12 +1,13 @@
 <div>
 
   <div id ="titleHome">
-    <a [routerLink]="['/login']" id="connect">Se connecter</a>
+    <a [routerLink]="['/login']" id="connect" *ngIf="!isConnected">Se connecter</a>
+    <a [routerLink]="['/home']" id="connect" *ngIf="isConnected" (click)="disconnect()">Se déconnecter</a>
     <h1> Bienvenue sur My Project Event</h1>
   </div>
 
   <div id="blockMenu">
-  <a [routerLink]="['/create-event']" id="button">Créer un événement</a>
+  <a [routerLink]="['/create-event']" id="button" *ngIf="isManager">Créer un événement</a>
   </div>
 
   <div>

@@ -1,8 +1,13 @@
 <div>
 
-  <a [routerLink]="['/login']" id="connect">Se connecter</a>
+  <a [routerLink]="['/login']" id="connect" *ngIf="!isConnected">Se connecter</a>
+  <a [routerLink]="['/home']" id="connect" *ngIf="isConnected" (click)="disconnect()">Se déconnecter</a>
 
   <h2>Activité: {{activityName}}</h2>
+
+  <div id="blockMenu">
+    <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deleteActivity(activityId)">Supprimer cette activité</a>
+  </div>
 
   <div id="img">
     <img width="600" [src]=" '/assets/img/imgActivity/' + activityImg">
@@ -18,6 +23,7 @@
     <ul>
       <li *ngFor= "let people of (listPeople)">
           {{people.firstName}} {{people.lastName}}
+          <!-- <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deletePeople({{people.id}})">Supprimer cette personne</a> -->
       </li>
     </ul>
   </div>

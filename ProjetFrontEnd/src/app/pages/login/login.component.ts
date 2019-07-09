@@ -68,9 +68,8 @@ export class LoginComponent implements OnInit {
     newLogin.email = newValues.login;
     newLogin.password = newValues.pwd;
     this.login = newLogin;
-    console.log(this.login);
+
     this.javaService.postLogin(this.login).subscribe(p =>  {
-      console.log('voici', p);
       this.connection(p);
     });
   }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JavaService } from 'src/app/services/java.service';
 import { Activity } from 'src/app/models/activity.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-events',
@@ -10,7 +11,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventsComponent implements OnInit {
 
-  constructor(private javaService: JavaService, private route: ActivatedRoute) { }
+  public isConnected: boolean;
+
+  public isManager = false;
+
+  constructor(
+    private javaService: JavaService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthenticationService) { }
 
   public listActivities: Activity[];
 
@@ -32,6 +41,25 @@ export class EventsComponent implements OnInit {
         this.eventId = e.id;
       });
     });
+
+    this.isConnected = this.authService.isConnected();
+    if (this.authService.getLoggedInUser() === '1' || this.authService.getLoggedInUser() === '2') {
+      this.isManager = true;
+    }
+
+
   }
 
+  next() {
+    this.router.navigate(['/home']);
+  }
+
+  public disconnect() {
+    this.authService.removeLoggedInUser();
+    this.next();
+  }
+
+  public deleteEvent(id: number) {
+    this.javaService.deleteEvent(id).subscribe();
+  }
 }

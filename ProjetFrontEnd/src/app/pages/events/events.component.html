@@ -1,13 +1,16 @@
 <div>
 
-  <a [routerLink]="['/login']" id="connect">Se connecter</a>
+  <a [routerLink]="['/login']" id="connect" *ngIf="!isConnected">Se connecter</a>
+    <a [routerLink]="['/home']" id="connect" *ngIf="isConnected" (click)="disconnect()">Se déconnecter</a>
 
   <h2>Événement: {{eventName}}</h2>
 
   <div id="blockMenu">
       <a [routerLink]="['/create-people', eventId]" class="button">S'inscrire</a>
 
-      <a [routerLink]="['/create-activity', eventId]" class="button">Créer une activité</a>
+      <a [routerLink]="['/create-activity', eventId]" class="button" *ngIf="isManager">Créer une activité</a>
+
+      <a [routerLink]="['/home']" class="button" *ngIf="isManager" (click)="deleteEvent(eventId)">Supprimer cet événement</a>
   </div>
 
   <div id="img">

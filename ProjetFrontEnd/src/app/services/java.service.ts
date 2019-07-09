@@ -76,4 +76,29 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
+
+
+
+
+  public deleteEvent(n: number): Observable<Event> {
+    return this.http
+      .delete<Event>(`http://localhost:8080/projet-back-end/json/delete-event/${n}`)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
+  public deleteActivity(n: number): Observable<Activity> {
+    return this.http
+      .delete<Activity>(`http://localhost:8080/projet-back-end/json/delete-activity/${n}`)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
+  public deletePeople(n: number): Observable<People> {
+    return this.http
+      .delete<People>(`http://localhost:8080/projet-back-end/json/delete-people/${n}`)
+// tslint:disable-next-line: deprecation
+      .pipe(catchError((error: any) => Observable.throw(error.json())));
+  }
+
 }

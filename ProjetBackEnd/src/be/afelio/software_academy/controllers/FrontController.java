@@ -123,6 +123,7 @@ public class FrontController  extends HttpServlet {
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String pathInfo = request.getPathInfo();
+		System.out.println("FrontController.doDelete()");
 		if (pathInfo != null) {
 			setHeaders(response);
 			response.setContentType("application/json");
