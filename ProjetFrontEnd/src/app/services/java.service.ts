@@ -48,7 +48,7 @@ export class JavaService {
 
   public postLogin(login: MyLogin): Observable<People> {
     return this.http
-    .post<People>(`http://localhost:8080/projet-back-end/json/login`, login, {withCredentials: true} )
+    .post<People>(`http://localhost:8080/projet-back-end/json/login/`, login, {withCredentials: true} )
     // tslint:disable-next-line: deprecation
     .pipe(catchError((error: any) => Observable.throw(error.json())));
   }

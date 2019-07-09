@@ -72,8 +72,7 @@ public class FrontController  extends HttpServlet {
 			} else if (pathInfo.startsWith("/activity/")){
 				activityController.findOneActivitysById(request, response);
 				
-			} else if (pathInfo.startsWith("/people/")){
-				System.out.println("FrontController.doGet()");
+			} else if (pathInfo.startsWith("/people/")){ // sert-il encore àqqch?
 				peopleController.findOnePeopleByEmail(request, response);
 							
 			} else {
@@ -104,8 +103,10 @@ public class FrontController  extends HttpServlet {
 				peopleController.addPeople(request,response);
 				break;	
 			case "/login/":
-				System.out.println("FrontController.doPost()");
 				peopleController.findOnePeopleByEmailAndPassword(request, response);
+				break;
+			case "/logout/":
+				request.getSession().invalidate();
 				break;
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);

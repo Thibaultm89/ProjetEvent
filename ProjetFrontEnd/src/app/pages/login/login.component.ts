@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       pwd : this.fb.control(this.login.password)
     });
 
-    login = new MyLogin();
+    this.login = new MyLogin();
 
 
     this.people = new People();
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     newLogin.email = newValues.email;
     newLogin.password = newValues.pwd;
     this.login = newLogin;
-
+    console.log(this.login);
     this.javaService.postLogin(this.login).subscribe(people =>  this.connection(people));
   }
 
