@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  public disconnect(){
+  public disconnect() {
     this.authService.removeLoggedInUser();
     this.next();
   }
