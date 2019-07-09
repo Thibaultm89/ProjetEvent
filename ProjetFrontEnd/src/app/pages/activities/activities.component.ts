@@ -27,7 +27,6 @@ export class ActivitiesComponent implements OnInit {
         this.activityImg = act.img;
         this.activityName = act.name;
         this.listPeople = act.listPeople;
-        console.log(act);
       });
     });
   }

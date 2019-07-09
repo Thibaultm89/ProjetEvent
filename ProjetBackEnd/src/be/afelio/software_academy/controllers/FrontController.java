@@ -121,6 +121,7 @@ public class FrontController  extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String pathInfo = request.getPathInfo();
 		if (pathInfo != null) {
+			setHeaders(response);
 			response.setContentType("application/json");
 			if (pathInfo.startsWith("/delete-event/")) {
 				eventController.deleteEventById(request, response);
