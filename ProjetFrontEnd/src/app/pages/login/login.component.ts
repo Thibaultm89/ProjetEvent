@@ -121,12 +121,12 @@ export class LoginComponent implements OnInit {
 
   public hasLoginError() {
     const control = this.logForm.get('login');
-    return control.errors && control.errors.required && control.invalid;
+    return control.errors && control.errors.required;
   }
 
   public hasPwdError() {
-    const control = this.logForm.get('password');
-    return control.errors && control.errors.required && control.invalid;
+    const control = this.logForm.get('pwd');
+    return control.errors && control.errors.required;
   }
 
   public connection(people: People) {
