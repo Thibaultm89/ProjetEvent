@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Activity } from 'src/app/models/activity.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { People } from 'src/app/models/people.model';
 import { MyLogin } from 'src/app/models/login.model';
 import { JavaService } from 'src/app/services/java.service';
@@ -16,17 +15,18 @@ export class LoginComponent implements OnInit {
   public login: MyLogin;
   public logForm: FormGroup;
   public person: People;
+  public isConnected = false;
 
   public people: People;
   public peopleForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute, private router: Router) {
 
-    this.person = new People();
+    this.login = new MyLogin();
 
     this.logForm = this.fb.group({
-      login : this.fb.control(this.person.email),
-      pwd : this.fb.control(this.person.password)
+      login : this.fb.control(this.login.email),
+      pwd : this.fb.control(this.login.password)
     });
 
     login = new MyLogin();
@@ -48,14 +48,23 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  next() {
+    this.router.navigate(['/home']);
+  }
+
+
   public submitForm1() {
 
-    this.javaService.getLogin(this.login).subscribe(e => {
-      this.logForm.value.login = e;
-    });
-    console.log(this.logForm.value);
+    const newValues = this.logForm.value;
+    const newLogin = new MyLogin();
 
+    newLogin.email = newValues.email;
+    newLogin.password = newValues.pwd;
+    this.login = newLogin;
+
+    this.javaService.postLogin(this.login).subscribe(people =>  this.connection(people));
   }
+
 
 
 
@@ -97,5 +106,28 @@ export class LoginComponent implements OnInit {
   public hasPasswordError() {
     const control = this.peopleForm.get('password');
     return control.errors && control.errors.required;
+  }
+
+
+
+
+
+  public hasLoginError() {
+    const control = this.logForm.get('login');
+    return control.errors && control.errors.required && control.invalid;
+  }
+
+  public hasPwdError() {
+    const control = this.logForm.get('password');
+    return control.errors && control.errors.required && control.invalid;
+  }
+
+  public connection(people: People) {
+    if (people === null) {
+     this.isConnected = false;
+    } else {
+      this.isConnected = true;
+      this.next();
+    }
   }
 }

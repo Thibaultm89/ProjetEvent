@@ -28,8 +28,6 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-
-
   public getListActivity(): Observable<Activity[]> {
     return this.http
       .get<Activity[]>(`http://localhost:8080/projet-back-end/json/activity/all`)
@@ -44,16 +42,13 @@ export class JavaService {
       .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
 
-  public getPeople(email: string): Observable<People> {
-    return this.http
-      .get<People>(`http://localhost:8080/projet-back-end/json/people/${email}`, {withCredentials: true} )
-// tslint:disable-next-line: deprecation
-      .pipe(catchError((error: any) => Observable.throw(error.json())));
-  }
 
-  public getLogin(login: MyLogin): Observable<People> {
+
+
+
+  public postLogin(login: MyLogin): Observable<People> {
     return this.http
-    .get<People>(`http://localhost:8080/projet-back-end/json/login/`, {withCredentials: true} )
+    .post<People>(`http://localhost:8080/projet-back-end/json/login`, login, {withCredentials: true} )
     // tslint:disable-next-line: deprecation
     .pipe(catchError((error: any) => Observable.throw(error.json())));
   }
