@@ -30,8 +30,6 @@ public class PeopleController extends BaseController {
 			idActivity = people.getIdActivity();
 			System.out.println("idActivity vaut: " + idActivity);
 			people = repository.findOnePeopleByFirstNameAndLastName(people.getFirstName(), people.getLastName()); 
-			//récup id auto incrémenté de db
-			// après avoir récup id people , ajout dans activity_people aveec id_acvitivy récup de angular
 			repository.addActivityPeople(idActivity, people.getId());
 		}
 		response.getWriter().write(objectToJson(people));
