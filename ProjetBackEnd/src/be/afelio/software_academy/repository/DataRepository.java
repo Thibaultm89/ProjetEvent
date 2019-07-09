@@ -285,25 +285,24 @@ public class DataRepository {
 	public People findOnePeopleById(Integer id) {
 		People people = null;
 		String sql = "SELECT id_people AS PeopleId, firstname_people as FirstNamePeople, lastname_people AS LastNamePeople,"
-				+ " email AS EmailPeople, password AS PasswordPeople "
-				+ "FROM \"People\" where firstname_people = ? AND lastname_people = ?";
+				+ " email AS EmailPeople "
+				+ "FROM \"People\" where id_people = ?";
 		try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql);
 			) {
-			//	statement.setString(1, firstName);
-			//	statement.setString(2, lastName);
+				statement.setInt(1, id);
 				try (
 					ResultSet resultSet = statement.executeQuery()
 				) {
 					if (resultSet.next()) {
-						people = createPeople(resultSet);
+						people = createPeopleWithoutPassword(resultSet);
 					}
 				}
 			} catch(SQLException sqle) {
 				throw new RuntimeException(sqle);
 			}
-		return new People();
+		return people;
 	}
 	
 	public People findOnePeopleByFirstNameAndLastName(String firstName, String lastName) {
