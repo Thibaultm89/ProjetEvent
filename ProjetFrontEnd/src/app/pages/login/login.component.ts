@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       pwd : this.fb.control(this.person.password)
     });
 
-
+    login = new MyLogin();
 
 
     this.people = new People();

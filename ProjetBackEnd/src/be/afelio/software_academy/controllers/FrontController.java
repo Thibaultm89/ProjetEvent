@@ -104,7 +104,9 @@ public class FrontController  extends HttpServlet {
 				peopleController.addPeople(request,response);
 				break;	
 			case "/login/":
+				System.out.println("FrontController.doPost()");
 				peopleController.findOnePeopleByEmailAndPassword(request, response);
+				break;
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}			
@@ -150,12 +152,6 @@ public class FrontController  extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Headers", "*");
 	}
 
-	private void checkLogin(HttpServletRequest request, HttpServletResponse response) {
-		int id = 1;
-		request.getSession().setAttribute("idUser", id);
-		//getSession.invalidate (pour logout)
-	}
-	
 
 }
 

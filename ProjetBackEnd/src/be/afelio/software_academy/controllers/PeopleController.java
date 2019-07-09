@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import be.afelio.software_academy.beans.MyLogin;
 import be.afelio.software_academy.beans.People;
 import be.afelio.software_academy.repository.DataRepository;
 
@@ -35,7 +36,7 @@ public class PeopleController extends BaseController {
 			repository.addActivityPeople(idActivity, people.getId());
 			//je pense que activiy_id sera perdu car on écrase people, il faudrait peut etre la récup dans un variable avant *
 		}
-		//TODO  ne sert à rien ? response.getWriter().write(objectToJson(people));
+		response.getWriter().write(objectToJson(people));
 	}
 
 
@@ -46,12 +47,14 @@ public class PeopleController extends BaseController {
 	}
 	
 	public void findOnePeopleByEmailAndPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String email = request.getPathInfo().split("/")[2];
-		String password = request.getPathInfo().split("/")[3];
-		People p  = repository.findOnePeopleByEmailAndPassword(email,password);
+		MyLogin myLogin = jsonStreamToObject(request.getInputStream(), MyLogin.class);
+		People p = repository.findOnePeopleByEmailAndPassword(myLogin.getLogin(), myLogin.getPassword());
+		if (p != null) { 
+			int id = p.getId();
+			request.getSession().setAttribute("idUser", id);
+		}
+		
 		response.getWriter().write(objectToJson(p));
-		int id = p.getId();
-		request.getSession().setAttribute("idUser", id);
 	}
 }
 

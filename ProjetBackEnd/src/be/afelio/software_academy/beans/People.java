@@ -10,7 +10,7 @@ public class People implements Serializable  {
 	protected String firstName;
 	protected String lastName;
 	protected String email;
-	protected String password;
+	protected String password; // a retirer
 	protected int idActivity;
 	
 	

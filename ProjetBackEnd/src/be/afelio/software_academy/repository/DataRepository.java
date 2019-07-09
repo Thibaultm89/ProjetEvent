@@ -337,14 +337,15 @@ public class DataRepository {
 	}
 	
 	public People findOnePeopleByEmailAndPassword(String email, String password) {
-		People people = new People();
+		People people = null;
 		if (email != null && !email.isBlank()) {
 			String sql = "SELECT id_people AS PeopleId, firstname_people AS FirstNamePeople, lastname_people AS LastNamePeople,"
-					+ " email AS EmailPeople, password AS PasswordPeople FROM \"People\" WHERE email = ? AND password = ?";
+					+ " email AS EmailPeople FROM \"People\" WHERE email = ? AND password = ?";
 			try (
 				Connection connection = createConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)
 			) {
+				System.out.println("DataRepository.findOnePeopleByEmailAndPassword()");
 				statement.setString(1, email);
 				statement.setString(2, password);
 				try (
