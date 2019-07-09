@@ -13,6 +13,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [JavaService],
+  providers: [JavaService,  AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

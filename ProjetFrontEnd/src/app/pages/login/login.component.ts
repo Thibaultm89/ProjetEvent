@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { People } from 'src/app/models/people.model';
 import { MyLogin } from 'src/app/models/login.model';
 import { JavaService } from 'src/app/services/java.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,13 @@ export class LoginComponent implements OnInit {
   public people: People;
   public peopleForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private javaService: JavaService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private javaService: JavaService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthenticationService
+    ) {
 
     this.login = new MyLogin();
 
@@ -123,10 +130,11 @@ export class LoginComponent implements OnInit {
   }
 
   public connection(people: People) {
-    if (people === null) {
+    if (people === null || people === undefined) {
      this.isConnected = false;
     } else {
       this.isConnected = true;
+      this.authService.setLoggedInUser(this.person.id);
       this.next();
     }
   }
