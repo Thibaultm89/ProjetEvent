@@ -108,6 +108,9 @@ public class FrontController  extends HttpServlet {
 			case "/logout/":
 				request.getSession().invalidate();
 				break;
+			case "/register-people/":
+				//peopleController.findOnePeopleById(request,response);
+				break;
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}			
@@ -130,7 +133,7 @@ public class FrontController  extends HttpServlet {
 			if (pathInfo.startsWith("/delete-event/")) {
 				eventController.deleteEventById(request, response);
 			} else if (pathInfo.startsWith("/delete-activity/")) {
-			//TODO	activityController.deleteActivityById(request, response);
+				activityController.deleteActivityById(request, response);
 			} else if (pathInfo.startsWith("/delete-people/")) {
 			//TODO peopleController.deletePeopleById(request, response);
 			} else {

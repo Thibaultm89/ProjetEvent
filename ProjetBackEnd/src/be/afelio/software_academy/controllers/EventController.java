@@ -45,6 +45,7 @@ public class EventController extends BaseController{
 		response.getWriter().write(objectToJson(event));
 	}
 	
+
 	public void deleteEventById(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = 0;
 		try {
