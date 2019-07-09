@@ -48,7 +48,7 @@ public class PeopleController extends BaseController {
 	
 	public void findOnePeopleByEmailAndPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		MyLogin myLogin = jsonStreamToObject(request.getInputStream(), MyLogin.class);
-		People p = repository.findOnePeopleByEmailAndPassword(myLogin.getLogin(), myLogin.getPassword());
+		People p = repository.findOnePeopleByEmailAndPassword(myLogin.getEmail(), myLogin.getPassword());
 		if (p != null) { 
 			int id = p.getId();
 			request.getSession().setAttribute("idUser", id);

@@ -69,7 +69,10 @@ export class LoginComponent implements OnInit {
     newLogin.password = newValues.pwd;
     this.login = newLogin;
     console.log(this.login);
-    this.javaService.postLogin(this.login).subscribe(people =>  this.connection(people));
+    this.javaService.postLogin(this.login).subscribe(p =>  {
+      this.connection(p);
+      console.log(p);
+    });
   }
 
 
@@ -129,11 +132,12 @@ export class LoginComponent implements OnInit {
     return control.errors && control.errors.required;
   }
 
-  public connection(people: People) {
-    if (people === null || people === undefined) {
+  public connection(person: People) {
+    if (person === null || person === undefined) {
      this.isConnected = false;
     } else {
       this.isConnected = true;
+      console.log(this.person);
       this.authService.setLoggedInUser(this.person.id);
       this.next();
     }

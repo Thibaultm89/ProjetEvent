@@ -150,7 +150,7 @@ public class FrontController  extends HttpServlet {
 		response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
 		response.addHeader("Access-Control-Allow-Methods", "*");
 		response.addHeader("Access-Control-Allow-Credentials", "true");
-		response.addHeader("Access-Control-Allow-Headers", "*");
+		response.addHeader("Access-Control-Allow-Headers", "content-type");
 	}
 
 
