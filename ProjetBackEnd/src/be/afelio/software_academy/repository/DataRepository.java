@@ -480,5 +480,18 @@ public class DataRepository {
 			throw new RuntimeException(sqle);
 		}
 	}
-
+	
+	public void deletePeopleById(int idPeople) {
+		String sql = "DELETE FROM \"People\" where id_people = ?";
+		try (
+			Connection connection = createConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+		) {
+			connection.setAutoCommit(true);
+			statement.setInt(1, idPeople);
+			statement.executeUpdate();
+		} catch(SQLException sqle) {
+			throw new RuntimeException(sqle);
+		}
+	}
 }

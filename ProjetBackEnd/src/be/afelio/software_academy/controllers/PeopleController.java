@@ -40,8 +40,8 @@ public class PeopleController extends BaseController {
 
 	public void findOnePeopleByEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String email = getPathParameter(request.getPathInfo());
-		Object o = repository.findOnePeopleByEmail(email);
-		response.getWriter().write(objectToJson(o));	
+		People p= repository.findOnePeopleByEmail(email);
+		response.getWriter().write(objectToJson(p));	
 	}
 	
 	public void findOnePeopleByEmailAndPassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -59,6 +59,23 @@ public class PeopleController extends BaseController {
 		Integer id = Integer.parseInt(request.getPathInfo().split("/")[2]);
 		People p = repository.findOnePeopleById(id);
 		response.getWriter().write(objectToJson(p));	
+	}
+	
+	public void deletePeopleById(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = 0;
+		try {
+			id = Integer.parseInt(getPathParameter(request.getPathInfo()));
+		} catch(NumberFormatException e) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		Object o = null;
+		if (id > 0) {
+			o = repository.findOnePeopleById(id);
+			if (o != null) {
+				repository.deletePeopleById(id);
+			}
+		}
+		response.getWriter().write(objectToJson(o));
 	}
 }
 

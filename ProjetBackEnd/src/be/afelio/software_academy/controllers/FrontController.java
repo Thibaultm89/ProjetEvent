@@ -135,7 +135,7 @@ public class FrontController  extends HttpServlet {
 			} else if (pathInfo.startsWith("/delete-activity/")) {
 				activityController.deleteActivityById(request, response);
 			} else if (pathInfo.startsWith("/delete-people/")) {
-			//TODO peopleController.deletePeopleById(request, response);
+				peopleController.deletePeopleById(request, response);
 			} else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}			
